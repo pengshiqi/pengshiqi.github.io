@@ -84,16 +84,33 @@
 
 
 
-<meta name="description" content="Where there is a will, there is a way.">
+<meta name="description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。
+时间表示方式
+在python中，通常有这几种方式来表示时间：
+时间戳
+格式化的时间字符串
+元组（九个元素）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python中的time模块">
 <meta property="og:url" content="http://yoursite.com/2016/08/15/python-time/index.html">
 <meta property="og:site_name" content="Patrick_psq's BLOG">
-<meta property="og:description" content="Where there is a will, there is a way.">
-<meta property="og:updated_time" content="2016-08-15T09:40:52.000Z">
+<meta property="og:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。
+时间表示方式
+在python中，通常有这几种方式来表示时间：
+时间戳
+格式化的时间字符串
+元组（九个元素）">
+<meta property="og:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
+<meta property="og:updated_time" content="2016-08-16T09:03:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中的time模块">
-<meta name="twitter:description" content="Where there is a will, there is a way.">
+<meta name="twitter:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。
+时间表示方式
+在python中，通常有这几种方式来表示时间：
+时间戳
+格式化的时间字符串
+元组（九个元素）">
+<meta name="twitter:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
 
 
 
@@ -331,7 +348,201 @@
       
 
       
-        
+        <p>因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。</p>
+<h3 id="时间表示方式"><a href="#时间表示方式" class="headerlink" title="时间表示方式"></a>时间表示方式</h3><ol>
+<li>在python中，通常有这几种方式来表示时间：<ul>
+<li>时间戳</li>
+<li>格式化的时间字符串</li>
+<li>元组（九个元素）<a id="more"></a></li>
+</ul>
+</li>
+<li>UTC（Coordinate Universal Time），世界标准时间。在中国为UTC+8 。</li>
+<li>时间戳(timestamp)。时间戳表示的是从 <em>1970年1月1日 00：00：00</em> 开始按毫秒计算的偏移量。返回时间戳的方式有time(),clock()等。</li>
+<li>元组(struct_time)。共有9个元素，返回struct_time的函数主要有gmtime(),localtime(),strptime()等。<br>例如：<br><img src="http://i2.buimg.com/4851/f3eb5255fd74f548.png" alt="icon"><br>各字段的含义如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>索引（index）</th>
+<th>属性（attribute）</th>
+<th>值（values）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>tm_year</td>
+<td>eg.2016</td>
+</tr>
+<tr>
+<td>1</td>
+<td>tm_mon</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>tm_mday</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>3</td>
+<td>tm_hour</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>4</td>
+<td>tm_min</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>5</td>
+<td>tm_sec</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>6</td>
+<td>tm_wday</td>
+<td>0-6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>tm_yday(一年中的第几天)</td>
+<td>1-366</td>
+</tr>
+<tr>
+<td>8</td>
+<td>tm_isdst(是否是夏令时)</td>
+<td>-1 (default)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ol>
+<li><p>time.localtime([secs]): 将一个时间戳转换成当前时区的struct_time。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.localtime()</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=15, tm_min=28, tm_sec=22, tm_wday=1, tm_yday=229, tm_isdst=0)</div><div class="line">&gt;&gt;&gt; time.localtime(1471334822)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=7, tm_sec=2, tm_wday=1, tm_yday=229, tm_isdst=0)</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.time(): 返回当前时间的时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.time()</div><div class="line">1471334993.112127</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.mktime(t): 将一个struct_time转换成时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.mktime(time.localtime())</div><div class="line">1471335138.0</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.sleep(secs): 线程推迟指定的时间运行，单位为秒。</p>
+</li>
+<li><p>time.clock(): 在不同系统上含义不同。在UNIX系统上，返回进程时间，是以秒为单位的浮点数。而在windows系统上，第一次调用返回进程运行时间，而之后的调用则是返回第一次调用到现在的运行时间。下面是在macOS上的运行示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077041</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077398</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077726</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.asctime([t]): 把一个表示时间的元组或者struct_time转换形式表示出来。default参数为time.localtime()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.asctime()</div><div class="line">&apos;Tue Aug 16 16:26:22 2016&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.ctime([secs]): 把一个时间戳转换成time.asctime()的形式。default参数为time.time()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.ctime()</div><div class="line">&apos;Tue Aug 16 16:30:32 2016&apos;</div><div class="line">&gt;&gt;&gt; time.ctime(1471334822)</div><div class="line">&apos;Tue Aug 16 16:07:02 2016&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.strftime(format[,t]): 把一个代表时间的元组或者struct_time转化为格式化的时间字符串。default参数为time.localtime()。如果元组中任何一个参数越界，则会抛出一个ValueError的错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strftime(&apos;%Y-%m-%d %X&apos;, time.localtime())</div><div class="line">&apos;2016-08-16 16:43:05&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.strptime(string[,format]): 把一个格式化时间字符串转换成struct_time。它和strftime()是逆操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strptime(&apos;2016-08-16 16:43:05&apos;, &apos;%Y-%m-%d %X&apos;)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=43, tm_sec=5, tm_wday=1, tm_yday=229, tm_isdst=-1)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%a</td>
+<td>本地简化星期名称</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>本地完整星期名称</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>本地简化月份名称</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>本地完整月份名称</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>本地相应的日期和时间表示</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>一个月第几天（01-31）</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>一天第几个小时（24小时制）</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>第几个小时（12小时制）</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中第几天（001-366）</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月份（01-12）</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟数（00-59）</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>本地am或pm</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒（01-61，闰年秒占两秒）</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>一年中的星期数（00-53）</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>一个星期中的第几天（0-6）</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>和%U基本相同，不同的是%W以星期一为一个星期的开始</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>本地相应日期</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>本地相应时间</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>去掉世纪的年份（00-99）</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>完整的年份</td>
+</tr>
+<tr>
+<td>%Z</td>
+<td>时区的名字</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>‘%’字符</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
 
@@ -505,7 +716,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间表示方式"><span class="nav-number">1.</span> <span class="nav-text">时间表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">2.</span> <span class="nav-text">常用函数</span></a></li></ol></div>
             
           </div>
         </section>
