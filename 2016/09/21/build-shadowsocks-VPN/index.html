@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Shadowsocks," />
 
 
 
@@ -90,7 +90,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/09/21/build-shadowsocks-VPN/index.html">
 <meta property="og:site_name" content="Patrick_psq's BLOG">
 <meta property="og:description" content="作为一个百度黑，翻墙是生存下来的必要手段，之前一年都是购买的shadowsocks的代理服务，99元一年。前不久申请了GitHub Student Pack,听说里面有赠送免费的VPS，于是就自己动手搭建了一个海外服务器，来提供翻墙之用。">
-<meta property="og:updated_time" content="2016-09-21T11:55:28.000Z">
+<meta property="og:updated_time" content="2016-11-08T06:54:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻墙教程：用国外VPS搭建自己的Shadowsocks服务器">
 <meta name="twitter:description" content="作为一个百度黑，翻墙是生存下来的必要手段，之前一年都是购买的shadowsocks的代理服务，99元一年。前不久申请了GitHub Student Pack,听说里面有赠送免费的VPS，于是就自己动手搭建了一个海外服务器，来提供翻墙之用。">
@@ -331,7 +331,10 @@
 <p>进入vi模式来修改配置文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"server"</span>:<span class="string">" 服务器 ip"</span>,</div><div class="line">    <span class="string">"server_port"</span>:端口,</div><div class="line">    <span class="string">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</div><div class="line">    <span class="string">"local_port"</span>:1080,</div><div class="line">    <span class="string">"password"</span>:<span class="string">" 连接密码 "</span>,</div><div class="line">    <span class="string">"timeout"</span>:300,</div><div class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>,</div><div class="line">    <span class="string">"fast_open"</span>:<span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>按i进入编辑模式，esc退出编辑模式，修改完成后，退出编辑模式，输入:wq保存退出，:q!不保存退出。</p>
-<p>应用配置文件启动服务。若需停止则把 start 换成 stop</p>
+<p>启动 shadowsocks 服务器的命令如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json</div></pre></td></tr></table></figure>
+<p>后台启动和停止shadowsocks服务器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json -d start</div><div class="line">ssserver -c /etc/shadowsocks.json -d stop</div></pre></td></tr></table></figure>
 <p>大功告成！！！梯子已准备完毕！！</p>
 <h4 id="shadowsocks的使用"><a href="#shadowsocks的使用" class="headerlink" title="shadowsocks的使用"></a>shadowsocks的使用</h4><p>下载一个shadowsocks客户端，输入自己的配置参数，就可以使用啦！</p>
 
@@ -374,6 +377,12 @@
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Shadowsocks/" rel="tag">#Shadowsocks</a>
+          
+        </div>
       
 
       
@@ -481,7 +490,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -498,7 +507,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
