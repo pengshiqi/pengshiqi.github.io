@@ -1,0 +1,1027 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python中的time模块">
+<meta property="og:url" content="http://yoursite.com/2016/08/15/python-time/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
+<meta property="og:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
+<meta property="og:updated_time" content="2017-08-27T10:04:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python中的time模块">
+<meta name="twitter:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
+<meta name="twitter:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6318630373483873000,
+      author: 'Admin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/15/python-time/"/>
+
+  <title> python中的time模块 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Last Whisper</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                python中的time模块
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2016-08-15T17:40:06+08:00" content="2016-08-15">
+              2016-08-15
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/15/python-time/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/15/python-time/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/08/15/python-time/" class="leancloud_visitors" data-flag-title="python中的time模块">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。</p>
+<h3 id="时间表示方式"><a href="#时间表示方式" class="headerlink" title="时间表示方式"></a>时间表示方式</h3><a id="more"></a>
+<ol>
+<li>在python中，通常有这几种方式来表示时间：<ul>
+<li>时间戳</li>
+<li>格式化的时间字符串</li>
+<li>元组（九个元素）</li>
+</ul>
+</li>
+<li>UTC（Coordinate Universal Time），世界标准时间。在中国为UTC+8 。</li>
+<li>时间戳(timestamp)。时间戳表示的是从 <em>1970年1月1日 00：00：00</em> 开始按毫秒计算的偏移量。返回时间戳的方式有time(),clock()等。</li>
+<li>元组(struct_time)。共有9个元素，返回struct_time的函数主要有gmtime(),localtime(),strptime()等。<br>例如：<br><img src="http://i2.buimg.com/4851/f3eb5255fd74f548.png" alt="icon"><br>各字段的含义如下：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>索引（index）</th>
+<th>属性（attribute）</th>
+<th>值（values）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>tm_year</td>
+<td>eg.2016</td>
+</tr>
+<tr>
+<td>1</td>
+<td>tm_mon</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>2</td>
+<td>tm_mday</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>3</td>
+<td>tm_hour</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>4</td>
+<td>tm_min</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>5</td>
+<td>tm_sec</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>6</td>
+<td>tm_wday</td>
+<td>0-6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>tm_yday(一年中的第几天)</td>
+<td>1-366</td>
+</tr>
+<tr>
+<td>8</td>
+<td>tm_isdst(是否是夏令时)</td>
+<td>-1 (default)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ol>
+<li><p>time.localtime([secs]): 将一个时间戳转换成当前时区的struct_time。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.localtime()</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=15, tm_min=28, tm_sec=22, tm_wday=1, tm_yday=229, tm_isdst=0)</div><div class="line">&gt;&gt;&gt; time.localtime(1471334822)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=7, tm_sec=2, tm_wday=1, tm_yday=229, tm_isdst=0)</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.time(): 返回当前时间的时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.time()</div><div class="line">1471334993.112127</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.mktime(t): 将一个struct_time转换成时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.mktime(time.localtime())</div><div class="line">1471335138.0</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.sleep(secs): 线程推迟指定的时间运行，单位为秒。</p>
+</li>
+<li><p>time.clock(): 在不同系统上含义不同。在UNIX系统上，返回进程时间，是以秒为单位的浮点数。而在windows系统上，第一次调用返回进程运行时间，而之后的调用则是返回第一次调用到现在的运行时间。下面是在macOS上的运行示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077041</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077398</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077726</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.asctime([t]): 把一个表示时间的元组或者struct_time转换形式表示出来。default参数为time.localtime()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.asctime()</div><div class="line">&apos;Tue Aug 16 16:26:22 2016&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.ctime([secs]): 把一个时间戳转换成time.asctime()的形式。default参数为time.time()。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.ctime()</div><div class="line">&apos;Tue Aug 16 16:30:32 2016&apos;</div><div class="line">&gt;&gt;&gt; time.ctime(1471334822)</div><div class="line">&apos;Tue Aug 16 16:07:02 2016&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.strftime(format[,t]): 把一个代表时间的元组或者struct_time转化为格式化的时间字符串。default参数为time.localtime()。如果元组中任何一个参数越界，则会抛出一个ValueError的错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strftime(&apos;%Y-%m-%d %X&apos;, time.localtime())</div><div class="line">&apos;2016-08-16 16:43:05&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>time.strptime(string[,format]): 把一个格式化时间字符串转换成struct_time。它和strftime()是逆操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strptime(&apos;2016-08-16 16:43:05&apos;, &apos;%Y-%m-%d %X&apos;)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=43, tm_sec=5, tm_wday=1, tm_yday=229, tm_isdst=-1)</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%a</td>
+<td>本地简化星期名称</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>本地完整星期名称</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>本地简化月份名称</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>本地完整月份名称</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>本地相应的日期和时间表示</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>一个月第几天（01-31）</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>一天第几个小时（24小时制）</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>第几个小时（12小时制）</td>
+</tr>
+<tr>
+<td>%j</td>
+<td>一年中第几天（001-366）</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>月份（01-12）</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>分钟数（00-59）</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>本地am或pm</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>秒（01-61，闰年秒占两秒）</td>
+</tr>
+<tr>
+<td>%U</td>
+<td>一年中的星期数（00-53）</td>
+</tr>
+<tr>
+<td>%w</td>
+<td>一个星期中的第几天（0-6）</td>
+</tr>
+<tr>
+<td>%W</td>
+<td>和%U基本相同，不同的是%W以星期一为一个星期的开始</td>
+</tr>
+<tr>
+<td>%x</td>
+<td>本地相应日期</td>
+</tr>
+<tr>
+<td>%X</td>
+<td>本地相应时间</td>
+</tr>
+<tr>
+<td>%y</td>
+<td>去掉世纪的年份（00-99）</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>完整的年份</td>
+</tr>
+<tr>
+<td>%Z</td>
+<td>时区的名字</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>‘%’字符</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>May The Force Be With You.</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag">#Python</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/12/Redis-mac/" rel="next" title="Redis 在 Mac 上的安装与使用">
+                <i class="fa fa-chevron-left"></i> Redis 在 Mac 上的安装与使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/17/mac-tree/" rel="prev" title="Unix系统下的tree命令——展示目录树结构">
+                Unix系统下的tree命令——展示目录树结构 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/profile.jpg"
+               alt="Patrick_psq" />
+          <p class="site-author-name" itemprop="name">Patrick_psq</p>
+          <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间表示方式"><span class="nav-number">1.</span> <span class="nav-text">时间表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">2.</span> <span class="nav-text">常用函数</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick_psq</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'patrick-psq';
+      var disqus_identifier = '2016/08/15/python-time/';
+      var disqus_title = "python中的time模块";
+      var disqus_url = 'http://yoursite.com/2016/08/15/python-time/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("UG6Ef6yp7QecbSj8Xk3rmHlt-gzGzoHsz", "Dr0E4K0SRzKyd0J8ovr2P9P7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+</body>
+</html>
