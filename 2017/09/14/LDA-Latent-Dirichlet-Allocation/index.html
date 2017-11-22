@@ -1,12 +1,32 @@
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Where there is a will, there is a way."><title>Hello World | Last Whisper</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hello World</h1><a id="logo" href="/.">Last Whisper</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Hello World</h1><div class="post-meta">Aug 10, 2016<script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2016/08/10/hello-world/" href="/2016/08/10/hello-world/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>大家好，我是 Patrick, 现在是上海交通大学EE的本科生。</p>
-<p>现在主要使用的语言有 python、C++，还想学习一些前端相关的知识，于是建立了这个技术博客，希望能记录下自己学习过程中的点点滴滴。</p>
-<p>这是我的<a href="https://github.com/pengshiqi" target="_blank" rel="external">GitHub</a>。现在还是菜鸟一枚，希望能从各位大牛身上学到更多的东西。</p>
-<p>共勉！</p>
-<p>Look where we are,<br>we’ve come so far,<br>and there’s still a long long way to go.</p>
-</div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2016/08/10/hello-world/" data-id="cjaacmh33000nho6coszvoyvt" class="article-share-link">Share</a><div class="tags"><a href="/tags/Life/">Life</a></div><div class="post-nav"><a href="/2016/08/12/Redis-mac/" class="pre">Redis 在 Mac 上的安装与使用</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'patrick-psq';
-var disqus_identifier = '2016/08/10/hello-world/';
-var disqus_title = 'Hello World';
-var disqus_url = 'http://yoursite.com/2016/08/10/hello-world/';
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="Where there is a will, there is a way."><title>LDA(Latent Dirichlet Allocation) | Last Whisper</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/6.0.0/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.2/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">LDA(Latent Dirichlet Allocation)</h1><a id="logo" href="/.">Last Whisper</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">LDA(Latent Dirichlet Allocation)</h1><div class="post-meta">Sep 14, 2017<span> | </span><span class="category"><a href="/categories/Machine-Learning/">Machine Learning</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-disqus-identifier="2017/09/14/LDA-Latent-Dirichlet-Allocation/" href="/2017/09/14/LDA-Latent-Dirichlet-Allocation/#disqus_thread" class="disqus-comment-count"></a><div class="post-content"><p>先借用Wikipedia上内容介绍一下LDA(隐含狄利克雷分布)：</p>
+<blockquote>
+<p><strong>隐含狄利克雷分布</strong>简称LDA(Latent Dirichlet allocation)，是一种<a href="https://zh.wikipedia.org/wiki/%E4%B8%BB%E9%A2%98%E6%A8%A1%E5%9E%8B" target="_blank" rel="external">主题模型</a>，它可以将文档集中每篇文档的主题按照<a href="https://zh.wikipedia.org/wiki/%E6%A6%82%E7%8E%87%E5%88%86%E5%B8%83" target="_blank" rel="external">概率分布</a>的形式给出。同时它是一种<a href="https://zh.wikipedia.org/wiki/%E9%9D%9E%E7%9B%A3%E7%9D%A3%E5%BC%8F%E5%AD%B8%E7%BF%92" target="_blank" rel="external">无监督学习</a>算法，在训练时不需要手工标注的训练集，需要的仅仅是文档集以及指定主题的数量k即可。此外LDA的另一个优点则是，对于每一个主题均可找出一些词语来描述它。</p>
+<p>LDA是一种典型的词袋模型，即它认为一篇文档是由一组词构成的一个集合，词与词之间没有顺序以及先后的关系。一篇文档可以包含多个主题，文档中每一个词都由其中的一个主题生成。</p>
+</blockquote>
+<p>理解LDA，可分为以下5个步骤：</p>
+<ol>
+<li>一个函数：gamma函数</li>
+<li>四个分布：二项分布、多项分布、beta分布、Dirichlet分布</li>
+<li>一个概念和一个理念：共轭先验和贝叶斯框架</li>
+<li>两个模型：pLSA、LDA</li>
+<li>一个采样：Gibbs采样</li>
+</ol>
+<p>在LDA模型中，一篇文档的生成方式如下：</p>
+<ul>
+<li>从狄利克雷分布\( \alpha \)中取样生成文档\( i \) 的主题分布\( \theta_{i} \) </li>
+<li>从主题的多项式分布\( \theta<em>{i} \) 中取样生成文档\( i \)  第 \( j \)   个词的主题 \( z</em>{i,j} \)</li>
+<li>从狄利克雷分布\( \beta \)中取样生成主题\( z<em>{i,j} \)对应的词语分布\( \phi</em>{z_{i,j}} \)</li>
+<li>从词语的多项式分布\( \phi<em>{z</em>{i,j}} \)中采样最终生成词语\( w_{i,j} \).</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a href="http://blog.csdn.net/v_july_v/article/details/41209515" target="_blank" rel="external">通俗理解LDA主题模型</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/隐含狄利克雷分布" target="_blank" rel="external">隐含狄利克雷分布</a></li>
+</ul>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script></div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/" data-id="cjaacmh2e0002ho6cz9lhz4sx" class="article-share-link">Share</a><div class="tags"><a href="/tags/Machine-Learning/">Machine Learning</a></div><div class="post-nav"><a href="/2017/09/14/Markov-Chain/" class="pre">Markov Chain</a><a href="/2017/09/13/Python-Decorator/" class="next">Python Decorator</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论 「请确保 disqus.com 可以正常加载」</button></div><script>var disqus_shortname = 'patrick-psq';
+var disqus_identifier = '2017/09/14/LDA-Latent-Dirichlet-Allocation/';
+var disqus_title = 'LDA(Latent Dirichlet Allocation)';
+var disqus_url = 'http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/';
 $('.btn_click_load').click(function() {
   (function() {
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
