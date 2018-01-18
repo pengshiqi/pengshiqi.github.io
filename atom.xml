@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-11-22T06:50:42.000Z</updated>
+  <updated>2018-01-18T13:15:17.798Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,58 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>EM Algorithm</title>
+    <link href="http://yoursite.com/2018/01/18/EM-Algorithm/"/>
+    <id>http://yoursite.com/2018/01/18/EM-Algorithm/</id>
+    <published>2018-01-18T05:08:13.000Z</published>
+    <updated>2018-01-18T13:15:17.798Z</updated>
+    
+    <content type="html"><![CDATA[<p>I’d like to talk about something about EM algorithm in my understanding.</p><p>This post is mainly based on <a href="https://www.bilibili.com/video/av12802062/?from=search&amp;seid=12077428943005827344" target="_blank" rel="external">Richard Xu’s machine learning course</a>.</p><a id="more"></a><h3 id="Gaussian-Mixture-Model"><a href="#Gaussian-Mixture-Model" class="headerlink" title="Gaussian Mixture Model"></a>Gaussian Mixture Model</h3><p>Gaussian Mixture Model (GMM) (k-mixture) is defined as:<br>$$<br>p(X | \Theta) = \sum_{l=1}^k \alpha_l \mathcal{N}(X | \mu_l, \Sigma_l) \tag{1}<br>$$</p><p>$$<br>\sum_{l=1}^k \alpha_l = 1 \tag{2}<br>$$</p><p>and<br>$$<br>\Theta = { \alpha_1, \dots, \alpha_k, \mu_1, \dots, \mu_k, \Sigma_1, \dots, \Sigma_k } \tag{3}<br>$$<br>For data $X = { x_1, \dots, x_n }$, we introduce latent variable $Z = { z_1, \dots, z_n }$, each $z_i$ indicates which mixture components $x_i$ belongs to.</p><p>Then we can use MLE to estimate $\Theta$:<br>$$<br>\Theta<em>{MLE} = \mathop{\arg\max}\limits</em>{\Theta} \Big( \sum<em>{i=1}^N \log \big[ \sum</em>{l=1}^k \alpha_l \mathcal{N}(x_i | \mu_l, \Sigma_l) \big] \Big) \tag{4}<br>$$<br>This formula is difficult to solve because it is in log-of-sum form. So, we solve this problem in an iterative way, called <strong><em>Expectation Maximization</em></strong>.</p><h3 id="Expectation-Maximization"><a href="#Expectation-Maximization" class="headerlink" title="Expectation Maximization"></a>Expectation Maximization</h3><p>Instead of performing<br>$$<br>\Theta<em>{MLE} = \mathop{\arg\max}\limits</em>{\Theta} \Big( \mathcal{L}(\Theta) \Big) = \mathop{\arg\max}\limits_{\Theta} \Big( \log \big( p(X|\Theta) \big ) \Big) \tag{5}<br>$$<br>we assume some latent variable $Z$ to the model, such that we generate a series of $\Theta = { \Theta^{(1)},  \Theta^{(2)}, \dots, \Theta^{(t)} }$.</p><p>For each iteration of the E-M algorithm, we perform:<br>$$<br>\Theta^{(g+1)} =\mathop{\arg\max}\limits_{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) \tag{6}<br>$$</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I’d like to talk about something about EM algorithm in my understanding.&lt;/p&gt;
+&lt;p&gt;This post is mainly based on &lt;a href=&quot;https://www.bilibili.com/video/av12802062/?from=search&amp;amp;seid=12077428943005827344&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Richard Xu’s machine learning course&lt;/a&gt;.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Recurrent Neural Networks</title>
+    <link href="http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/"/>
+    <id>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</id>
+    <published>2018-01-03T09:31:33.000Z</published>
+    <updated>2018-01-03T12:03:02.063Z</updated>
+    
+    <content type="html"><![CDATA[<p>Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.</p><p>A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network has been shown to be particularly effective when stacked into a deep configuration, achieving state-of-the-art results on a diverse array of problems from language translation to automatic captioning of images and videos.</p><p>After reading this post, you will know:</p><ul><li>The limitations of Multilayer Perceptrons that are addressed by recurrent neural networks.</li><li>The problems that must be addressed to make Recurrent Neural networks useful.</li><li>The details of the Long Short-Term Memory networks used in applied deep learning.</li></ul><p>​        </p><h3 id="Long-Short-Term-Memory-Network"><a href="#Long-Short-Term-Memory-Network" class="headerlink" title="Long Short-Term Memory Network"></a>Long Short-Term Memory Network</h3><p>The Long Short-Term Memory, or LSTM, network is a type of Recurrent Neural Network (RNN) designed for sequence problems. Given a standard feedforward Multilayer Perceptron network, an RNN can be thought of as the addition of loops to the architecture. The recurrent connections add state or memory to the network and allow it to learn and harness the ordered nature of observations within input sequences.</p><p>Instead of neurons, LSTM networks have memory blocks that are connected into layers.</p><p>A block has components that make it smarter than a classical neuron and a memory for recent sequences. A block contains gates that manage the block’s state and output. A unit operates upon an input sequence and each gate within a unit uses the sigmoid activation function to control whether they are triggered or not, making the change of state and addition of information flowing through the unit conditional.</p><p>There are three types of gates within a memory unit:</p><ul><li><strong>Forget Gate</strong>: conditionally decides what information to discard from the unit.</li><li><strong>Input Gate</strong>: conditionally decides which values from the input to update the memory state.</li><li><strong>Output Gate</strong>: conditionally decides what to output based on input and the memory of the unit.</li></ul><p>Each unit is like a mini state machine where the gates of the units have weights that are learned during the training procedure.</p><h4 id="Vanilla-LSTM"><a href="#Vanilla-LSTM" class="headerlink" title="Vanilla LSTM"></a>Vanilla LSTM</h4><p>It is the LSTM architecture defined in the original 1997 LSTM paper1 and the architecture that will give good results on most small sequence prediction problems.</p><p>The Vanilla LSTM is defined as:</p><ol><li>Input layer;</li><li>Fully connected LSTM hidden layer;</li><li>Fully connected output layer.</li></ol><p>​    </p><h4 id="Stacked-LSTM"><a href="#Stacked-LSTM" class="headerlink" title="Stacked LSTM"></a>Stacked LSTM</h4><h4 id="CNN-LSTM"><a href="#CNN-LSTM" class="headerlink" title="CNN LSTM"></a>CNN LSTM</h4><h4 id="Encode-Decode-LSTM"><a href="#Encode-Decode-LSTM" class="headerlink" title="Encode-Decode LSTM"></a>Encode-Decode LSTM</h4><p>​            </p><h4 id="Bidirectional-LSTM"><a href="#Bidirectional-LSTM" class="headerlink" title="Bidirectional LSTM"></a>Bidirectional LSTM</h4><h4 id="Generative-LSTM"><a href="#Generative-LSTM" class="headerlink" title="Generative LSTM"></a>Generative LSTM</h4><p>​    </p><p>​<br>​<br>​    </p><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://machinelearningmastery.com/crash-course-recurrent-neural-networks-deep-learning/" target="_blank" rel="external">Crash Course in Recurrent Neural Networks for Deep Learning</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.&lt;/p&gt;
+&lt;p&gt;A powerful type 
+      
+    
+    </summary>
+    
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+  </entry>
+  
+  <entry>
     <title>test math jax</title>
     <link href="http://yoursite.com/2017/11/21/test-math-jax/"/>
     <id>http://yoursite.com/2017/11/21/test-math-jax/</id>
     <published>2017-11-21T15:40:31.000Z</published>
-    <updated>2017-11-22T06:50:42.000Z</updated>
+    <updated>2017-12-26T09:10:19.958Z</updated>
     
-    <content type="html"><![CDATA[<p>This is the test file of mathjax.</p><a id="more"></a><p>This is the inline formula \(E=mc^2\).</p><p>This is the inter line formula</p><p>\begin{aligned}<br>\dot{x} &amp; = \sigma(y-x) \\<br>\dot{y} &amp; = \rho x - y - xz \\<br>\dot{z} &amp; = -\beta z + xy<br>\end{aligned}</p><p>Hello world!</p><p>This is the inline formula $E=mc^2$.</p><p>This is the inter line formula</p><p>$a_1 + a_2 = a_3$</p><p>$$<br>\begin{eqnarray}<br>\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\<br>\nabla\cdot\vec{B} &amp;=&amp; 0 \\<br>\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\<br>\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)<br>\end{eqnarray}<br>$$</p>]]></content>
+    <content type="html"><![CDATA[<p>This is the test file of mathjax.</p><a id="more"></a><p>This is the inline formula \(E=mc^2\).</p><p>This is the inter line formula</p><p>\begin{aligned}<br>\dot{x} &amp; = \sigma(y-x) \\<br>\dot{y} &amp; = \rho x - y - xz \\<br>\dot{z} &amp; = -\beta z + xy<br>\end{aligned}</p><p>Hello world!</p><p>This is the inline formula $E=mc^2$.</p><p>This is the inter line formula</p><p>$a_1 + a_2 = a_3$</p><p>\begin{equation}<br>a_1 + a_2 = a_3<br>\end{equation}</p><p>$$<br>\begin{eqnarray}<br>\nabla\cdot\vec{E} &amp;=&amp; \frac{\rho}{\epsilon_0} \\<br>\nabla\cdot\vec{B} &amp;=&amp; 0 \\<br>\nabla\times\vec{E} &amp;=&amp; -\frac{\partial B}{\partial t} \\<br>\nabla\times\vec{B} &amp;=&amp; \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)<br>\end{eqnarray}<br>$$</p><p>method 1</p><p>\begin{equation}<br>\ln p(\mathbf{X}_1 | \boldsymbol{\theta}_2) = \mathcal{L}(q_3, \boldsymbol{\theta}) + \text{KL}(q || p)<br>\end{equation}</p><p>method 2<br>$$<br>\ln p(\mathbf{X}_1 | \boldsymbol{\theta}_2) = \mathcal{L}(q_3, \boldsymbol{\theta}) + \text{KL}(q || p)<br>$$</p><p>编号测试</p><p>(1)<br>$$<br>\begin{equation}<br>a = b + c \<br>d = e + f<br>\end{equation}<br>$$<br>(2)<br>$$<br>\sum_{i=1}^n a_i= 1 \tag{1}<br>$$</p>]]></content>
     
     <summary type="html">
     
@@ -160,9 +205,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Mac/Linux/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   
@@ -344,9 +389,9 @@
       <category term="Mac" scheme="http://yoursite.com/categories/Mac/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   

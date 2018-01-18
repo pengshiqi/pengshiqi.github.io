@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
+    
+    <lastmod>2018-01-18T13:15:17.798Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</loc>
+    
+    <lastmod>2018-01-03T12:03:02.063Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/11/21/test-math-jax/</loc>
     
-    <lastmod>2017-11-22T06:50:42.000Z</lastmod>
+    <lastmod>2017-12-26T09:10:19.958Z</lastmod>
     
   </url>
   

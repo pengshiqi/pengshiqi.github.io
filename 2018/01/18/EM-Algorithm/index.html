@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="Machine Learning," />
 
 
 
@@ -86,17 +86,17 @@
 
 
 
-<meta name="description" content="最近发现了一个有趣的闯关游戏，叫Python Challenge。在做题的同时，也能学习到一些新的python模块。 我的解题代码放在我的github上.">
-<meta name="keywords" content="Python">
+<meta name="description" content="I’d like to talk about something about EM algorithm in my understanding. This post is mainly based on Richard Xu’s machine learning course.">
+<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python Challenge">
-<meta property="og:url" content="http://yoursite.com/2016/08/27/Python-Challenge/index.html">
+<meta property="og:title" content="EM Algorithm">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/EM-Algorithm/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="最近发现了一个有趣的闯关游戏，叫Python Challenge。在做题的同时，也能学习到一些新的python模块。 我的解题代码放在我的github上.">
-<meta property="og:updated_time" content="2017-08-27T10:04:32.000Z">
+<meta property="og:description" content="I’d like to talk about something about EM algorithm in my understanding. This post is mainly based on Richard Xu’s machine learning course.">
+<meta property="og:updated_time" content="2018-01-18T13:15:17.798Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python Challenge">
-<meta name="twitter:description" content="最近发现了一个有趣的闯关游戏，叫Python Challenge。在做题的同时，也能学习到一些新的python模块。 我的解题代码放在我的github上.">
+<meta name="twitter:title" content="EM Algorithm">
+<meta name="twitter:description" content="I’d like to talk about something about EM algorithm in my understanding. This post is mainly based on Richard Xu’s machine learning course.">
 
 
 
@@ -117,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/27/Python-Challenge/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/01/18/EM-Algorithm/"/>
 
-  <title> Python Challenge | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> EM Algorithm | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -259,7 +259,7 @@
             
             
               
-                Python Challenge
+                EM Algorithm
               
             
           </h1>
@@ -271,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T13:57:44+08:00" content="2016-08-27">
-              2016-08-27
+            <time itemprop="dateCreated" datetime="2018-01-18T13:08:13+08:00" content="2018-01-18">
+              2018-01-18
             </time>
           </span>
 
@@ -282,8 +282,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/27/Python-Challenge/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/27/Python-Challenge/" itemprop="commentsCount"></span>
+                <a href="/2018/01/18/EM-Algorithm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/01/18/EM-Algorithm/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -293,7 +293,7 @@
 
           
           
-             <span id="/2016/08/27/Python-Challenge/" class="leancloud_visitors" data-flag-title="Python Challenge">
+             <span id="/2018/01/18/EM-Algorithm/" class="leancloud_visitors" data-flag-title="EM Algorithm">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -315,41 +315,16 @@
       
 
       
-        <p>最近发现了一个有趣的闯关游戏，叫<a href="http://www.pythonchallenge.com/" target="_blank" rel="external">Python Challenge</a>。在做题的同时，也能学习到一些新的python模块。</p>
-<p>我的解题代码放在<a href="https://github.com/pengshiqi/PythonChallenge" target="_blank" rel="external">我的github上</a>.<br><a id="more"></a></p>
-<h3 id="Level-0"><a href="#Level-0" class="headerlink" title="Level 0"></a>Level 0</h3><p>将2的38次方替换掉URL中的0.</p>
-<h3 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h3><p>字符整体后移两位，原本URL中的map后移两位便是 <em>OCR</em>。</p>
-<h3 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h3><p>查看网页源代码，一串乱序的字符串中，夹杂着有用的信息，提取出其中的字母，得到 <em>equality</em>.</p>
-<h3 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h3><p>还是在网页源代码的注释中，找到 <em>恰好</em> 三个大写字母从两侧包围一个小写字母的情况，找到单词 <em>linkedlist</em>。</p>
-<h3 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h3><p>点击图片看到 <em>and the next nothing is 44827</em>，将URL的12345替换为44827后，得到45439，以此类推，很多次之后得到单词 <em>peak</em>.</p>
-<h3 id="Level-5"><a href="#Level-5" class="headerlink" title="Level 5"></a>Level 5</h3><p>和 peak hell 发音很像的是 pickle,说明这题要用到python的pickle库。从banner.p处拿到文件，用pickle处理得到单词 <em>channel</em>。</p>
-<h3 id="Level-6"><a href="#Level-6" class="headerlink" title="Level 6"></a>Level 6</h3><p>图片是拉链 zip，而 zip 又有压缩文件的意思，所以讲URL的后缀改为zip得到 channel.zip 的压缩文件。</p>
-<p>解压压缩文件后，从 readme 可知，又要不停地寻找 the next nothing，最后得到：collect the comments.</p>
-<p>原来，zip文件有comments属性，python 有 zipfile 库来处理。</p>
-<p>获得每个中间文件的comments，得到最后的单词 <em>oxygen</em>。</p>
-<h3 id="Level-7"><a href="#Level-7" class="headerlink" title="Level 7"></a>Level 7</h3><p>图片中央有一条线，通过python的Image库来分析这条线，取这条线上的点的像素，并将其转换成ascii码，得到单词 <em>integrity</em>。</p>
-<h3 id="Level-8"><a href="#Level-8" class="headerlink" title="Level 8"></a>Level 8</h3><p>python的bz2模块。</p>
-<p>在网页源代码中有加密后的username和password，通过bz2.decompress()函数能解密之。输入 huge 和 file 即可跳转到 good.html。</p>
-<h3 id="Level-9"><a href="#Level-9" class="headerlink" title="Level 9"></a>Level 9</h3><p>first 和 second 连接起来，相邻的两个数字作为一个点的坐标，画出图形，是一头牛，于是答案便是 <em>bull</em>。</p>
-<h3 id="Level-10"><a href="#Level-10" class="headerlink" title="Level 10"></a>Level 10</h3><p>找规律，第零个数是1，第一个数是11，表示1个1，第二个数是21，表示2个1，第三个数是1211，表示1个2、1个1，一次类推到第30个数，第三十个数的长度为 <em>5808</em>，即为答案。</p>
-<h3 id="Level-11"><a href="#Level-11" class="headerlink" title="Level 11"></a>Level 11</h3><p>图像的名字叫even odd，暗示我们要把这张图的像素点分奇偶提取出来，分别提取出坐标为奇数和偶数的像素，作图可得单词 <em>evil</em>。</p>
-<h3 id="Level-12"><a href="#Level-12" class="headerlink" title="Level 12"></a>Level 12</h3><p>先找到 evil2.gfx 文件，原图里那个人把扑克牌分成五堆，所以这里把这个gfx分成五个文件，得到单词 <em>disproportional</em>。</p>
-<h3 id="Level-13"><a href="#Level-13" class="headerlink" title="Level 13"></a>Level 13</h3><p>按下数字键5，会进入一个xml界面，这个界面用了RPC(Remote Procedure Call)协议，通过python的xmlrpclib库可以处理它，向 Bert 打电话，可得单词 <em>ITALY</em>。</p>
-<h3 id="Level-14"><a href="#Level-14" class="headerlink" title="Level 14"></a>Level 14</h3><p>下方那张图片实际上是 10000<em>1 的，标题叫walk around，而且上方的图片是螺旋状的面包，暗示着我们要把下面的图片按照螺旋状排开，得到了一只猫的图片，所以答案是 </em>cat*。</p>
-<h3 id="Level-15"><a href="#Level-15" class="headerlink" title="Level 15"></a>Level 15</h3><p>从右下角可以看出这年是闰年，而且是1**6年，通过datetime模块来判断符合要求的年份，得到如下几个：</p>
-<ul>
-<li>1176-01-26</li>
-<li>1356-01-26</li>
-<li>1576-01-26</li>
-<li>1756-01-26</li>
-<li>1976-01-26</li>
-</ul>
-<p>而又说到是第二年轻的，所以是1756年。第二天要买花，查一查1756-01-27，发现是莫扎特的诞辰，所以答案是 <em>Mozart</em>。</p>
-<h3 id="Level-16"><a href="#Level-16" class="headerlink" title="Level 16"></a>Level 16</h3><p>标题说 let me get this staight，于是我们就按照每行第一个粉红色的点来对齐，得到单词 <em>romance</em>。</p>
-<h3 id="Level-17"><a href="#Level-17" class="headerlink" title="Level 17"></a>Level 17</h3><p>这一关有点麻烦，首先获取网页的cookie提示，知道要回到第四关linkedlist，用busynothing替换掉之前的nothing，而且这次要收集每次的cookie信息。然后利用之前的bz2解码方式对这些信息解码，得到 <em>‘is it the 26th already? call his father and inform him that “the flowers are on their way”. he’ll understand.’</em>。然后像13题一样，给Mozart的父亲打电话，得到 <em>555-VIOLIN</em>。将 ‘the flowers are on their way’ 作为cookie传入这个页面，得到最终的提示 <em>‘oh well, don’t you dare to forget the balloons.’</em>。所以答案就是 <em>balloons</em>。</p>
-<h3 id="Level-18"><a href="#Level-18" class="headerlink" title="Level 18"></a>Level 18</h3><p>提示说两幅图的区别，显然就是brightness。然后下载deltas.gz的文件。这个压缩文件里是两片16进制的数据，利用difflib库的ndiff函数来找出它们的不同(缺点就是计算的好慢啊。。)，结果是三幅图片，分别是 ‘/hex/bin.html’, ‘butter’, ‘fly’，所以在bin.html中输入username和password即可过关。</p>
-<h3 id="Level-19"><a href="#Level-19" class="headerlink" title="Level 19"></a>Level 19</h3><p>将网页源代码中的文本信息转换成音频wav文件，encoding方式为base64，然后发现只有一个单词 sorry，看提示图片可知，需要把每一帧音频反转，得到的音频文件内容为 ‘You are an idiot’，于是，答案便为 <em>idiot</em>。</p>
-<h3 id="To-be-continued…"><a href="#To-be-continued…" class="headerlink" title="To be continued…"></a>To be continued…</h3>
+        <p>I’d like to talk about something about EM algorithm in my understanding.</p>
+<p>This post is mainly based on <a href="https://www.bilibili.com/video/av12802062/?from=search&amp;seid=12077428943005827344" target="_blank" rel="external">Richard Xu’s machine learning course</a>.</p>
+<a id="more"></a>
+<h3 id="Gaussian-Mixture-Model"><a href="#Gaussian-Mixture-Model" class="headerlink" title="Gaussian Mixture Model"></a>Gaussian Mixture Model</h3><p>Gaussian Mixture Model (GMM) (k-mixture) is defined as:<br>$$<br>p(X | \Theta) = \sum_{l=1}^k \alpha_l \mathcal{N}(X | \mu_l, \Sigma_l) \tag{1}<br>$$</p>
+<p>$$<br>\sum_{l=1}^k \alpha_l = 1 \tag{2}<br>$$</p>
+<p>and<br>$$<br>\Theta = { \alpha_1, \dots, \alpha_k, \mu_1, \dots, \mu_k, \Sigma_1, \dots, \Sigma_k } \tag{3}<br>$$<br>For data $X = { x_1, \dots, x_n }$, we introduce latent variable $Z = { z_1, \dots, z_n }$, each $z_i$ indicates which mixture components $x_i$ belongs to.</p>
+<p>Then we can use MLE to estimate $\Theta$:<br>$$<br>\Theta<em>{MLE} = \mathop{\arg\max}\limits</em>{\Theta} \Big( \sum<em>{i=1}^N \log \big[ \sum</em>{l=1}^k \alpha_l \mathcal{N}(x_i | \mu_l, \Sigma_l) \big] \Big) \tag{4}<br>$$<br>This formula is difficult to solve because it is in log-of-sum form. So, we solve this problem in an iterative way, called <strong><em>Expectation Maximization</em></strong>.</p>
+<h3 id="Expectation-Maximization"><a href="#Expectation-Maximization" class="headerlink" title="Expectation Maximization"></a>Expectation Maximization</h3><p>Instead of performing<br>$$<br>\Theta<em>{MLE} = \mathop{\arg\max}\limits</em>{\Theta} \Big( \mathcal{L}(\Theta) \Big) = \mathop{\arg\max}\limits_{\Theta} \Big( \log \big( p(X|\Theta) \big ) \Big) \tag{5}<br>$$<br>we assume some latent variable $Z$ to the model, such that we generate a series of $\Theta = { \Theta^{(1)},  \Theta^{(2)}, \dots, \Theta^{(t)} }$.</p>
+<p>For each iteration of the E-M algorithm, we perform:<br>$$<br>\Theta^{(g+1)} =\mathop{\arg\max}\limits_{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) \tag{6}<br>$$</p>
+
       
     </div>
 
@@ -392,7 +367,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
           
         </div>
       
@@ -401,17 +376,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/17/mac-tree/" rel="next" title="Unix系统下的tree命令——展示目录树结构">
-                <i class="fa fa-chevron-left"></i> Unix系统下的tree命令——展示目录树结构
+              <a href="/2018/01/03/Recurrent-Neural-Networks/" rel="next" title="Recurrent Neural Networks">
+                <i class="fa fa-chevron-left"></i> Recurrent Neural Networks
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/09/21/build-shadowsocks-VPN/" rel="prev" title="翻墙教程：用国外VPS搭建自己的Shadowsocks服务器">
-                翻墙教程：用国外VPS搭建自己的Shadowsocks服务器 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -539,7 +510,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-0"><span class="nav-number">1.</span> <span class="nav-text">Level 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-1"><span class="nav-number">2.</span> <span class="nav-text">Level 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-2"><span class="nav-number">3.</span> <span class="nav-text">Level 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-3"><span class="nav-number">4.</span> <span class="nav-text">Level 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-4"><span class="nav-number">5.</span> <span class="nav-text">Level 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-5"><span class="nav-number">6.</span> <span class="nav-text">Level 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-6"><span class="nav-number">7.</span> <span class="nav-text">Level 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-7"><span class="nav-number">8.</span> <span class="nav-text">Level 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-8"><span class="nav-number">9.</span> <span class="nav-text">Level 8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-9"><span class="nav-number">10.</span> <span class="nav-text">Level 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-10"><span class="nav-number">11.</span> <span class="nav-text">Level 10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-11"><span class="nav-number">12.</span> <span class="nav-text">Level 11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-12"><span class="nav-number">13.</span> <span class="nav-text">Level 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-13"><span class="nav-number">14.</span> <span class="nav-text">Level 13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-14"><span class="nav-number">15.</span> <span class="nav-text">Level 14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-15"><span class="nav-number">16.</span> <span class="nav-text">Level 15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-16"><span class="nav-number">17.</span> <span class="nav-text">Level 16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-17"><span class="nav-number">18.</span> <span class="nav-text">Level 17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-18"><span class="nav-number">19.</span> <span class="nav-text">Level 18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Level-19"><span class="nav-number">20.</span> <span class="nav-text">Level 19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#To-be-continued…"><span class="nav-number">21.</span> <span class="nav-text">To be continued…</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Gaussian-Mixture-Model"><span class="nav-number">1.</span> <span class="nav-text">Gaussian Mixture Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expectation-Maximization"><span class="nav-number">2.</span> <span class="nav-text">Expectation Maximization</span></a></li></ol></div>
             
           </div>
         </section>
@@ -666,9 +637,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'patrick-psq';
-      var disqus_identifier = '2016/08/27/Python-Challenge/';
-      var disqus_title = "Python Challenge";
-      var disqus_url = 'http://yoursite.com/2016/08/27/Python-Challenge/';
+      var disqus_identifier = '2018/01/18/EM-Algorithm/';
+      var disqus_title = "EM Algorithm";
+      var disqus_url = 'http://yoursite.com/2018/01/18/EM-Algorithm/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
