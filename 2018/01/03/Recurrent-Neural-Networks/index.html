@@ -86,17 +86,17 @@
 
 
 
-<meta name="description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time. A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network">
+<meta name="description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.">
 <meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Recurrent Neural Networks">
 <meta property="og:url" content="http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time. A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network">
-<meta property="og:updated_time" content="2018-01-03T12:03:02.063Z">
+<meta property="og:description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.">
+<meta property="og:updated_time" content="2018-01-18T13:20:11.014Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Recurrent Neural Networks">
-<meta name="twitter:description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time. A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network">
+<meta name="twitter:description" content="Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.">
 
 
 
@@ -316,15 +316,17 @@
 
       
         <p>Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.</p>
+<a id="more"></a>
 <p>A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network has been shown to be particularly effective when stacked into a deep configuration, achieving state-of-the-art results on a diverse array of problems from language translation to automatic captioning of images and videos.</p>
 <p>After reading this post, you will know:</p>
 <ul>
 <li>The limitations of Multilayer Perceptrons that are addressed by recurrent neural networks.</li>
 <li>The problems that must be addressed to make Recurrent Neural networks useful.</li>
-<li>The details of the Long Short-Term Memory networks used in applied deep learning.</li>
+<li><p>The details of the Long Short-Term Memory networks used in applied deep learning.</p>
+<p>​    </p>
+<h3 id="Long-Short-Term-Memory-Network"><a href="#Long-Short-Term-Memory-Network" class="headerlink" title="Long Short-Term Memory Network"></a>Long Short-Term Memory Network</h3></li>
 </ul>
-<p>​        </p>
-<h3 id="Long-Short-Term-Memory-Network"><a href="#Long-Short-Term-Memory-Network" class="headerlink" title="Long Short-Term Memory Network"></a>Long Short-Term Memory Network</h3><p>The Long Short-Term Memory, or LSTM, network is a type of Recurrent Neural Network (RNN) designed for sequence problems. Given a standard feedforward Multilayer Perceptron network, an RNN can be thought of as the addition of loops to the architecture. The recurrent connections add state or memory to the network and allow it to learn and harness the ordered nature of observations within input sequences.</p>
+<p>The Long Short-Term Memory, or LSTM, network is a type of Recurrent Neural Network (RNN) designed for sequence problems. Given a standard feedforward Multilayer Perceptron network, an RNN can be thought of as the addition of loops to the architecture. The recurrent connections add state or memory to the network and allow it to learn and harness the ordered nature of observations within input sequences.</p>
 <p>Instead of neurons, LSTM networks have memory blocks that are connected into layers.</p>
 <p>A block has components that make it smarter than a classical neuron and a memory for recent sequences. A block contains gates that manage the block’s state and output. A unit operates upon an input sequence and each gate within a unit uses the sigmoid activation function to control whether they are triggered or not, making the change of state and addition of information flowing through the unit conditional.</p>
 <p>There are three types of gates within a memory unit:</p>
