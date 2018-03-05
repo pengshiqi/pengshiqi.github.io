@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/18/EM-Algorithm/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="I’d like to talk about something about EM algorithm in my understanding. This post is mainly based on Richard Xu’s machine learning course.">
-<meta property="og:updated_time" content="2018-01-18T14:25:42.092Z">
+<meta property="og:updated_time" content="2018-01-18T14:33:30.479Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EM Algorithm">
 <meta name="twitter:description" content="I’d like to talk about something about EM algorithm in my understanding. This post is mainly based on Richard Xu’s machine learning course.">
@@ -329,7 +329,7 @@
 <p>For each iteration of the E-M algorithm, we perform:<br>$$<br>\Theta^{(g+1)} =\mathop{\arg\max}\limits_{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) dZ \tag{6}<br>$$</p>
 <p>We must ensure convergence:<br>$$<br>\log p(X|\Theta^{(g+1)}) \ge \log p(X|\Theta^{(g)}) \tag{7}<br>$$<br><strong><em>Proof</em></strong> :<br>$$<br>E<em>{p(Z|X, \Theta^{(g)})} \Big[\log p(X|\Theta) \Big] = E</em>{p(Z|X, \Theta^{(g)})} \Big[\log p(X,Z|\Theta) - \log p(Z|X,\Theta) \Big] \tag{8}<br>$$</p>
 <p>$$<br>\log p(X|\Theta) =  \int_Z  \log p(X,Z|\Theta) p(Z|X, \Theta^{(g)}) dZ -  \int_Z  \log p(Z|X,\Theta) p(Z|X, \Theta^{(g)}) dZ \tag{9}<br>$$</p>
-<p>denote<br>$$<br>Q(\Theta, \Theta^{(g)}) = \int_Z  \log p(X,Z|\Theta) p(Z|X, \Theta^{(g)}) dZ \<br>H(\Theta, \Theta^{(g)}) = \int_Z  \log p(Z|X,\Theta) p(Z|X, \Theta^{(g)}) dZ<br>$$<br>then we have<br>$$<br>\log p(X|\Theta) =Q(\Theta, \Theta^{(g)}) - H(\Theta, \Theta^{(g)}) \tag{10}<br>$$<br>Because<br>$$<br>Q(\Theta^{(g)}, \Theta^{(g)}) \le Q(\Theta^{(g+1)}, \Theta^{(g)}) \<br>H(\Theta^{(g)}, \Theta^{(g)}) \ge H(\Theta^{(g+1)}, \Theta^{(g)})<br>$$<br>the second inequality can be derived </p>
+<p>denote<br>$$<br>Q(\Theta, \Theta^{(g)}) = \int_Z  \log p(X,Z|\Theta) p(Z|X, \Theta^{(g)}) dZ \<br>H(\Theta, \Theta^{(g)}) = \int_Z  \log p(Z|X,\Theta) p(Z|X, \Theta^{(g)}) dZ<br>$$<br>then we have<br>$$<br>\log p(X|\Theta) =Q(\Theta, \Theta^{(g)}) - H(\Theta, \Theta^{(g)}) \tag{10}<br>$$<br>Because<br>$$<br>Q(\Theta^{(g)}, \Theta^{(g)}) \le Q(\Theta^{(g+1)}, \Theta^{(g)}) \<br>H(\Theta^{(g)}, \Theta^{(g)}) \ge H(\Theta^{(g+1)}, \Theta^{(g)})<br>$$<br>the second inequality can be derived using Jensen’s inequality.</p>
 <p>Hence ,<br>$$<br>\log p(X|\Theta^{(g+1)}) \ge \log p(X|\Theta^{(g)}) \tag{11}<br>$$</p>
 <h3 id="Using-EM-algorithm-to-solve-GMM"><a href="#Using-EM-algorithm-to-solve-GMM" class="headerlink" title="Using EM algorithm to solve GMM"></a>Using EM algorithm to solve GMM</h3><p>Put GMM into this frame work.<br>$$<br>\Theta^{(g+1)} = \mathop{\arg\max}\limits<em>{\Theta} \big[ Q(\Theta, \Theta^{(g)}) \big] =\mathop{\arg\max}\limits</em>{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) dZ \tag{12}<br>$$<br><strong><em>E-Step:</em></strong></p>
 <p>Define $ p(X, Z | \Theta)$ :<br>$$<br>p(X, Z | \Theta) = \Pi_{i=1}^n p(x_i, z<em>i | \Theta) = \Pi</em>{i=1}^n p(x_i|z_i, \Theta) p(z<em>i|\Theta) =  \Pi</em>{i=1}^n \alpha_{z<em>i} \mathcal{N}(\mu</em>{z<em>i}, \Sigma</em>{z<em>i}) \tag{13}<br>$$<br>Define $p (Z | X, \Theta)$ :<br>$$<br>p (Z | X, \Theta) = \Pi</em>{i=1}^{n} p(z_i|x<em>i, \Theta) = \Pi</em>{i=1}^{n} \frac{\alpha_{z<em>i} \mathcal{N} (\mu</em>{z<em>i}, \Sigma</em>{z<em>i})}{\sum</em>{l=1}^k \alpha_l \mathcal{N} (\mu_l, \Sigma<em>l)} \tag{14}<br>$$<br> Then<br>$$<br>Q(\Theta, \Theta^{(g)}) = \sum</em>{z<em>1= 1}^k  \sum</em>{z<em>2= 1}^k  \dots  \sum</em>{z<em>N= 1}^k \Big(  \sum</em>{i=1}^N \big[ \log \alpha_{z<em>i} + \log \mathcal{N}(\mu</em>{z<em>i}, \Sigma</em>{z<em>i})  \big] * \Pi</em>{i=1}^N  p(z_i| x<em>i, \Theta^{(g)}) \Big) \<br>= \sum</em>{i=1}^N \sum<em>{l = 1}^k \big( \log \alpha</em>{l} + \log \mathcal{N}(\mu<em>{l}, \Sigma</em>{l}) \big) p(l| x<em>i, \Theta^{(g)}) \tag{15}<br>$$<br><strong><em>M-Step:</em></strong><br>$$<br>Q(\Theta, \Theta^{(g)}) = \sum</em>{i=1}^N \sum<em>{l = 1}^k  \log (\alpha</em>{l}) p(l| x<em>i, \Theta^{(g)})  + \sum</em>{i=1}^N \sum<em>{l = 1}^k\log \mathcal{N}(\mu</em>{l}, \Sigma_{l}) p(l| x_i, \Theta^{(g)}) \tag{16}<br>$$<br>The first term contains only $\alpha$ and the second term contains only $\mu, \Sigma$, so we can maximize both terms independantly.</p>
@@ -394,6 +394,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/25/Python-Skill-List/" rel="prev" title="Python Skill List">
+                Python Skill List <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -468,7 +472,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">19</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>

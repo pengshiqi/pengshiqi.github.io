@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/01/25/Python-Skill-List/</loc>
+    
+    <lastmod>2018-03-05T13:13:13.039Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/</loc>
+    
+    <lastmod>2018-03-05T13:13:01.262Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
     
-    <lastmod>2018-01-18T14:25:42.092Z</lastmod>
+    <lastmod>2018-01-18T14:33:30.479Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</loc>
     
-    <lastmod>2018-01-18T13:20:11.014Z</lastmod>
+    <lastmod>2018-01-18T14:27:38.394Z</lastmod>
     
   </url>
   
@@ -37,14 +51,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/09/14/Markov-Chain/</loc>
+    <loc>http://yoursite.com/2017/07/08/Farewell-My-Undergraduate/</loc>
     
     <lastmod>2017-11-22T01:14:51.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/07/08/Farewell-My-Undergraduate/</loc>
+    <loc>http://yoursite.com/2017/09/14/Markov-Chain/</loc>
     
     <lastmod>2017-11-22T01:14:51.000Z</lastmod>
     
