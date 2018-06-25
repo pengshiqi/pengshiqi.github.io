@@ -58,9 +58,9 @@
     </summary>
     
     
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
-    
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
     
   </entry>
   
@@ -269,9 +269,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Mac/Linux/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -453,9 +453,9 @@
       <category term="Mac" scheme="http://yoursite.com/categories/Mac/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
