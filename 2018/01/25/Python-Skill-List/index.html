@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/01/25/Python-Skill-List/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="偶然间在知乎上看到了一篇文章: 我眼中一个好的Pythoneer应该具备的品质，于是想思考一下这些问题的答案。">
-<meta property="og:updated_time" content="2018-03-05T13:13:13.039Z">
+<meta property="og:updated_time" content="2018-03-21T13:54:03.341Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python Skill List">
 <meta name="twitter:description" content="偶然间在知乎上看到了一篇文章: 我眼中一个好的Pythoneer应该具备的品质，于是想思考一下这些问题的答案。">
@@ -385,6 +385,73 @@
 <li>知道python中格式化字符串的方式以及其常见格式语法。</li>
 <li>知道python中常见的魔术方法和其使用方式。</li>
 </ul>
+<hr>
+<h2 id="1-python常见的解释器"><a href="#1-python常见的解释器" class="headerlink" title="1. python常见的解释器"></a>1. python常见的解释器</h2><ul>
+<li><strong>CPython</strong></li>
+</ul>
+<blockquote>
+<p>当我们从<a href="https://www.python.org/" target="_blank" rel="external">Python官方网站</a>下载并安装好Python 2.7后，我们就直接获得了一个官方版本的解释器：CPython。这个解释器是用C语言开发的，所以叫CPython。在命令行下运行<code>python</code>就是启动CPython解释器。</p>
+<p>CPython是使用最广的Python解释器。</p>
+</blockquote>
+<ul>
+<li><strong>IPython</strong></li>
+</ul>
+<blockquote>
+<p>IPython是基于CPython之上的一个交互式解释器，也就是说，IPython只是在交互方式上有所增强，但是执行Python代码的功能和CPython是完全一样的。好比很多国产浏览器虽然外观不同，但内核其实都是调用了IE。</p>
+<p>CPython用<code>&gt;&gt;&gt;</code>作为提示符，而IPython用<code>In [序号]:</code>作为提示符。</p>
+</blockquote>
+<ul>
+<li><strong>PyPy</strong></li>
+</ul>
+<blockquote>
+<p>PyPy是另一个Python解释器，它的目标是执行速度。PyPy采用<a href="http://en.wikipedia.org/wiki/Just-in-time_compilation" target="_blank" rel="external">JIT技术</a>，对Python代码进行动态编译（注意不是解释），所以可以显著提高Python代码的执行速度。</p>
+<p>绝大部分Python代码都可以在PyPy下运行，但是PyPy和CPython有一些是不同的，这就导致相同的Python代码在两种解释器下执行可能会有不同的结果。如果你的代码要放到PyPy下执行，就需要了解<a href="http://pypy.readthedocs.org/en/latest/cpython_differences.html" target="_blank" rel="external">PyPy和CPython的不同点</a>。</p>
+</blockquote>
+<ul>
+<li><strong>Jython</strong></li>
+</ul>
+<blockquote>
+<p>Jython是运行在Java平台上的Python解释器，可以直接把Python代码编译成Java字节码执行。</p>
+</blockquote>
+<ul>
+<li><strong>IronPython</strong></li>
+</ul>
+<blockquote>
+<p>IronPython和Jython类似，只不过IronPython是运行在微软.Net平台上的Python解释器，可以直接把Python代码编译成.Net的字节码。</p>
+</blockquote>
+<p><strong>Reference:</strong></p>
+<p><a href="https://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001407375700558864523211a5049c4983176de304549c8000" target="_blank" rel="external">廖雪峰的官方网站</a></p>
+<h2 id="2-GIL的限制以及与多线程的关系"><a href="#2-GIL的限制以及与多线程的关系" class="headerlink" title="2.GIL的限制以及与多线程的关系"></a>2.GIL的限制以及与多线程的关系</h2><p>首先需要明确的一点是<code>GIL</code>并不是Python的特性，它是在实现Python解析器(CPython)时所引入的一个概念。而JPython就没有GIL。</p>
+<p>GIL全称<code>Global Interpreter Lock</code>，为了避免误导，我们还是来看一下官方给出的解释：</p>
+<blockquote>
+<p>In CPython, the global interpreter lock, or GIL, is a mutex that prevents multiple native threads from executing Python bytecodes at once. This lock is necessary mainly because CPython’s memory management is not thread-safe. (However, since the GIL exists, other features have grown to depend on the guarantees that it enforces.)</p>
+</blockquote>
+<p>具体见<a href="http://cenalulu.github.io/python/gil-in-python/" target="_blank" rel="external">Python的GIL是什么鬼，多线程性能究竟如何</a>。</p>
+<h2 id="3-python的命名空间查找规则（LEGB）"><a href="#3-python的命名空间查找规则（LEGB）" class="headerlink" title="3. python的命名空间查找规则（LEGB）"></a>3. python的命名空间查找规则（LEGB）</h2><p>LEGB含义解释：<br><strong>L-Local(function)</strong>：            函数内的名字空间<br><strong>E-Enclosing function locals</strong>：  外部嵌套函数的名字空间(例如closure)<br><strong>G-Global(module)</strong>：            函数定义所在模块（文件）的名字空间<br><strong>B-Builtin(Python)</strong>：            Python内置模块的名字空间</p>
+<h2 id="4-python-2-x和3-x的主要差异"><a href="#4-python-2-x和3-x的主要差异" class="headerlink" title="4. python 2.x和3.x的主要差异"></a>4. python 2.x和3.x的主要差异</h2><p>4.1 <code>__future__</code> 模块</p>
+<p>Python 3.x 介绍的 一些Python 2 不兼容的关键字和特性可以通过在 Python 2 的内置 <code>__future__</code> 模块导入。</p>
+<p>例如： <code>nested_scopes</code>,  <code>generators</code>,  <code>division</code>,  <code>absolute_import</code>,  <code>with_statement</code>,  <code>print_function</code>, <code>unicode_literals</code>。</p>
+<p>4.2 <code>print</code></p>
+<p>print从语法调整为了函数。</p>
+<p>4.3 整除</p>
+<p>python2.7中，<code>/</code>为整除，而python3中，<code>/</code>的结果为float。</p>
+<p>4.4 unicode</p>
+<p>Python 2 有 ASCII str() 类型，<code>unicode()</code> 是单独的，不是 <code>byte</code> 类型。<br>在 Python 3，我们最终有了 <code>Unicode (utf-8)</code> 字符串，以及一个字节类：<code>byte</code> 和 <code>bytearrays</code>。</p>
+<p>4.5 <code>xrange</code></p>
+<p>python3 中的<code>range</code>被<code>xrange</code>替代。</p>
+<p>4.6 Raising Exception</p>
+<p>Python2 中有两种写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1.</span></div><div class="line"><span class="keyword">raise</span> IOError, <span class="string">"file error"</span></div><div class="line"></div><div class="line"><span class="comment"># 2.</span></div><div class="line"><span class="keyword">raise</span> IOError(<span class="string">"file error"</span>)</div></pre></td></tr></table></figure>
+<p>而Python3中只保留了第二种写法。</p>
+<p>4.7 Handling Exception</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Python2</span></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    let_us_cause_a_NameError</div><div class="line"><span class="keyword">except</span> NameError, err:</div><div class="line">    <span class="keyword">print</span> err, <span class="string">'--&gt; our error message'</span></div><div class="line"></div><div class="line"><span class="comment"># Python3 </span></div><div class="line"><span class="keyword">try</span>:</div><div class="line">    let_us_cause_a_NameError</div><div class="line"><span class="keyword">except</span> NameError <span class="keyword">as</span> err:</div><div class="line">    print(err, <span class="string">'--&gt; our error message'</span>)</div></pre></td></tr></table></figure>
+<p>4.8 <code>next()</code>函数和<code>.next()</code>方法</p>
+<p>在Python2.7中，两种方式都可以。</p>
+<p>在Python3 中，只能使用<code>next()</code>函数。</p>
+<p>4.9 For循环变量和全局命名空间泄漏</p>
+<p>在 Python 3.x 中 <code>for</code> 循环变量不会再导致命名空间泄漏。</p>
+<p>4.10 比较不可排序类型</p>
+<p>Python3中，不可排序的类型做比较的时候会抛出错误。</p>
 
       
     </div>
@@ -522,7 +589,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -575,7 +642,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-python常见的解释器"><span class="nav-number">1.</span> <span class="nav-text">1. python常见的解释器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-GIL的限制以及与多线程的关系"><span class="nav-number">2.</span> <span class="nav-text">2.GIL的限制以及与多线程的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-python的命名空间查找规则（LEGB）"><span class="nav-number">3.</span> <span class="nav-text">3. python的命名空间查找规则（LEGB）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-python-2-x和3-x的主要差异"><span class="nav-number">4.</span> <span class="nav-text">4. python 2.x和3.x的主要差异</span></a></li></ol></div>
             
           </div>
         </section>
