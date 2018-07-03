@@ -92,7 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/06/25/在CodaLab上提交MURA竞赛的结果/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="What is MURA?  MURA (musculoskeletal radiographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.  这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone">
-<meta property="og:updated_time" content="2018-07-03T03:22:58.666Z">
+<meta property="og:updated_time" content="2018-07-03T03:43:23.830Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在CodaLab上提交MURA竞赛的结果">
 <meta name="twitter:description" content="What is MURA?  MURA (musculoskeletal radiographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.  这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone">
@@ -339,7 +339,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid src:src &quot;python src/&lt;path-to-prediction-program&gt; valid_image_paths.csv predictions.csv&quot; -n run-predictions</div></pre></td></tr></table></figure>
 <p> 这里需要用到docker，我在docker hub准备了一个docker镜像，sqpeng1996/mura2:v5，里面有python 3.6，pytorch, torchnet, sklearn等代码需要的库。</p>
 <p>使用命令为:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py valid_images_paths.csv predictions.csv&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</div></pre></td></tr></table></figure>
 <p>这里特别要注意的是需要多请求一些memory，（或者把batch size改为1）,不然无法跑通。</p>
 <p>如果这一步的state变成了ready，那就说明没问题了。然后执行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl make run-predictions/predictions.csv -n predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure>

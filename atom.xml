@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-07-03T03:22:58.666Z</updated>
+  <updated>2018-07-03T03:43:23.830Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://yoursite.com/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/"/>
     <id>http://yoursite.com/2018/06/25/在CodaLab上提交MURA竞赛的结果/</id>
     <published>2018-06-25T12:15:42.000Z</published>
-    <updated>2018-07-03T03:22:58.666Z</updated>
+    <updated>2018-07-03T03:43:23.830Z</updated>
     
-    <content type="html"><![CDATA[<p>What is MURA?</p><blockquote><p>MURA (<strong>mu</strong>sculoskeletal <strong>ra</strong>diographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.</p></blockquote><p>这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone X-Ray Deep Learning Competition)，这是它的<a href="https://stanfordmlgroup.github.io/competitions/mura/" target="_blank" rel="external">官网</a>。</p><p>数据集是七类人体部位的X光，分为normal和abnormal两种，需要训练一个模型，能够完成这样一个二分类的诊断任务。</p><p>Baseline是一个169层的DenseNet，我们用PyTorch实现了它。</p><p>答案的提交是通过CodaLab这个网站，官方给出了这样一个<a href="https://worksheets.codalab.org/worksheets/0x42dda565716a4ee08d61f0a23656d8c0/" target="_blank" rel="external">提交教程</a>：</p><a id="more"></a><p><strong>Step 1:</strong></p><p>创建一个新的WorkSheet。</p><p><strong>Step 2:</strong></p><p>复制一份虚拟的数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cl add bundle mura-utils//valid .</div><div class="line">cl add bundle mura-utils//valid_image_paths.csv .</div></pre></td></tr></table></figure><p><strong>Step 3:</strong></p><p>将你的代码和模型打包后上传，压缩成zip后上传，系统会自动解压。</p><p>这份伪造数据的路径保存在<code>valid_image_paths.csv</code>中，格式为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/&lt;IMAGE&gt;</div></pre></td></tr></table></figure><p>你的程序需要能够输出一份对于每一个study的预测结果，形如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/,&#123;0,1&#125;</div></pre></td></tr></table></figure><p><strong>Step 4:</strong></p><p>在伪造数据集上运行你预训练好的模型。这是他们给出的运行命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid src:src &quot;python src/&lt;path-to-prediction-program&gt; valid_image_paths.csv predictions.csv&quot; -n run-predictions</div></pre></td></tr></table></figure><p> 这里需要用到docker，我在docker hub准备了一个docker镜像，sqpeng1996/mura2:v5，里面有python 3.6，pytorch, torchnet, sklearn等代码需要的库。</p><p>使用命令为:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</div></pre></td></tr></table></figure><p>这里特别要注意的是需要多请求一些memory，（或者把batch size改为1）,不然无法跑通。</p><p>如果这一步的state变成了ready，那就说明没问题了。然后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl make run-predictions/predictions.csv -n predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>MODELNAME不能包含空格，最好也避免特殊字符。</p><p>最后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl macro mura-utils/valid-eval-v1.1 predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>就能看到结果了（因为这里是伪造的数据，所以结果不重要）。</p><p><strong>Step 5：</strong></p><p>提交：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl edit predictions-&#123;MODELNAME&#125; --tags mura-submit</div></pre></td></tr></table></figure><p>把 <strong>predictions-{MODELNAME} </strong> bundle的 URL发邮件给 jirvin16@stanford.edu 就可以了。</p>]]></content>
+    <content type="html"><![CDATA[<p>What is MURA?</p><blockquote><p>MURA (<strong>mu</strong>sculoskeletal <strong>ra</strong>diographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.</p></blockquote><p>这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone X-Ray Deep Learning Competition)，这是它的<a href="https://stanfordmlgroup.github.io/competitions/mura/" target="_blank" rel="external">官网</a>。</p><p>数据集是七类人体部位的X光，分为normal和abnormal两种，需要训练一个模型，能够完成这样一个二分类的诊断任务。</p><p>Baseline是一个169层的DenseNet，我们用PyTorch实现了它。</p><p>答案的提交是通过CodaLab这个网站，官方给出了这样一个<a href="https://worksheets.codalab.org/worksheets/0x42dda565716a4ee08d61f0a23656d8c0/" target="_blank" rel="external">提交教程</a>：</p><a id="more"></a><p><strong>Step 1:</strong></p><p>创建一个新的WorkSheet。</p><p><strong>Step 2:</strong></p><p>复制一份虚拟的数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cl add bundle mura-utils//valid .</div><div class="line">cl add bundle mura-utils//valid_image_paths.csv .</div></pre></td></tr></table></figure><p><strong>Step 3:</strong></p><p>将你的代码和模型打包后上传，压缩成zip后上传，系统会自动解压。</p><p>这份伪造数据的路径保存在<code>valid_image_paths.csv</code>中，格式为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/&lt;IMAGE&gt;</div></pre></td></tr></table></figure><p>你的程序需要能够输出一份对于每一个study的预测结果，形如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/,&#123;0,1&#125;</div></pre></td></tr></table></figure><p><strong>Step 4:</strong></p><p>在伪造数据集上运行你预训练好的模型。这是他们给出的运行命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid src:src &quot;python src/&lt;path-to-prediction-program&gt; valid_image_paths.csv predictions.csv&quot; -n run-predictions</div></pre></td></tr></table></figure><p> 这里需要用到docker，我在docker hub准备了一个docker镜像，sqpeng1996/mura2:v5，里面有python 3.6，pytorch, torchnet, sklearn等代码需要的库。</p><p>使用命令为:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py valid_images_paths.csv predictions.csv&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</div></pre></td></tr></table></figure><p>这里特别要注意的是需要多请求一些memory，（或者把batch size改为1）,不然无法跑通。</p><p>如果这一步的state变成了ready，那就说明没问题了。然后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl make run-predictions/predictions.csv -n predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>MODELNAME不能包含空格，最好也避免特殊字符。</p><p>最后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl macro mura-utils/valid-eval-v1.1 predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>就能看到结果了（因为这里是伪造的数据，所以结果不重要）。</p><p><strong>Step 5：</strong></p><p>提交：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl edit predictions-&#123;MODELNAME&#125; --tags mura-submit</div></pre></td></tr></table></figure><p>把 <strong>predictions-{MODELNAME} </strong> bundle的 URL发邮件给 jirvin16@stanford.edu 就可以了。</p>]]></content>
     
     <summary type="html">
     
@@ -58,9 +58,9 @@
     </summary>
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
       <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -269,9 +269,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Mac/Linux/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
@@ -453,9 +453,9 @@
       <category term="Mac" scheme="http://yoursite.com/categories/Mac/"/>
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
   </entry>
   
