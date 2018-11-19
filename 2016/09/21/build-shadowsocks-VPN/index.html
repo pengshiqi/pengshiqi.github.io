@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/09/21/build-shadowsocks-VPN/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="作为一个百度黑，翻墙是生存下来的必要手段，之前一年都是购买的shadowsocks的代理服务，99元一年。前不久申请了GitHub Student Pack,听说里面有赠送免费的VPS，于是就自己动手搭建了一个海外服务器，来提供翻墙之用。">
-<meta property="og:updated_time" content="2016-11-08T06:54:20.000Z">
+<meta property="og:updated_time" content="2018-11-19T06:45:21.836Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="翻墙教程：用国外VPS搭建自己的Shadowsocks服务器">
 <meta name="twitter:description" content="作为一个百度黑，翻墙是生存下来的必要手段，之前一年都是购买的shadowsocks的代理服务，99元一年。前不久申请了GitHub Student Pack,听说里面有赠送免费的VPS，于是就自己动手搭建了一个海外服务器，来提供翻墙之用。">
@@ -340,6 +340,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ssserver -c /etc/shadowsocks.json -d start</div><div class="line">ssserver -c /etc/shadowsocks.json -d stop</div></pre></td></tr></table></figure>
 <p>大功告成！！！梯子已准备完毕！！</p>
 <h4 id="shadowsocks的使用"><a href="#shadowsocks的使用" class="headerlink" title="shadowsocks的使用"></a>shadowsocks的使用</h4><p>下载一个shadowsocks客户端，输入自己的配置参数，就可以使用啦！</p>
+<hr>
+<p>🌀 <strong><em>2018-11-19 14:41 Update</em></strong></p>
+<p>今天又去新开一个droplet，按上面的步骤操作，结果报错了…</p>
+<p>报错信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">root@ubuntu-s-1vcpu-1gb-sfo2-01:~# ssserver -c /etc/shadowsocks.json</div><div class="line">INFO: loading config from /etc/shadowsocks.json</div><div class="line">2018-11-19 06:29:00 INFO     loading libcrypto from libcrypto.so.1.1</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;/usr/local/bin/ssserver&quot;, line 11, in &lt;module&gt;</div><div class="line">    sys.exit(main())</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/server.py&quot;, line 34, in main</div><div class="line">    config = shell.get_config(False)</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/shell.py&quot;, line 262, in get_config</div><div class="line">    check_config(config, is_local)</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/shell.py&quot;, line 124, in check_config</div><div class="line">    encrypt.try_cipher(config[&apos;password&apos;], config[&apos;method&apos;])</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py&quot;, line 44, in try_cipher</div><div class="line">    Encryptor(key, method)</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py&quot;, line 83, in __init__</div><div class="line">    random_string(self._method_info[1]))</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/encrypt.py&quot;, line 109, in get_cipher</div><div class="line">    return m[2](method, key, iv, op)</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py&quot;, line 76, in __init__</div><div class="line">    load_openssl()</div><div class="line">  File &quot;/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py&quot;, line 52, in load_openssl</div><div class="line">    libcrypto.EVP_CIPHER_CTX_cleanup.argtypes = (c_void_p,)</div><div class="line">  File &quot;/usr/lib/python2.7/ctypes/__init__.py&quot;, line 379, in __getattr__</div><div class="line">    func = self.__getitem__(name)</div><div class="line">  File &quot;/usr/lib/python2.7/ctypes/__init__.py&quot;, line 384, in __getitem__</div><div class="line">    func = self._FuncPtr((name_or_ordinal, self))</div><div class="line">AttributeError: /usr/lib/x86_64-linux-gnu/libcrypto.so.1.1: undefined symbol: EVP_CIPHER_CTX_cleanup</div></pre></td></tr></table></figure>
+<p>查了一下， 发现原因是：</p>
+<p><code>Ubuntu 18.04下由于升级 openssl 至1.1.0以上版本导致的 shadowsocks 服务出现 undefined symbol: EVP_CIPHER_CTX_cleanup 错误而无法启动的问题</code>。</p>
+<p>这是由于在openssl 1.1.0中废弃了 <code>EVP_CIPHER_CTX_cleanup()</code> 函数而引入了 <code>EVE_CIPHER_CTX_reset()</code> 函数所导致的。</p>
+<p>因此，可以通过将 <code>EVP_CIPHER_CTX_cleanup()</code> 函数替换为 <code>EVP_CIPHER_CTX_reset()</code> 函数来解决该问题。具体解决方法如下：</p>
+<p>1、根据错误信息定位到文件 <code>/usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py</code> 。</p>
+<p>2、搜索 cleanup 并将其替换为 reset 。（我这个版本中有两处，分别是在52行和111行。）</p>
+<p>3、重新启动 shadowsocks, 该问题解决。</p>
 
       
     </div>
