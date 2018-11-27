@@ -37,17 +37,14 @@
     <link href="http://yoursite.com/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
     <id>http://yoursite.com/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-论文解读/</id>
     <published>2018-11-26T15:41:16.000Z</published>
-    <updated>2018-11-27T05:46:07.404Z</updated>
+    <updated>2018-11-27T12:08:53.646Z</updated>
     
-    <content type="html"><![CDATA[<p>这是CVPR2018的一篇做细粒度图像分类的文章。</p>]]></content>
+    <content type="html"><![CDATA[<p>这是CVPR2018的一篇做细粒度图像分类的文章。</p><p>文章链接：<a href="https://arxiv.org/pdf/1611.09932.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1611.09932.pdf</a> 。</p><a id="more"></a><p>这篇文章提出的模型比较简单，通过学习一系列的1x1卷积，来增强CNN的mid-level学习能力。而且这个模型是end-to-end的，不需要额外的bounding box等标签。</p><p>模型的出发点是：图片经过CNN后，得到了高层语义的feature map，其中每个spatial location都对应着原始图像上的一个patch，feature map中相应越高的地方，其对应的patch，也就是图像在分类的时候，更关注的区域，找到这些区域，对于做细粒度分类很有帮助（并且具有很强的可解释性）。</p><p>这个方法的motivation如下图所示：</p><p><img src="/images/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-论文解读/img1.png" alt="img1"></p><p>拿base model为VGG16举例（不限于VGG16，ResNet也可以），模型的整体结构如下图所示：</p><p><img src="/images/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-论文解读/img2.png" alt="img2"></p><p>先用基础的VGG16的 Conv1 - Conv4 层，提取出feature map，然后分为3个branch，从左到右依次命名为: G-Stream, P-Stream, Side Branch。</p><p>G-Stream 就是基础的VGG16的Conv 5 + fc layer，用于提取global 特征，所以叫G-Stream。</p><p>P-Stream 用于提取discriminative patches，所以叫 P-Stream。VGG16的Conv4_3层的每一个spatial location，在原始图片的receptive field是一个92x92的patch。先用一个1x1的卷积层对feature map做卷积，然后通过Global Maximum Pooling层，最后通过一个fc层分类。</p><p>Side branch的作用是对conv6层做supervision。核心是一个Cross-Channel Pooling层，其实也就是一个一维pooling层，具体如下图所示:</p><p><img src="/images/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-论文解读/img3.png" alt="img3"></p><p>这里的supervision就是，之前1x1的卷积核有kxM个，经过 Conv 6 + Pool 6 之后，得到的是一个 kM x 1 x 1 的向量，这里我们认为每k个对应一个class，所以做一个一维average pooling，得到Mx1x1的向量，用于最后的分类。</p><p>GitHub上有同学用PyTorch复现了这篇paper的代码（然而我并不能用他的代码得到他所说的结果…），模型部分如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DFL_VGG16</span><span class="params">(nn.Module)</span>:</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, k = <span class="number">10</span>, nclass = <span class="number">200</span>)</span>:</span></div><div class="line">super(DFL_VGG16, self).__init__()</div><div class="line">self.k = k</div><div class="line">self.nclass = nclass</div><div class="line"></div><div class="line"><span class="comment"># k channels for one class, nclass is total classes, therefore k * nclass for conv6</span></div><div class="line">vgg16featuremap = torchvision.models.vgg16_bn(pretrained=<span class="keyword">True</span>).features</div><div class="line">conv1_conv4 = torch.nn.Sequential(*list(vgg16featuremap.children())[:<span class="number">-11</span>])</div><div class="line">conv5 = torch.nn.Sequential(*list(vgg16featuremap.children())[<span class="number">-11</span>:])</div><div class="line">conv6 = torch.nn.Conv2d(<span class="number">512</span>, k * nclass, kernel_size = <span class="number">1</span>, stride = <span class="number">1</span>, padding = <span class="number">0</span>)</div><div class="line">pool6 = torch.nn.MaxPool2d((<span class="number">56</span>, <span class="number">56</span>), stride = (<span class="number">56</span>, <span class="number">56</span>), return_indices = <span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># Feature extraction root</span></div><div class="line">self.conv1_conv4 = conv1_conv4</div><div class="line"></div><div class="line"><span class="comment"># G-Stream</span></div><div class="line">self.conv5 = conv5</div><div class="line">self.cls5 = nn.Sequential(</div><div class="line">nn.Conv2d(<span class="number">512</span>, <span class="number">200</span>, kernel_size=<span class="number">1</span>, stride = <span class="number">1</span>, padding = <span class="number">0</span>),</div><div class="line">nn.BatchNorm2d(<span class="number">200</span>),</div><div class="line">nn.ReLU(<span class="keyword">True</span>),</div><div class="line">nn.AdaptiveAvgPool2d((<span class="number">1</span>,<span class="number">1</span>)),</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># P-Stream</span></div><div class="line">self.conv6 = conv6</div><div class="line">self.pool6 = pool6</div><div class="line">self.cls6 = nn.Sequential(</div><div class="line">nn.Conv2d(k * nclass, nclass, kernel_size = <span class="number">1</span>, stride = <span class="number">1</span>, padding = <span class="number">0</span>),</div><div class="line">nn.AdaptiveAvgPool2d((<span class="number">1</span>,<span class="number">1</span>)),</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># Side-branch</span></div><div class="line">self.cross_channel_pool = nn.AvgPool1d(kernel_size = k, stride = k, padding = <span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></div><div class="line">batchsize = x.size(<span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="comment"># Stem: Feature extraction</span></div><div class="line">inter4 = self.conv1_conv4(x)</div><div class="line"></div><div class="line">        <span class="comment"># G-stream</span></div><div class="line">x_g = self.conv5(inter4)</div><div class="line">out1 = self.cls5(x_g)</div><div class="line">out1 = out1.view(batchsize, <span class="number">-1</span>)</div><div class="line"></div><div class="line"><span class="comment"># P-stream ,indices is for visualization</span></div><div class="line">x_p = self.conv6(inter4)</div><div class="line">x_p, indices = self.pool6(x_p)</div><div class="line">inter6 = x_p</div><div class="line">out2 = self.cls6(x_p)</div><div class="line">out2 = out2.view(batchsize, <span class="number">-1</span>)</div><div class="line"></div><div class="line"><span class="comment"># Side-branch</span></div><div class="line">inter6 = inter6.view(batchsize, <span class="number">-1</span>, self.k * self.nclass)</div><div class="line">out3 = self.cross_channel_pool(inter6)</div><div class="line">out3 = out3.view(batchsize, <span class="number">-1</span>)</div><div class="line"></div><div class="line"><span class="keyword">return</span> out1, out2, out3, indices</div></pre></td></tr></table></figure><p>Section 3.3 讲的是如何初始化Conv 6的权重，大致意思是，先找到conv4_3的feature map上energy最大的spatial location，然后用NMS + kmeans的方法对每个class取出topk，作为这个class对应的卷积核的初始化权重。</p><p>但是在复现的时候，并没有去做这个步骤… 一是做起来的确比较麻烦，二是感觉初始化只是会提高训练的起点，对最终训练的结果影响也不大。</p><hr><p>最后，我把这个方法应用到了我当前的脊骨分类问题中，效果提升并不理想… </p><p>感觉医疗图像和自然图像区别还是挺大的…  </p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;这是CVPR2018的一篇做细粒度图像分类的文章。&lt;/p&gt;
-
-      
+      &lt;p&gt;这是CVPR2018的一篇做细粒度图像分类的文章。&lt;/p&gt;
+&lt;p&gt;文章链接：&lt;a href=&quot;https://arxiv.org/pdf/1611.09932.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://arxiv.org/pdf/1611.09932.pdf&lt;/a&gt; 。&lt;/p&gt;
     
     </summary>
     
@@ -112,9 +109,9 @@
       <category term="Python" scheme="http://yoursite.com/categories/Machine-Learning/Python/"/>
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
       <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
     
   </entry>
   
@@ -286,9 +283,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Mac/Linux/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   
@@ -476,9 +473,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   
