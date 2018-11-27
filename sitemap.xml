@@ -2,86 +2,128 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2016/09/21/build-shadowsocks-VPN/</loc>
-    
-    <lastmod>2018-11-19T06:45:21.836Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/</loc>
     
-    <lastmod>2018-07-03T03:43:23.830Z</lastmod>
+    <lastmod>2018-11-27T06:13:35.129Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
-    <lastmod>2018-06-25T13:20:26.234Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/01/25/Python-Skill-List/</loc>
-    
-    <lastmod>2018-03-21T13:54:03.341Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/</loc>
-    
-    <lastmod>2018-03-05T13:13:01.262Z</lastmod>
+    <lastmod>2018-11-27T06:10:48.235Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
     
-    <lastmod>2018-01-18T14:33:30.479Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</loc>
-    
-    <lastmod>2018-01-18T14:27:38.394Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/11/21/test-math-jax/</loc>
-    
-    <lastmod>2017-12-26T09:10:19.958Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/</loc>
-    
-    <lastmod>2017-11-22T01:20:28.000Z</lastmod>
+    <lastmod>2018-11-27T06:08:24.144Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2017/08/25/Shadowsocks-principles/</loc>
     
-    <lastmod>2017-11-22T01:14:52.000Z</lastmod>
+    <lastmod>2018-11-27T05:47:39.523Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/09/14/Markov-Chain/</loc>
+    <loc>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</loc>
     
-    <lastmod>2017-11-22T01:14:51.000Z</lastmod>
+    <lastmod>2018-11-27T05:47:10.726Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/01/25/Python-Skill-List/</loc>
+    
+    <lastmod>2018-11-27T05:46:51.798Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/08/27/Python-Challenge/</loc>
+    
+    <lastmod>2018-11-27T05:46:40.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/08/17/mac-tree/</loc>
+    
+    <lastmod>2018-11-27T05:46:27.866Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/11/27/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
+    
+    <lastmod>2018-11-27T05:46:14.445Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</loc>
+    
+    <lastmod>2018-11-27T05:46:07.404Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/</loc>
+    
+    <lastmod>2018-11-27T05:45:43.915Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/08/10/hello-world/</loc>
+    
+    <lastmod>2018-11-27T05:45:33.933Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2017/07/08/Farewell-My-Undergraduate/</loc>
     
-    <lastmod>2017-11-22T01:14:51.000Z</lastmod>
+    <lastmod>2018-11-27T05:45:24.357Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/</loc>
+    
+    <lastmod>2018-11-27T05:44:45.114Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/09/21/build-shadowsocks-VPN/</loc>
+    
+    <lastmod>2018-11-27T05:44:21.080Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/</loc>
+    
+    <lastmod>2018-11-27T05:42:54.592Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2018-11-27T05:27:01.938Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2018-11-27T05:26:32.906Z</lastmod>
     
   </url>
   
@@ -121,13 +163,6 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/08/27/Python-Challenge/</loc>
-    
-    <lastmod>2017-08-27T10:04:32.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2016/08/15/python-time/</loc>
     
     <lastmod>2017-08-27T10:04:28.000Z</lastmod>
@@ -135,51 +170,9 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/08/10/hello-world/</loc>
-    
-    <lastmod>2017-07-08T03:14:35.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/</loc>
-    
-    <lastmod>2017-07-08T02:42:33.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2016/08/17/mac-tree/</loc>
-    
-    <lastmod>2017-07-08T02:41:58.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/2016/08/12/Redis-mac/</loc>
     
     <lastmod>2017-07-08T02:40:21.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index-1.html</loc>
-    
-    <lastmod>2016-10-03T09:19:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
-    
-    <lastmod>2016-08-13T09:39:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    
-    <lastmod>2016-08-13T02:39:07.000Z</lastmod>
     
   </url>
   
