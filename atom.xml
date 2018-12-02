@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-11-27T05:46:14.445Z</updated>
+  <updated>2018-12-02T14:06:18.829Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -18,17 +18,26 @@
   
   <entry>
     <title>Attention-based Deep Multiple Instance Learning 论文解读</title>
-    <link href="http://yoursite.com/2018/11/27/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
-    <id>http://yoursite.com/2018/11/27/Attention-based-Deep-Multiple-Instance-Learning-论文解读/</id>
-    <published>2018-11-27T05:21:08.000Z</published>
-    <updated>2018-11-27T05:46:14.445Z</updated>
+    <link href="http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/</id>
+    <published>2018-11-29T02:07:08.000Z</published>
+    <updated>2018-12-02T14:06:18.829Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。</p><p>文章的开源代码在 <a href="https://github.com/AMLab-Amsterdam/AttentionDeepMIL" target="_blank" rel="external">AttentionDeepMIL</a> 。</p><a id="more"></a><hr><p>MIL将许多instances看作一个bag，然后对这个bag赋予一个label。 在这篇文章中，作者将MIL问题看作是学习bag标签的Bernoulli分布（二项分布），通过优化对数似然函数来训练模型，提出了一个 <code>neural network-based permutation-invariant aggregation operator that corresponds to the attention mechanism</code> 。</p><p>MIL处理的问题是：现在有许多instances，把它们看作一个bag，但是只给了一个bag的标签。MIL的主要目标就是学习一个模型来预测bag的标签，另外，还希望能够发现<code>key instances (the instances that trigger the bag label)</code>，这样能提高模型的可解释性。</p><p>对bag probability的建模分为3步：</p><ol><li>a transformation of instances to a low-dimensional embedding;</li><li>a permutation-invariant(symmetric) aggregation function;</li><li>a transformation to the bag probability.</li></ol><p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p><h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = { x_1, \dots, x_K }$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in { 0, 1}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p><p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/formula.png" style="zoom:45%"></p><p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于<br>$$<br>Y = \mathop{\max}\limits_{k} {y_k} \tag{2}<br>$$<br>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p><p>MIL问题可以看做<code>Fundamental Theorem of Symmetric Functions</code>的一个特例。</p><blockquote><p><strong>Theorem 1.</strong> </p><p>A scoring function for a set of instances $X$, $S(X) \in R$, is a symmetric function (i.e., permutation- invariant to the elements in $X$), if and only if it can be decomposed in the following form:<br>$$<br>S(X) = g(\sum_{x \in X}f(x))  \tag{3}，<br>$$<br>where $f$ and $g$ are suitable transformations.</p><p><strong>Theorem 2.</strong> </p><p>For any $\epsilon &gt; 0$, a Hausdorff continuous symmetric function $S(X) \in R$ can be arbitrarily approximated by a function in the form $g(\max_{x \in X}f(x))$, where max is the element-wise vector maximum operator and $f$ and $g$ are continuous functions, that is:<br>$$<br>| S(X) - g(\max_{x \in X}f(x)) | &lt; \epsilon ，\tag{4}<br>$$</p></blockquote><p>这两个定理对于bag的分类任务给出了一般的求解步骤：</p><ol><li>a transformation of instances using the function $f$</li><li>a conbination of transformed instances using a symmetric function $\sigma$</li><li>a transformation of combined instances transformed by $f$ using a function $g$</li></ol><p>应用起来就是: (1) CNN 提取特征; (2) pooling (max pooling | avg pooling | MIL pooling); (3) FC层。</p><blockquote><p><em>The embedding-level approach:</em> The function $f$ maps instances to a low-dimensional embedding. MIL pooling is used to obtain a bag representation that is independent of the number of instances in the bag. The bag representation is further processed by a bag-level classifier to provide $\theta(X)$.</p></blockquote><h4 id="Attention-based-MIL-pooling"><a href="#Attention-based-MIL-pooling" class="headerlink" title="Attention-based MIL pooling"></a>Attention-based MIL pooling</h4><p>使用max-operator有两点不足：pre-defined and non-trainable。希望使用attention mechanism来增加模型的灵活性和可解释性。</p><p>公式也不复杂，就是各个instances在low-embedding后的softmax加权平均，和之前的MIL pooling的对比如下图所示:</p><p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/img1.png" alt="img1"></p><p>最后实验部分，作者给出了这个方法在MNIST数据集和一个组织病理学数据集上的实验，证明其有效性。</p>]]></content>
     
     <summary type="html">
+    
+      &lt;p&gt;这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。&lt;/p&gt;
+&lt;p&gt;文章的开源代码在 &lt;a href=&quot;https://github.com/AMLab-Amsterdam/AttentionDeepMIL&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AttentionDeepMIL&lt;/a&gt; 。&lt;/p&gt;
     
     </summary>
     
       <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
     
+    
+      <category term="Multiple Instance Learning" scheme="http://yoursite.com/tags/Multiple-Instance-Learning/"/>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
     
   </entry>
   
@@ -283,9 +292,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Mac/Linux/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   
@@ -473,9 +482,9 @@
       <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
     
     
-      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+      <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
     
   </entry>
   

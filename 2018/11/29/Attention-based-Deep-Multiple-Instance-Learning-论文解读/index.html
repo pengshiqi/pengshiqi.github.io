@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Multiple Instance Learning,Machine Learning," />
 
 
 
@@ -86,15 +86,20 @@
 
 
 
-<meta name="description" content="Where there is a will, there is a way.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Last Whisper">
-<meta property="og:url" content="http://yoursite.com/tags/MySQL/index.html">
+<meta name="description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
+<meta name="keywords" content="Multiple Instance Learning,Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
+<meta property="og:url" content="http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="Where there is a will, there is a way.">
+<meta property="og:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
+<meta property="og:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/formula.png">
+<meta property="og:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/img1.png">
+<meta property="og:updated_time" content="2018-12-02T14:06:18.829Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Last Whisper">
-<meta name="twitter:description" content="Where there is a will, there is a way.">
+<meta name="twitter:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
+<meta name="twitter:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
+<meta name="twitter:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/formula.png">
 
 
 
@@ -115,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/MySQL/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/"/>
 
-  <title> Tag: MySQL | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Attention-based Deep Multiple Instance Learning 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -138,7 +143,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,46 +241,216 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        MySQL
-        <small>Tag</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Attention-based Deep Multiple Instance Learning 论文解读
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2018-11-29T10:07:08+08:00" content="2018-11-29">
+              2018-11-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Paper-Report/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper Report</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/" class="leancloud_visitors" data-flag-title="Attention-based Deep Multiple Instance Learning 论文解读">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。</p>
+<p>文章的开源代码在 <a href="https://github.com/AMLab-Amsterdam/AttentionDeepMIL" target="_blank" rel="external">AttentionDeepMIL</a> 。</p>
+<a id="more"></a>
+<hr>
+<p>MIL将许多instances看作一个bag，然后对这个bag赋予一个label。 在这篇文章中，作者将MIL问题看作是学习bag标签的Bernoulli分布（二项分布），通过优化对数似然函数来训练模型，提出了一个 <code>neural network-based permutation-invariant aggregation operator that corresponds to the attention mechanism</code> 。</p>
+<p>MIL处理的问题是：现在有许多instances，把它们看作一个bag，但是只给了一个bag的标签。MIL的主要目标就是学习一个模型来预测bag的标签，另外，还希望能够发现<code>key instances (the instances that trigger the bag label)</code>，这样能提高模型的可解释性。</p>
+<p>对bag probability的建模分为3步：</p>
+<ol>
+<li>a transformation of instances to a low-dimensional embedding;</li>
+<li>a permutation-invariant(symmetric) aggregation function;</li>
+<li>a transformation to the bag probability.</li>
+</ol>
+<p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p>
+<h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = { x_1, \dots, x_K }$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in { 0, 1}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
+<p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/formula.png" style="zoom:45%"></p>
+<p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于<br>$$<br>Y = \mathop{\max}\limits_{k} {y_k} \tag{2}<br>$$<br>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p>
+<p>MIL问题可以看做<code>Fundamental Theorem of Symmetric Functions</code>的一个特例。</p>
+<blockquote>
+<p><strong>Theorem 1.</strong> </p>
+<p>A scoring function for a set of instances $X$, $S(X) \in R$, is a symmetric function (i.e., permutation- invariant to the elements in $X$), if and only if it can be decomposed in the following form:<br>$$<br>S(X) = g(\sum_{x \in X}f(x))  \tag{3}，<br>$$<br>where $f$ and $g$ are suitable transformations.</p>
+<p><strong>Theorem 2.</strong> </p>
+<p>For any $\epsilon &gt; 0$, a Hausdorff continuous symmetric function $S(X) \in R$ can be arbitrarily approximated by a function in the form $g(\max_{x \in X}f(x))$, where max is the element-wise vector maximum operator and $f$ and $g$ are continuous functions, that is:<br>$$<br>| S(X) - g(\max_{x \in X}f(x)) | &lt; \epsilon ，\tag{4}<br>$$</p>
+</blockquote>
+<p>这两个定理对于bag的分类任务给出了一般的求解步骤：</p>
+<ol>
+<li>a transformation of instances using the function $f$</li>
+<li>a conbination of transformed instances using a symmetric function $\sigma$</li>
+<li>a transformation of combined instances transformed by $f$ using a function $g$</li>
+</ol>
+<p>应用起来就是: (1) CNN 提取特征; (2) pooling (max pooling | avg pooling | MIL pooling); (3) FC层。</p>
+<blockquote>
+<p><em>The embedding-level approach:</em> The function $f$ maps instances to a low-dimensional embedding. MIL pooling is used to obtain a bag representation that is independent of the number of instances in the bag. The bag representation is further processed by a bag-level classifier to provide $\theta(X)$.</p>
+</blockquote>
+<h4 id="Attention-based-MIL-pooling"><a href="#Attention-based-MIL-pooling" class="headerlink" title="Attention-based MIL pooling"></a>Attention-based MIL pooling</h4><p>使用max-operator有两点不足：pre-defined and non-trainable。希望使用attention mechanism来增加模型的灵活性和可解释性。</p>
+<p>公式也不复杂，就是各个instances在low-embedding后的softmax加权平均，和之前的MIL pooling的对比如下图所示:</p>
+<p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/img1.png" alt="img1"></p>
+<p>最后实验部分，作者给出了这个方法在MNIST数据集和一个组织病理学数据集上的实验，证明其有效性。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/" itemprop="url">
-              
-                <span itemprop="name">如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>May The Force Be With You.</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-08T14:50:43+08:00"
-              content="2016-11-08" >
-          11-08
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Multiple-Instance-Learning/" rel="tag">#Multiple Instance Learning</a>
+          
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-论文解读/" rel="next" title="Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读">
+                <i class="fa fa-chevron-left"></i> Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -283,6 +458,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -302,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/profile.jpg"
@@ -360,6 +555,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multiple-Instance-Learning"><span class="nav-number">1.</span> <span class="nav-text">Multiple Instance Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attention-based-MIL-pooling"><span class="nav-number">2.</span> <span class="nav-text">Attention-based MIL pooling</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -463,6 +669,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -479,9 +689,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'patrick-psq';
-      var disqus_identifier = 'tags/MySQL/index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/';
+      var disqus_title = "Attention-based Deep Multiple Instance Learning 论文解读";
+      var disqus_url = 'http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -492,6 +702,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
