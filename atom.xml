@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-20T04:17:50.045Z</updated>
+  <updated>2019-01-20T14:03:34.937Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读</title>
+    <link href="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/</id>
+    <published>2019-01-20T09:15:08.000Z</published>
+    <updated>2019-01-20T14:03:34.937Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。</p><p><a href="https://arxiv.org/abs/1811.10842" target="_blank" rel="external">arxiv 链接</a>。</p><a id="more"></a><hr><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>弱监督语义分割任务是只给出图片的标注，通过训练网络得到像素级的分割结果。</p><p>当前state-of-the-art的方法是通过图片的标注生成 proxy segmentation mask，然后再以此为标签训练分割网络。作者认为，这种方式独立处理每张图片，没有考虑<code>cross-image relationship</code>。</p><p>于是，作者在这篇文章中提出了<code>end-to-end affinity module</code>来对图片间的关系建模，这样一张图片可以得到其他图片的补充信息，而且一组图片间还可以共享监督信息，来提高模型效果。</p><p>在Pascal VOC 2012数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果。</p><h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>该方法可以分为两部分：</p><ol><li>生成初始的 proxy segmentation masks;</li><li>通过 cross-image affinity module 来训练 segmentation network。</li></ol><p>首先，和之前的方法一样，通过CAM来生成 initial seeds。</p><p>然后是 affinity module。AM通过两张图片的 embedded feature map，计算它们的 affinity，然后传递 supplementary messages。</p><p><strong>Affinity 的计算</strong>：给定两个nodes、query function 和 key function，Affinity = query(image1) * key(image2)。这里的距离度量函数用的是点积（因为简单），其他的（高斯核函数、余弦距离）也可以。</p><p> <strong>Message passing</strong>： 计算出各个nodes间的affinity后，归一化，并以此为权重将所有有用的信息相加。</p><p>整个Affinity module的结果如下图所示：</p><p><img src="/images/CIAN 论文解读/image1.png" style="zoom:100%"></p><p>上述的两张图片间的 affinity module 可以扩展到多张图片间，即 group affinity module(G-AM)，以及一张图片内部的 self affinity module(S-AM)。</p><p>整体网络结构如下图所示：</p><p><img src="/images/CIAN 论文解读/image2.png" style="zoom:100%"></p><p>输入batch分为许多groups，每个group内部的图片至少有一个共同标签。通过backbone之后分为两支，G-AM和S-AM，分别根据 cross-image affinity 和 intra-image affinity 来计算出messages，以此增强原始feature，去预测分割结果。两支网络的参数全部共享。</p><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>在Pascal VOC 2012 数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果，超越了之前的state-of-the-art。</p><p>然后作者也做了许多 ablation study 来证明其方法的鲁棒性，具体可以参见文章。</p><p>我觉得比较有趣的是作者对affinity的可视化，可以更好地帮助我们理解同一个类别的图片间的相似性。</p><p><img src="/images/CIAN 论文解读/image3.png" style="zoom:60%"></p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章主要通过挖掘图片间的关联度（cross-image relationship）来提高弱监督分割的效果，这个值得我们借鉴学习，可以考虑将其应用到其他的深度学习任务（classification… etc）上。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1811.10842&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;arxiv 链接&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
+    
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+      <category term="Weakly Supervised Segmentation" scheme="http://yoursite.com/tags/Weakly-Supervised-Segmentation/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode Weekly Contest 120</title>
@@ -475,28 +500,6 @@
       <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
     
       <category term="Mac" scheme="http://yoursite.com/tags/Mac/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Shadowsocks 原理</title>
-    <link href="http://yoursite.com/2017/08/25/Shadowsocks-principles/"/>
-    <id>http://yoursite.com/2017/08/25/Shadowsocks-principles/</id>
-    <published>2017-08-25T07:59:14.000Z</published>
-    <updated>2018-11-27T05:47:39.523Z</updated>
-    
-    <content type="html"><![CDATA[<p>据说明年3月将大量封禁 VPN ，于是想研究一下 Shadowsocks 的原理，看看是否还能使用。</p><a id="more"></a><p>Shadowsocks 是目前最好的科学上网方式，<strong>它的流量经过加密，所以没有流量特征，不会被GFW阻断</strong>！</p><p>之前写过<a href="https://pengshiqi.github.io/2016/09/21/build-shadowsocks-VPN/" target="_blank" rel="external">如何搭建 Shadowsocks 的教程</a>，这次写一写 Shadowsocks 背后的原理。</p><p>Shadowsocks 不同于 VPN(Virtual Private Network)，它是 Proxy ，Github 上的介绍是： </p><ul><li><strong> A fast tunnel proxy that helps you bypass firewalls </strong> </li></ul><h2 id="Long-long-ago…"><a href="#Long-long-ago…" class="headerlink" title="Long long ago…"></a>Long long ago…</h2><p>在很久很久以前，我们访问各种网站都是简单而直接的，用户的请求通过互联网发送到服务提供方，服务提供方直接将信息反馈给用户。</p><p><img src="/images/Shadowsocks-principles/shadowsocks2.png" alt="icon"></p><h2 id="When-evil-comes…"><a href="#When-evil-comes…" class="headerlink" title="When evil comes…"></a>When evil comes…</h2><p>然后有一天，GFW 就出现了，它像一个收过路费的强盗一样夹在用户(client)和服务(server)之间，每当用户需要信息，都需要经过GFW，GFW会将它不喜欢的内容过滤掉。于是当用户触发GFW的过滤规则的时候，就会收到<code>Connection Reset</code>这样的相应内容，而无法接收到正常的请求内容。</p><p><img src="/images/Shadowsocks-principles/shadowsocks3.png" alt="icon"></p><h2 id="SSH-tunnel"><a href="#SSH-tunnel" class="headerlink" title="SSH tunnel"></a>SSH tunnel</h2><p>于是人们想到了利用境外服务器代理的方式来绕过GFW的过滤，其中包含了各种HTTP代理服务、Socks服务、VPN服务…其中<code>SSH Tunnel</code>方式比较有代表性。</p><p>1) 首先用户和境外服务器基于 SSH 建立起一条加密的通道。</p><p>2) 3) 用户通过建立起的隧道进行代理，通过SSH server向真实的服务器发起请求。</p><p>4) 5) 服务器通过SSH server，再通过创建好的隧道返回给用户。</p><p><img src="/images/Shadowsocks-principles/shadowsocks4.png" alt="icon"></p><p>由于SSH本身就是基于RSA加密技术的，所以GFW无法从数据传输的过程中进行关键词分析，避免了被重置链接的问题。但由于创建隧道和数据传输的过程中，SSH本身的特征很明显，所以GFW一度通过分析连接的特征进行干扰，导致SSH存在被定向干扰的问题。</p><h2 id="Shadowsocks"><a href="#Shadowsocks" class="headerlink" title="Shadowsocks"></a>Shadowsocks</h2><p>于是<code>clowwindy</code>同学分享并开源了他的解决方案。</p><p>简单地理解，Shadowsocks就是将原来SSH创建的Socks5协议拆开成Server端和Client端，所以下面这个原理图基本上和利用SSH Tunnel类似。</p><p>1) 6) 客户端发出的请求基于Socks5协议跟SS local端进行通讯，由于这个SS local一般是本机或路由器局域网的其他机器，不经过GFW，所以解决了上面被GFW通过特征分析进行干扰的问题。</p><p>2) 5) SS local 和 SS server两端通过多种可选的加密方法进行通讯，<strong>经过GFW的时候是常规的TCP包，没有明显的特征码而且GFW也无法对通讯数据进行解密！</strong></p><p>3) 4) SS server将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务器，获取响应原路返回。</p><p><img src="/images/Shadowsocks-principles/shadowsocks5.png" alt="icon"></p><h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>因此，Shadowsocks的优点在于它通过流量混淆隐秘解决了GFW通过分析流量特征从而干扰的问题，这是它优于SSH和VPN翻墙的地方（但VPN更注重加密安全性）。缺点也依然明显，需要一点点技术和资源（墙外VPS服务器）来搭建Shadowsocks服务。</p><h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul><li><p><a href="https://vc2tea.com/whats-shadowsocks/" target="_blank" rel="external">写给非专业人士看的 Shadowsocks 简介</a></p></li><li><p><a href="https://tumutanzi.com/archives/13005" target="_blank" rel="external">ShadowSocks的翻墙原理</a></p></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;据说明年3月将大量封禁 VPN ，于是想研究一下 Shadowsocks 的原理，看看是否还能使用。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Network" scheme="http://yoursite.com/categories/Network/"/>
-    
-    
-      <category term="Network" scheme="http://yoursite.com/tags/Network/"/>
     
   </entry>
   

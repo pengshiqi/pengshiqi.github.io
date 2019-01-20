@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Machine Learning,Weakly Supervised Segmentation," />
 
 
 
@@ -86,15 +86,21 @@
 
 
 
-<meta name="description" content="Where there is a will, there is a way.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Last Whisper">
-<meta property="og:url" content="http://yoursite.com/categories/Machine-Learning/Python/index.html">
+<meta name="description" content="这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。 arxiv 链接。">
+<meta name="keywords" content="Machine Learning,Weakly Supervised Segmentation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
+<meta property="og:url" content="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="Where there is a will, there is a way.">
+<meta property="og:description" content="这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。 arxiv 链接。">
+<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image1.png">
+<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image2.png">
+<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image3.png">
+<meta property="og:updated_time" content="2019-01-20T14:03:34.937Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Last Whisper">
-<meta name="twitter:description" content="Where there is a will, there is a way.">
+<meta name="twitter:title" content="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
+<meta name="twitter:description" content="这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。 arxiv 链接。">
+<meta name="twitter:image" content="http://yoursite.com/images/CIAN%20论文解读/image1.png">
 
 
 
@@ -115,9 +121,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/Machine-Learning/Python/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/"/>
 
-  <title> Category: Python | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -138,7 +144,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,47 +242,207 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Python
-        <small>Category</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-01-20T17:15:08+08:00" content="2019-01-20">
+              2019-01-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Paper-Report/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper Report</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/" class="leancloud_visitors" data-flag-title="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。</p>
+<p><a href="https://arxiv.org/abs/1811.10842" target="_blank" rel="external">arxiv 链接</a>。</p>
+<a id="more"></a>
+<hr>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>弱监督语义分割任务是只给出图片的标注，通过训练网络得到像素级的分割结果。</p>
+<p>当前state-of-the-art的方法是通过图片的标注生成 proxy segmentation mask，然后再以此为标签训练分割网络。作者认为，这种方式独立处理每张图片，没有考虑<code>cross-image relationship</code>。</p>
+<p>于是，作者在这篇文章中提出了<code>end-to-end affinity module</code>来对图片间的关系建模，这样一张图片可以得到其他图片的补充信息，而且一组图片间还可以共享监督信息，来提高模型效果。</p>
+<p>在Pascal VOC 2012数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果。</p>
+<h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>该方法可以分为两部分：</p>
+<ol>
+<li>生成初始的 proxy segmentation masks;</li>
+<li>通过 cross-image affinity module 来训练 segmentation network。</li>
+</ol>
+<p>首先，和之前的方法一样，通过CAM来生成 initial seeds。</p>
+<p>然后是 affinity module。AM通过两张图片的 embedded feature map，计算它们的 affinity，然后传递 supplementary messages。</p>
+<p><strong>Affinity 的计算</strong>：给定两个nodes、query function 和 key function，Affinity = query(image1) * key(image2)。这里的距离度量函数用的是点积（因为简单），其他的（高斯核函数、余弦距离）也可以。</p>
+<p> <strong>Message passing</strong>： 计算出各个nodes间的affinity后，归一化，并以此为权重将所有有用的信息相加。</p>
+<p>整个Affinity module的结果如下图所示：</p>
+<p><img src="/images/CIAN 论文解读/image1.png" style="zoom:100%"></p>
+<p>上述的两张图片间的 affinity module 可以扩展到多张图片间，即 group affinity module(G-AM)，以及一张图片内部的 self affinity module(S-AM)。</p>
+<p>整体网络结构如下图所示：</p>
+<p><img src="/images/CIAN 论文解读/image2.png" style="zoom:100%"></p>
+<p>输入batch分为许多groups，每个group内部的图片至少有一个共同标签。通过backbone之后分为两支，G-AM和S-AM，分别根据 cross-image affinity 和 intra-image affinity 来计算出messages，以此增强原始feature，去预测分割结果。两支网络的参数全部共享。</p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>在Pascal VOC 2012 数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果，超越了之前的state-of-the-art。</p>
+<p>然后作者也做了许多 ablation study 来证明其方法的鲁棒性，具体可以参见文章。</p>
+<p>我觉得比较有趣的是作者对affinity的可视化，可以更好地帮助我们理解同一个类别的图片间的相似性。</p>
+<p><img src="/images/CIAN 论文解读/image3.png" style="zoom:60%"></p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章主要通过挖掘图片间的关联度（cross-image relationship）来提高弱监督分割的效果，这个值得我们借鉴学习，可以考虑将其应用到其他的深度学习任务（classification… etc）上。</p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/" itemprop="url">
-              
-                <span itemprop="name">Dimension Reduction using PCA and t-SNE</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>May The Force Be With You.</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-05T17:11:13+08:00"
-              content="2018-03-05" >
-          03-05
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Machine-Learning/" rel="tag">#Machine Learning</a>
+          
+            <a href="/tags/Weakly-Supervised-Segmentation/" rel="tag">#Weakly Supervised Segmentation</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/20/LeetCode-Weekly-Contest-120/" rel="next" title="LeetCode Weekly Contest 120">
+                <i class="fa fa-chevron-left"></i> LeetCode Weekly Contest 120
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -284,6 +450,17 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -303,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/profile.jpg"
@@ -361,6 +547,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Approach"><span class="nav-number">2.</span> <span class="nav-text">Approach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">3.</span> <span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -464,6 +661,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
@@ -480,9 +681,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'patrick-psq';
-      var disqus_identifier = 'categories/Machine-Learning/Python/index.html';
-      var disqus_title = "";
-      var disqus_url = '';
+      var disqus_identifier = '2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/';
+      var disqus_title = "CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读";
+      var disqus_url = 'http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
@@ -493,6 +694,8 @@
       }
 
       run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
       
     </script>
   
