@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="Weakly Supervised Object Localization," />
 
 
 
@@ -86,20 +86,22 @@
 
 
 
-<meta name="description" content="不同的项目之间可能会使用不同版本的某些包，但是因为某些原因（比如有依赖冲突）却不能都升级到最新版本。这时候就需要对环境进行隔离，使用虚拟环境让全局的site-packages目录非常干净和可管理。">
-<meta name="keywords" content="Python">
+<meta name="description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
+<meta name="keywords" content="Weakly Supervised Object Localization">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python中的虚拟环境">
-<meta property="og:url" content="http://yoursite.com/2016/10/03/python-virtual-environment/index.html">
+<meta property="og:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
+<meta property="og:url" content="http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="不同的项目之间可能会使用不同版本的某些包，但是因为某些原因（比如有依赖冲突）却不能都升级到最新版本。这时候就需要对环境进行隔离，使用虚拟环境让全局的site-packages目录非常干净和可管理。">
-<meta property="og:image" content="http://obw22u9v2.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-03%20%E4%B8%8B%E5%8D%885.25.16.png">
-<meta property="og:image" content="http://obw22u9v2.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-03%20%E4%B8%8B%E5%8D%885.29.19.png">
-<meta property="og:updated_time" content="2017-08-27T10:05:49.000Z">
+<meta property="og:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
+<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
+<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png">
+<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png">
+<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png">
+<meta property="og:updated_time" content="2019-01-22T06:14:43.564Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python中的虚拟环境">
-<meta name="twitter:description" content="不同的项目之间可能会使用不同版本的某些包，但是因为某些原因（比如有依赖冲突）却不能都升级到最新版本。这时候就需要对环境进行隔离，使用虚拟环境让全局的site-packages目录非常干净和可管理。">
-<meta name="twitter:image" content="http://obw22u9v2.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-03%20%E4%B8%8B%E5%8D%885.25.16.png">
+<meta name="twitter:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
+<meta name="twitter:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
+<meta name="twitter:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
 
 
 
@@ -120,9 +122,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/10/03/python-virtual-environment/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/"/>
 
-  <title> Python中的虚拟环境 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -262,7 +264,7 @@
             
             
               
-                Python中的虚拟环境
+                Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读
               
             
           </h1>
@@ -274,8 +276,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-10-03T17:11:49+08:00" content="2016-10-03">
-              2016-10-03
+            <time itemprop="dateCreated" datetime="2019-01-22T09:54:08+08:00" content="2019-01-22">
+              2019-01-22
             </time>
           </span>
 
@@ -288,8 +290,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/Paper-Report/" itemprop="url" rel="index">
+                    <span itemprop="name">Paper Report</span>
                   </a>
                 </span>
 
@@ -304,8 +306,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/10/03/python-virtual-environment/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/10/03/python-virtual-environment/" itemprop="commentsCount"></span>
+                <a href="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -315,7 +317,7 @@
 
           
           
-             <span id="/2016/10/03/python-virtual-environment/" class="leancloud_visitors" data-flag-title="Python中的虚拟环境">
+             <span id="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/" class="leancloud_visitors" data-flag-title="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -337,15 +339,37 @@
       
 
       
-        <p>不同的项目之间可能会使用不同版本的某些包，但是因为某些原因（比如有依赖冲突）却不能都升级到最新版本。这时候就需要对环境进行隔离，使用虚拟环境让全局的site-packages目录非常干净和可管理。</p>
+        <p>这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。</p>
+<p>arxiv链接在<a href="https://arxiv.org/abs/1804.06962" target="_blank" rel="external">https://arxiv.org/abs/1804.06962</a>，作者的开源代码在 <a href="https://github.com/xiaomengyc/ACoL" target="_blank" rel="external">xiaomengyc/ACoL</a> 。</p>
 <a id="more"></a>
-<p>这里我们使用virtualenv来创建管理单独、干净的python环境。</p>
-<h3 id="virtualenv"><a href="#virtualenv" class="headerlink" title="virtualenv"></a>virtualenv</h3><p>先安装virtualenv：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo pip install virtualenv</div></pre></td></tr></table></figure></p>
-<p>现在创建一个Python环境：<br><img src="http://obw22u9v2.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-03%20%E4%B8%8B%E5%8D%885.25.16.png" alt="icon"></p>
-<p>virtualenv默认会创建一个包含了Python可执行文件、常用的标准库、激活virtualenv环境的脚本的目录。</p>
-<p>使用source激活virtualenv环境：<br><img src="http://obw22u9v2.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-10-03%20%E4%B8%8B%E5%8D%885.29.19.png" alt="icon"></p>
-<p>注意终端提示的改变，前面添加了’(venv)’前缀。</p>
-<p>可以看到已经不再使用系统环境变量中的Python了。如果要退出虚拟环境，可以取消激活：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(venv)&gt; deactivate</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>这篇文章提出了 <strong>A</strong>dversarial <strong>Co</strong>mplementary <strong>L</strong>earning (ACoL) 的方法在<strong>仅有图片标签</strong>的情况下完成目标定位的任务。</p>
+<p>在CAM的文章中指出了最后一个卷积层得到的feature map可以得到各个类别的位置信息，但同时也存在一些问题：1）CAM过度依赖显著特征来对图片分类；2）不能定位到整个目标物体（比如一只猫只能定位到头部）。</p>
+<p>作者展现了一个新的网络框架，该框架使用了两支并行的分类器，其中一支动态地定位出一些显著的目标区域，然后通过擦除其中的某些区域并反馈给另一支分类器，能够让其发现新的目标区域，以此提升目标定位的效果。</p>
+<p>ACoL有两个优点：</p>
+<ol>
+<li>该模型可以端到端地训练；</li>
+<li>动态擦除可以让第二支分类器更有效地发现新的目标区域。</li>
+</ol>
+<p>在ILSVRC数据集上，该方法可以达到45.14%的Top-1的定位错误率。</p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png" style="zoom:60%"></p>
+<p>上图是对ACoL的一个解释。假设我们要定位一匹马，分类器A会发现一些显著区域（马的头和后腿），在分类器B的feature map中将这些部分擦除，可以让分类器B发现其他的显著区域（马的前腿），将这两部分融合起来，就能得到完整的目标区域（马）。</p>
+<h3 id="Revisiting-CAM"><a href="#Revisiting-CAM" class="headerlink" title="Revisiting CAM"></a>Revisiting CAM</h3><p>原本的CAM需要在训练完VGG网络后，将其全连接层替换为GAP层再训练一次，作者提出了一种更方便得到CAM的方法。</p>
+<p>图片通过FCN后得到feature map，在后面接一个C-channel的1x1 conv层，然后通过GAP和softmax做分类。这个1x1 conv层的权重与feature map相乘，得到的结果与原始CAM是等价的。</p>
+<h3 id="The-proposed-ACoL"><a href="#The-proposed-ACoL" class="headerlink" title="The proposed ACoL"></a>The proposed ACoL</h3><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png" style="zoom:100%"></p>
+<p>ACoL的整体框架如上图所示，包括三个部分：Backbone、分类器A和分类器B。</p>
+<p>Backbone是一个全卷积网络（Fully Convolutional Network），用作特征提取器（feature extractor）。分类器A和分类器B都可以按照上述CAM的方式得到object localization maps，不过它们的输入不同，分类器B的输入是FCN的feature map减去分类器A的object localization maps中最显著区域后得到的部分。最终目标物体的localization maps由两支的结果融合后得到，融合方式是两支的结果取max。</p>
+<p>算法流程如下所示：</p>
+<p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png" style="zoom:100%"></p>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者在ILSVRC、CUB-200-2011和Caltech-256三个数据集上进行了实验，使用VGG和GoogLeNet两种Backbone进行实验，主要与CAM进行对比，都能超越CAM的准确率，具体实验数据参见文章。</p>
+<p>Ablation study是尝试不同的threshold对结果的影响，0.6或0.7可以达到最好的效果。</p>
+<p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png" style="zoom:100%"></p>
+<p>上图是ACoL与CAM在目标定位的结果对比示例，可以看到，ACoL更能捕捉到整个物体，这就是作者的出发点。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章的贡献点主要在两个方面：</p>
+<ol>
+<li>提出了一个更简洁的得到CAM的方法；</li>
+<li>通过擦除feature map上最显著的区域，让模型关注到其他区域，以此提高模型目标检测的效果。</li>
+</ol>
 
       
     </div>
@@ -389,7 +413,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
+            <a href="/tags/Weakly-Supervised-Object-Localization/" rel="tag">#Weakly Supervised Object Localization</a>
           
         </div>
       
@@ -398,17 +422,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/21/build-shadowsocks-VPN/" rel="next" title="翻墙教程：用国外VPS搭建自己的Shadowsocks服务器">
-                <i class="fa fa-chevron-left"></i> 翻墙教程：用国外VPS搭建自己的Shadowsocks服务器
+              <a href="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/" rel="next" title="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
+                <i class="fa fa-chevron-left"></i> CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/" rel="prev" title="如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)">
-                如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -536,7 +556,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#virtualenv"><span class="nav-number">1.</span> <span class="nav-text">virtualenv</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivations"><span class="nav-number">1.</span> <span class="nav-text">Motivations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Revisiting-CAM"><span class="nav-number">2.1.</span> <span class="nav-text">Revisiting CAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-proposed-ACoL"><span class="nav-number">2.2.</span> <span class="nav-text">The proposed ACoL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">3.</span> <span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
             
           </div>
         </section>
@@ -663,9 +683,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'patrick-psq';
-      var disqus_identifier = '2016/10/03/python-virtual-environment/';
-      var disqus_title = "Python中的虚拟环境";
-      var disqus_url = 'http://yoursite.com/2016/10/03/python-virtual-environment/';
+      var disqus_identifier = '2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/';
+      var disqus_title = "Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读";
+      var disqus_url = 'http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
