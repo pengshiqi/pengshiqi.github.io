@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png">
 <meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png">
 <meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png">
-<meta property="og:updated_time" content="2019-01-22T06:22:13.675Z">
+<meta property="og:updated_time" content="2019-01-26T04:28:12.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
 <meta name="twitter:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
@@ -345,7 +345,11 @@
 <a id="more"></a>
 <hr>
 <h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>这篇文章提出了 <strong>A</strong>dversarial <strong>Co</strong>mplementary <strong>L</strong>earning (ACoL) 的方法在<strong>仅有图片标签</strong>的情况下完成目标定位的任务。</p>
-<p>在CAM的文章中指出了最后一个卷积层得到的feature map可以得到各个类别的位置信息，但同时也存在一些问题：1）CAM过度依赖显著特征来对图片分类；2）不能定位到整个目标物体（比如一只猫只能定位到头部）。</p>
+<p>在CAM的文章中指出了最后一个卷积层得到的feature map可以得到各个类别的位置信息，但同时也存在一些问题：</p>
+<ol>
+<li>CAM过度依赖显著特征来对图片分类；</li>
+<li>不能定位到整个目标物体（比如一只猫只能定位到头部）。</li>
+</ol>
 <p>作者展现了一个新的网络框架，该框架使用了两支并行的分类器，其中一支动态地定位出一些显著的目标区域，然后通过擦除其中的某些区域并反馈给另一支分类器，能够让其发现新的目标区域，以此提升目标定位的效果。</p>
 <p>ACoL有两个优点：</p>
 <ol>
@@ -356,7 +360,7 @@
 <h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png" style="zoom:60%"></p>
 <p>上图是对ACoL的一个解释。假设我们要定位一匹马，分类器A会发现一些显著区域（马的头和后腿），在分类器B的feature map中将这些部分擦除，可以让分类器B发现其他的显著区域（马的前腿），将这两部分融合起来，就能得到完整的目标区域（马）。</p>
 <h3 id="Revisiting-CAM"><a href="#Revisiting-CAM" class="headerlink" title="Revisiting CAM"></a>Revisiting CAM</h3><p>原本的CAM需要在训练完VGG网络后，将其全连接层替换为GAP层再训练一次，作者提出了一种更方便得到CAM的方法。</p>
-<p>图片通过FCN后得到feature map，在后面接一个C-channel的1x1 conv层，然后通过GAP和softmax做分类。这个1x1 conv层的权重与feature map相乘，得到的结果与原始CAM是等价的。</p>
+<p>图片通过FCN后得到feature map，在后面接两个3x3 的conv层和一个C-channel的1x1 conv层，然后通过GAP和softmax做分类。通过1x1 conv层后的feature map就是localization maps，与原始CAM是等价的。</p>
 <p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image5.png" style="zoom:100%"></p>
 <p>上图是作者提出的方法与原始CAM的结果对比以及模型对比。</p>
 <h3 id="The-proposed-ACoL"><a href="#The-proposed-ACoL" class="headerlink" title="The proposed ACoL"></a>The proposed ACoL</h3><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png" style="zoom:100%"></p>
@@ -371,7 +375,7 @@
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章的贡献点主要在两个方面：</p>
 <ol>
 <li>提出了一个更简洁的得到CAM的方法；</li>
-<li>通过擦除feature map上最显著的区域，让模型关注到其他区域，以此提高模型目标检测的效果。</li>
+<li>通过擦除feature map上最显著的区域，让模型关注到其他区域，以此提高模型目标定位的效果。</li>
 </ol>
 
       
