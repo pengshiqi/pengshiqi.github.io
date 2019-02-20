@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-17T11:22:42.603Z</updated>
+  <updated>2019-02-20T07:31:47.425Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>SLSDeep-Skin Lesion Segmentation Based on Dilated Residual and Pyramid Pooling Networks 论文解读</title>
+    <link href="http://yoursite.com/2019/02/20/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://yoursite.com/2019/02/20/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/</id>
+    <published>2019-02-20T05:11:08.000Z</published>
+    <updated>2019-02-20T07:31:47.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是发表在 MICCAI 2018 上的一篇关于病灶分割的文章。</p><p>arxiv链接在<a href="https://arxiv.org/abs/1805.10241" target="_blank" rel="external">https://arxiv.org/abs/1805.10241</a>，作者的开源代码在 <a href="https://github.com/xmichelleshihx/SLSDeep" target="_blank" rel="external">https://github.com/xmichelleshihx/SLSDeep</a> 。</p><a id="more"></a><hr><h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>作者的任务是做 skin lesion segmentation (SLS)，采用了很常见的 encoder-decoder 的网络结构。</p><p>文章的主要贡献点：</p><ol><li>提出了一个 encoder(DRN) - decoder(PPN) 的网络结构；</li><li>提出了一个新的 loss function (NLL loss + EPE loss)。</li></ol><h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image1.png" style="zoom:100%"></p><p>文章提出的网络结构如上图所示。</p><p>更深入的细节可以查看 Dilated Residual Network 的<a href="http://openaccess.thecvf.com/content_cvpr_2017/papers/Yu_Dilated_Residual_Networks_CVPR_2017_paper.pdf" target="_blank" rel="external">论文</a>和<a href="https://github.com/fyu/drn/blob/master/drn.py" target="_blank" rel="external">代码</a>，以及Pyramid Scene Parsing Network的<a href="https://arxiv.org/pdf/1612.01105.pdf" target="_blank" rel="external">论文</a>和<a href="https://github.com/Lextal/pspnet-pytorch" target="_blank" rel="external">代码</a>。</p><p>作者提出同时考虑 NLL loss 和 EPE loss，分别作为 objective loss 和 content loss，NLL loss其实就是 cross entropy loss 在二分类时的情况。</p><p>NLL loss，$v$是true label，$p$是probability estimate:</p><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image2.png" style="zoom:50%"></p><p>EPE loss 参考了IJCV 2011的<a href="http://vision.middlebury.edu/flow/floweval-ijcv2011.pdf" target="_blank" rel="external">论文</a>，$u$是 generated mask，$v$是 ground truth:</p><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image3.png" style="zoom:50%"></p><p>total loss 为两者加权相加：</p><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image4.png" style="zoom:50%"></p><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者在ISBI 2016和ISBI2017两个数据集上做了实验。</p><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image5.png" style="zoom:60%"></p><p>可以看出，加上EPE loss后，在accuracy上会有 1-2% 的提升，在dice上会有 4-5% 的提升。</p><p><img src="/images/SLSDeep-Skin-Lesion-Segmentation-Based-on-Dilated-Residual-and-Pyramid-Pooling-Networks-论文解读/image6.png" style="zoom:100%"></p><p>这是一个qualitative result，展示了模型好的分割结果以及不好的分割结果。</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章想法比较简单，但我们可以通过这篇文章去了解CVPR 2017的两篇文章，Dilated Residual Network和Pyramid Scene Parsing Network，以及End Point Error loss，这是我们可以学习借鉴的东西。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是发表在 MICCAI 2018 上的一篇关于病灶分割的文章。&lt;/p&gt;
+&lt;p&gt;arxiv链接在&lt;a href=&quot;https://arxiv.org/abs/1805.10241&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://arxiv.org/abs/1805.10241&lt;/a&gt;，作者的开源代码在 &lt;a href=&quot;https://github.com/xmichelleshihx/SLSDeep&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/xmichelleshihx/SLSDeep&lt;/a&gt; 。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
+    
+    
+      <category term="Image Segmentation" scheme="http://yoursite.com/tags/Image-Segmentation/"/>
+    
+      <category term="MICCAI" scheme="http://yoursite.com/tags/MICCAI/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode Weekly Contest 124</title>
@@ -125,9 +150,9 @@
       <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
     
     
-      <category term="Weakly Supervised Segmentation" scheme="http://yoursite.com/tags/Weakly-Supervised-Segmentation/"/>
-    
       <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+      <category term="Weakly Supervised Segmentation" scheme="http://yoursite.com/tags/Weakly-Supervised-Segmentation/"/>
     
   </entry>
   
@@ -330,9 +355,9 @@
       <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
     
     
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
-    
       <category term="Multiple Instance Learning" scheme="http://yoursite.com/tags/Multiple-Instance-Learning/"/>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
     
   </entry>
   
@@ -454,28 +479,6 @@
     
       &lt;p&gt;I’d like to talk about something about EM algorithm in my understanding.&lt;/p&gt;
 &lt;p&gt;This post is mainly based on &lt;a href=&quot;https://www.bilibili.com/video/av12802062/?from=search&amp;amp;seid=12077428943005827344&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Richard Xu’s machine learning course&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/categories/Machine-Learning/"/>
-    
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Recurrent Neural Networks</title>
-    <link href="http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/"/>
-    <id>http://yoursite.com/2018/01/03/Recurrent-Neural-Networks/</id>
-    <published>2018-01-03T09:31:33.000Z</published>
-    <updated>2018-11-27T05:47:10.726Z</updated>
-    
-    <content type="html"><![CDATA[<p>Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.</p><a id="more"></a><p>A powerful type of Recurrent Neural Network called the Long Short-Term Memory Network has been shown to be particularly effective when stacked into a deep configuration, achieving state-of-the-art results on a diverse array of problems from language translation to automatic captioning of images and videos.</p><p>After reading this post, you will know:</p><ul><li>The limitations of Multilayer Perceptrons that are addressed by recurrent neural networks.</li><li>The problems that must be addressed to make Recurrent Neural networks useful.</li><li><p>The details of the Long Short-Term Memory networks used in applied deep learning.</p><p>​    </p><h3 id="Long-Short-Term-Memory-Network"><a href="#Long-Short-Term-Memory-Network" class="headerlink" title="Long Short-Term Memory Network"></a>Long Short-Term Memory Network</h3></li></ul><p>The Long Short-Term Memory, or LSTM, network is a type of Recurrent Neural Network (RNN) designed for sequence problems. Given a standard feedforward Multilayer Perceptron network, an RNN can be thought of as the addition of loops to the architecture. The recurrent connections add state or memory to the network and allow it to learn and harness the ordered nature of observations within input sequences.</p><p>Instead of neurons, LSTM networks have memory blocks that are connected into layers.</p><p>A block has components that make it smarter than a classical neuron and a memory for recent sequences. A block contains gates that manage the block’s state and output. A unit operates upon an input sequence and each gate within a unit uses the sigmoid activation function to control whether they are triggered or not, making the change of state and addition of information flowing through the unit conditional.</p><p>There are three types of gates within a memory unit:</p><ul><li><strong>Forget Gate</strong>: conditionally decides what information to discard from the unit.</li><li><strong>Input Gate</strong>: conditionally decides which values from the input to update the memory state.</li><li><strong>Output Gate</strong>: conditionally decides what to output based on input and the memory of the unit.</li></ul><p>Each unit is like a mini state machine where the gates of the units have weights that are learned during the training procedure.</p><h4 id="Vanilla-LSTM"><a href="#Vanilla-LSTM" class="headerlink" title="Vanilla LSTM"></a>Vanilla LSTM</h4><p>It is the LSTM architecture defined in the original 1997 LSTM paper1 and the architecture that will give good results on most small sequence prediction problems.</p><p>The Vanilla LSTM is defined as:</p><ol><li>Input layer;</li><li>Fully connected LSTM hidden layer;</li><li>Fully connected output layer.</li></ol><p>​    </p><h4 id="Stacked-LSTM"><a href="#Stacked-LSTM" class="headerlink" title="Stacked LSTM"></a>Stacked LSTM</h4><h4 id="CNN-LSTM"><a href="#CNN-LSTM" class="headerlink" title="CNN LSTM"></a>CNN LSTM</h4><h4 id="Encode-Decode-LSTM"><a href="#Encode-Decode-LSTM" class="headerlink" title="Encode-Decode LSTM"></a>Encode-Decode LSTM</h4><p>​            </p><h4 id="Bidirectional-LSTM"><a href="#Bidirectional-LSTM" class="headerlink" title="Bidirectional LSTM"></a>Bidirectional LSTM</h4><h4 id="Generative-LSTM"><a href="#Generative-LSTM" class="headerlink" title="Generative LSTM"></a>Generative LSTM</h4><p>​    </p><p>​<br>​<br>​    </p><h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://machinelearningmastery.com/crash-course-recurrent-neural-networks-deep-learning/" target="_blank" rel="external">Crash Course in Recurrent Neural Networks for Deep Learning</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Recurrent neural networks have connections that have loops, adding feedback and memory to the networks over time.&lt;/p&gt;
     
     </summary>
     
