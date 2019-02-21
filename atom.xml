@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-20T07:31:47.425Z</updated>
+  <updated>2019-02-21T10:37:00.843Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Approximating CNNs With Bag-of-Local-Features Models Works Surprisingly Well on ImageNet 论文解读</title>
+    <link href="http://yoursite.com/2019/02/21/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://yoursite.com/2019/02/21/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-论文解读/</id>
+    <published>2019-02-21T07:06:08.000Z</published>
+    <updated>2019-02-21T10:37:00.843Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是发表在 ICLR 2019 上的一篇关于深度神经网络可解释性的文章。</p><p>文章链接在<a href="https://openreview.net/forum?id=SkfMWhAqYQ" target="_blank" rel="external">https://openreview.net/forum?id=SkfMWhAqYQ</a>，作者的开源代码在 <a href="https://github.com/wielandbrendel/bag-of-local-features-models" target="_blank" rel="external">https://github.com/wielandbrendel/bag-of-local-features-models</a>。</p><a id="more"></a><hr><h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>深度神经网络一直被认为是黑匣子，这篇文章就是探讨其可解释性的。何为可解释性，就是如何根据图片的patches提取到的局部特征，得到整张图片的类别决策。</p><p>这篇文章的灵感来源是BoF(bag-of-feature) models，这是在深度学习出现之前目标识别领域最成功的方法。</p><p>作者设计了BagNet的网络结构，是ResNet-50的变体，通过统计图片局部特征出现的次数来进行图片分类，而不考虑这些特征的空间关系。BagNet在 feature sensitivity、error distribution 和 interaction between image parts等方面和VGG、ResNet、DenseNet等DNN表现相似。</p><h2 id="Network-Architecture"><a href="#Network-Architecture" class="headerlink" title="Network Architecture"></a>Network Architecture</h2><p><img src="../images/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-论文解读/image1.png" style="zoom:100%"></p><p>BagNets的网络结构如上图所示。网络结构和ResNet的唯一区别就是，将一些原来的3x3卷积层替换成了1x1卷积层（具体是哪些可以参见代码），这样可以限制最上面卷积层的感受野为qxq的大小，这样的BagNet记为BagNet-q，$q\in[9, 17, 33]$。</p><p>BagNet-17能达到AlexNet的精度，BagNet-33能达到约87%的top-5 accuracy。这表明，只需使用一组小图的特性即可解决ImageNet的分类问题，</p><h2 id="Discussions"><a href="#Discussions" class="headerlink" title="Discussions"></a>Discussions</h2><p>BagNet的一个特色是其透明的决策，即可解释性，可以知道DNN是如何做出分类决策的。</p><p><img src="../images/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-论文解读/image2.png" style="zoom:100%"></p><p>还可以根据各个patch对决策的贡献，画出热力图。</p><p><img src="../images/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-论文解读/image3.png" style="zoom:100%"></p><p>当然，DNN并不完全类似于Bag-of-Feature model，确实有偏差，而且，网络越深，对全局的依赖性也就越大。</p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>作者通过这篇文章想说明，CNN可能遵循及其简单的分类策略（然而并不完全是这样），并且这个点可能是未来神经网络可解释性的一个发展方向。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是发表在 ICLR 2019 上的一篇关于深度神经网络可解释性的文章。&lt;/p&gt;
+&lt;p&gt;文章链接在&lt;a href=&quot;https://openreview.net/forum?id=SkfMWhAqYQ&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://openreview.net/forum?id=SkfMWhAqYQ&lt;/a&gt;，作者的开源代码在 &lt;a href=&quot;https://github.com/wielandbrendel/bag-of-local-features-models&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/wielandbrendel/bag-of-local-features-models&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
+    
+    
+      <category term="Interpretable DNN" scheme="http://yoursite.com/tags/Interpretable-DNN/"/>
+    
+  </entry>
   
   <entry>
     <title>SLSDeep-Skin Lesion Segmentation Based on Dilated Residual and Pyramid Pooling Networks 论文解读</title>
@@ -463,29 +486,6 @@
     
     
       <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>EM Algorithm</title>
-    <link href="http://yoursite.com/2018/01/18/EM-Algorithm/"/>
-    <id>http://yoursite.com/2018/01/18/EM-Algorithm/</id>
-    <published>2018-01-18T05:08:13.000Z</published>
-    <updated>2018-11-27T06:08:24.144Z</updated>
-    
-    <content type="html"><![CDATA[<p>I’d like to talk about something about EM algorithm in my understanding.</p><p>This post is mainly based on <a href="https://www.bilibili.com/video/av12802062/?from=search&amp;seid=12077428943005827344" target="_blank" rel="external">Richard Xu’s machine learning course</a>.</p><a id="more"></a><h3 id="Gaussian-Mixture-Model"><a href="#Gaussian-Mixture-Model" class="headerlink" title="Gaussian Mixture Model"></a>Gaussian Mixture Model</h3><p>Gaussian Mixture Model (GMM) (k-mixture) is defined as:<br>$$<br>p(X | \Theta) = \sum_{l=1}^k \alpha_l \mathcal{N}(X | \mu_l, \Sigma_l) \tag{1}<br>$$</p><p>$$<br>\sum_{l=1}^k \alpha_l = 1 \tag{2}<br>$$</p><p>and<br>$$<br>\Theta = { \alpha_1, \dots, \alpha_k, \mu_1, \dots, \mu_k, \Sigma_1, \dots, \Sigma_k } \tag{3}<br>$$</p><p>For data $X = { x_1, \dots, x_n }$, we introduce latent variable $Z = { z_1, \dots, z_n }$, each $z_i$ indicates which mixture components $x_i$ belongs to. (The introduction of latent variable should <strong>not</strong> change the <em>marginal distribution</em> of $p(X)$.)</p><p>Then we can use MLE to estimate $\Theta$ :<br>$$<br>\Theta_{MLE} = \mathop{\arg\max}\limits_{\Theta} \Big( \sum_{i=1}^N \log \big[ \sum_{l=1}^k \alpha_l \mathcal{N}(x_i | \mu_l, \Sigma_l) \big] \Big) \tag{4}<br>$$</p><p>This formula is difficult to solve because it is in ‘log-of-sum’ form. So, we solve this problem in an iterative way, called <strong><em>Expectation Maximization</em></strong>.</p><h3 id="Expectation-Maximization"><a href="#Expectation-Maximization" class="headerlink" title="Expectation Maximization"></a>Expectation Maximization</h3><p>Instead of performing<br>$$<br>\Theta_{MLE} = \mathop{\arg\max}\limits{\Theta} \Big( \mathcal{L}(\Theta) \Big) = \mathop{\arg\max}\limits_{\Theta} \Big( \log \big( p(X|\Theta) \big ) \Big) \tag{5}<br>$$</p><p>we assume some latent variable $Z$ to the model, such that we generate a series of $\Theta = { \Theta^{(1)},  \Theta^{(2)}, \dots, \Theta^{(t)} }$.</p><p>For each iteration of the E-M algorithm, we perform:<br>$$<br>\Theta^{(g+1)} =\mathop{\arg\max}\limits_{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) dZ \tag{6}<br>$$</p><p>We must ensure convergence:<br>$$<br>\log p(X|\Theta^{(g+1)}) \ge \log p(X|\Theta^{(g)}) \tag{7}<br>$$<br><strong><em>Proof</em></strong> :<br>$$<br>E_{p(Z|X, \Theta^{(g)})} \Big[\log p(X|\Theta) \Big] = E_{p(Z|X, \Theta^{(g)})} \Big[\log p(X,Z|\Theta) - \log p(Z|X,\Theta) \Big] \tag{8}<br>$$</p><p>$$<br>\log p(X|\Theta) =  \int_Z  \log p(X,Z|\Theta) p(Z|X, \Theta^{(g)}) dZ -  \int_Z  \log p(Z|X,\Theta) p(Z|X, \Theta^{(g)}) dZ \tag{9}<br>$$</p><p>denote<br>$$<br>Q(\Theta, \Theta^{(g)}) = \int_Z  \log p(X,Z|\Theta) p(Z|X, \Theta^{(g)}) dZ \\<br>H(\Theta, \Theta^{(g)}) = \int_Z  \log p(Z|X,\Theta) p(Z|X, \Theta^{(g)}) dZ<br>$$<br>then we have<br>$$<br>\log p(X|\Theta) =Q(\Theta, \Theta^{(g)}) - H(\Theta, \Theta^{(g)}) \tag{10}<br>$$<br>Because<br>$$<br>Q(\Theta^{(g)}, \Theta^{(g)}) \le Q(\Theta^{(g+1)}, \Theta^{(g)}) \\<br>H(\Theta^{(g)}, \Theta^{(g)}) \ge H(\Theta^{(g+1)}, \Theta^{(g)})<br>$$<br>the second inequality can be derived using Jensen’s inequality.</p><p>Hence ,<br>$$<br>\log p(X|\Theta^{(g+1)}) \ge \log p(X|\Theta^{(g)}) \tag{11}<br>$$</p><h3 id="Using-EM-algorithm-to-solve-GMM"><a href="#Using-EM-algorithm-to-solve-GMM" class="headerlink" title="Using EM algorithm to solve GMM"></a>Using EM algorithm to solve GMM</h3><p>Put GMM into this frame work.<br>$$<br>\Theta^{(g+1)} = \mathop{\arg\max}\limits_{\Theta} \big[ Q(\Theta, \Theta^{(g)}) \big] =\mathop{\arg\max}\limits_{\Theta} \Big( \int_Z \log \big( p(X, Z | \Theta) p (Z | X, \Theta^{(g)}) \big) \Big) dZ \tag{12}<br>$$<br><strong><em>E-Step:</em></strong></p><p>Define $ p(X, Z | \Theta)$ :<br>$$<br>p(X, Z | \Theta) = \Pi_{i=1}^n p(x_i, z_i | \Theta) = \Pi_{i=1}^n p(x_i|z_i, \Theta) p(z_i|\Theta) =  \Pi_{i=1}^n \alpha_{z_i} \mathcal{N}(\mu_{z_i}, \Sigma_{z_i}) \tag{13}<br>$$<br>Define $p (Z | X, \Theta)$ :<br>$$<br>p (Z | X, \Theta) = \Pi_{i=1}^{n} p(z_i|x_i, \Theta) = \Pi_{i=1}^{n} \frac{\alpha_{z_i} \mathcal{N} (\mu_{z_i}, \Sigma_{z_i})}{\sum_{l=1}^k \alpha_l \mathcal{N} (\mu_l, \Sigma_l)} \tag{14}<br>$$<br> Then<br>$$<br>Q(\Theta, \Theta^{(g)}) = \sum_{z_1= 1}^k  \sum_{z_2= 1}^k  \dots  \sum_{z_N= 1}^k \Big( \sum_{i=1}^N \big[ \log \alpha_{z_i} + \log \mathcal{N}(\mu_{z_i}, \Sigma_{z_i})  \big] * \Pi_{i=1}^{N}  p(z_i| x_i, \Theta^{(g)}) \Big)<br>$$<br>$$<br> = \sum_{i=1}^N \sum_{l = 1}^k \big( \log \alpha_{l} + \log \mathcal{N}(\mu_{l}, \Sigma_{l}) \big) p(l| x_i, \Theta^{(g)}) \tag{15}<br>$$</p><p><strong><em>M-Step:</em></strong><br>$$<br>Q(\Theta, \Theta^{(g)}) = \sum_{i=1}^N \sum_{l = 1}^k  \log (\alpha_{l}) p(l| x_i, \Theta^{(g)})  + \sum_{i=1}^N \sum_{l = 1}^k\log \mathcal{N}(\mu_{l}, \Sigma_{l}) p(l| x_i, \Theta^{(g)}) \tag{16}<br>$$<br>The first term contains only $\alpha$ and the second term contains only $\mu, \Sigma$, so we can maximize both terms independantly.</p><p>Maximizing $\alpha$ means that:<br>$$<br>\frac{\partial \sum_{i=1}^N \sum_{l = 1}^k  \log (\alpha_{l}) p(l| x_i, \Theta^{(g)})}{\partial\alpha_1 \dots \partial\alpha_k} = 0 \tag{17}<br>$$<br>subject to $\sum_{l=1}^k = 1$. </p><p>Solving this problem via Lagrangian Multiplier, we have<br>$$<br>\alpha_l = \frac{1}{N} \sum_{i=1}^N p(l| x_i, \Theta^{(g)}) \tag{18}<br>$$<br>Similarly, we can solve $\mu$ and $\Sigma$.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;I’d like to talk about something about EM algorithm in my understanding.&lt;/p&gt;
-&lt;p&gt;This post is mainly based on &lt;a href=&quot;https://www.bilibili.com/video/av12802062/?from=search&amp;amp;seid=12077428943005827344&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Richard Xu’s machine learning course&lt;/a&gt;.&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/categories/Machine-Learning/"/>
-    
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
     
   </entry>
   
