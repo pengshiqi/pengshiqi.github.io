@@ -1,0 +1,858 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeetCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Time: Feb 24th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
+<meta name="keywords" content="LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Weekly Contest 125">
+<meta property="og:url" content="http://yoursite.com/2019/02/24/LeetCode-Weekly-Contest-125/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="Time: Feb 24th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
+<meta property="og:updated_time" content="2019-02-24T03:51:49.560Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Weekly Contest 125">
+<meta name="twitter:description" content="Time: Feb 24th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6318630373483873000,
+      author: 'Admin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/24/LeetCode-Weekly-Contest-125/"/>
+
+  <title> LeetCode Weekly Contest 125 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Last Whisper</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode Weekly Contest 125
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-02-24T12:04:21+08:00" content="2019-02-24">
+              2019-02-24
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/02/24/LeetCode-Weekly-Contest-125/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/24/LeetCode-Weekly-Contest-125/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/02/24/LeetCode-Weekly-Contest-125/" class="leancloud_visitors" data-flag-title="LeetCode Weekly Contest 125">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Time: Feb 24th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)</p>
+<a id="more"></a>
+<h3 id="997-Find-the-Town-Judge"><a href="#997-Find-the-Town-Judge" class="headerlink" title="997. Find the Town Judge"></a>997. Find the Town Judge</h3><p>总觉得我做的比较蠢…</p>
+<p>维护两个集合的列表，分别表示第i个人trust谁和第i个人被谁trust。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">findJudge</span><span class="params">(self, n: int, trust: List[List[int]])</span> -&gt; int:</span></div><div class="line">        trusted_list = [set() <span class="keyword">for</span> x <span class="keyword">in</span> range(n + <span class="number">1</span>)]</div><div class="line">        trust_list = [set() <span class="keyword">for</span> x <span class="keyword">in</span> range(n + <span class="number">1</span>)]</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> trust:</div><div class="line">            trusted_list[x[<span class="number">1</span>]].add(x[<span class="number">0</span>])</div><div class="line">            trust_list[x[<span class="number">0</span>]].add(x[<span class="number">1</span>])</div><div class="line">        </div><div class="line">        ret = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, n + <span class="number">1</span>):</div><div class="line">            <span class="keyword">if</span> len(trusted_list[i]) == n - <span class="number">1</span> <span class="keyword">and</span> len(trust_list[i]) == <span class="number">0</span>:</div><div class="line">                ret.append(i)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> len(ret) == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> ret[<span class="number">0</span>]</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span></div></pre></td></tr></table></figure>
+<h3 id="998-Maximum-Binary-Tree-II"><a href="#998-Maximum-Binary-Tree-II" class="headerlink" title="998. Maximum Binary Tree II"></a>998. Maximum Binary Tree II</h3><p>先deconstruct，再construct，都能通过递归实现。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Definition for a binary tree node.</span></div><div class="line"><span class="comment"># class TreeNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.left = None</span></div><div class="line"><span class="comment">#         self.right = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deconstruct</span><span class="params">(self, root: TreeNode)</span> -&gt; List[int]:</span></div><div class="line">        l = [] <span class="keyword">if</span> root.left <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> self.deconstruct(root.left)</div><div class="line">        r = [] <span class="keyword">if</span> root.right <span class="keyword">is</span> <span class="keyword">None</span> <span class="keyword">else</span> self.deconstruct(root.right)</div><div class="line">        <span class="keyword">return</span> l + [root.val] + r</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">construct</span><span class="params">(self, nums: List[int])</span> -&gt; TreeNode:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> nums:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">        i = nums.index(max(nums))</div><div class="line"></div><div class="line">        node = TreeNode(nums[i])</div><div class="line"></div><div class="line">        node.left = self.construct(nums[:i])</div><div class="line">        node.right = self.construct(nums[i + <span class="number">1</span>:])</div><div class="line"></div><div class="line">        <span class="keyword">return</span> node</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insertIntoMaxTree</span><span class="params">(self, root: TreeNode, val: int)</span> -&gt; TreeNode:</span></div><div class="line">        A = self.deconstruct(root)</div><div class="line">        B = A + [val]</div><div class="line">        <span class="keyword">return</span> self.construct(B)</div></pre></td></tr></table></figure>
+<h3 id="999-Available-Captures-for-Rook"><a href="#999-Available-Captures-for-Rook" class="headerlink" title="999. Available Captures for Rook"></a>999. Available Captures for Rook</h3><p>四个方向判断一下就好了…</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">numRookCaptures</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&gt;&amp; board)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> rx, ry;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; ++i)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">8</span>; ++j)</div><div class="line">                <span class="keyword">if</span> (board[i][j] == <span class="string">'R'</span>)</div><div class="line">                &#123;</div><div class="line">                    rx = i;</div><div class="line">                    ry = j;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> ret = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="comment">// N</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = rx - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">            <span class="keyword">if</span> (board[i][ry] == <span class="string">'.'</span>)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[i][ry] == <span class="string">'B'</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[i][ry] == <span class="string">'p'</span>) &#123;</div><div class="line">                ret++;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// S</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = rx + <span class="number">1</span>; i &lt; <span class="number">8</span>; ++i) &#123;</div><div class="line">            <span class="keyword">if</span> (board[i][ry] == <span class="string">'.'</span>)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[i][ry] == <span class="string">'B'</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[i][ry] == <span class="string">'p'</span>) &#123;</div><div class="line">                ret++;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// W</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = ry - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</div><div class="line">            <span class="keyword">if</span> (board[rx][i] == <span class="string">'.'</span>)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[rx][i] == <span class="string">'B'</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[rx][i] == <span class="string">'p'</span>) &#123;</div><div class="line">                ret++;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// E</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = ry + <span class="number">1</span>; i &lt; <span class="number">8</span>; ++i) &#123;</div><div class="line">            <span class="keyword">if</span> (board[rx][i] == <span class="string">'.'</span>)</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[rx][i] == <span class="string">'B'</span>)</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (board[rx][i] == <span class="string">'p'</span>) &#123;</div><div class="line">                ret++;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="1001-Grid-Illumination"><a href="#1001-Grid-Illumination" class="headerlink" title="1001. Grid Illumination"></a>1001. Grid Illumination</h3><p>像这种看起来两层循环会超时，一般都是以空间换时间，多用一些哈希的数据结构（比如dict，unordered_map）就可以了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">gridIllumination</span><span class="params">(self, N: int, lamps: List[List[int]], queries: List[List[int]])</span> -&gt; List[int]:</span></div><div class="line">        row = &#123;&#125;</div><div class="line">        column = &#123;&#125;</div><div class="line">        diag1 = &#123;&#125;</div><div class="line">        diag2 = &#123;&#125;</div><div class="line">        </div><div class="line">        lamp_dict = &#123;&#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> [x, y] <span class="keyword">in</span> lamps:</div><div class="line">            <span class="keyword">if</span> x <span class="keyword">in</span> row.keys():</div><div class="line">                row[x] += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                row[x] = <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> y <span class="keyword">in</span> column.keys():</div><div class="line">                column[y] += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                column[y] = <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> x - y <span class="keyword">in</span> diag1.keys():</div><div class="line">                diag1[x - y] += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                diag1[x - y] = <span class="number">1</span></div><div class="line">            <span class="keyword">if</span> x + y <span class="keyword">in</span> diag2.keys():</div><div class="line">                diag2[x + y] += <span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                diag2[x + y] = <span class="number">1</span></div><div class="line">            lamp_dict[N * (x) + y] = <span class="number">1</span></div><div class="line">            </div><div class="line">        ret = []</div><div class="line">        <span class="keyword">for</span> [x, y] <span class="keyword">in</span> queries:</div><div class="line">            <span class="keyword">if</span> row.get(x, <span class="number">0</span>) <span class="keyword">or</span> column.get(y, <span class="number">0</span>) <span class="keyword">or</span> diag1.get(x - y, <span class="number">0</span>) <span class="keyword">or</span> diag2.get(x + y, <span class="number">0</span>):</div><div class="line">                ret.append(<span class="number">1</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                ret.append(<span class="number">0</span>)</div><div class="line">                </div><div class="line">            <span class="comment"># turn off [x, y] adjacents</span></div><div class="line">            <span class="comment"># row x</span></div><div class="line">            <span class="keyword">if</span> lamp_dict.get(N * (x) + y, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x) + y] = <span class="number">0</span></div><div class="line">                row[x] -= <span class="number">1</span></div><div class="line">                column[y] -= <span class="number">1</span></div><div class="line">                diag1[x - y] -= <span class="number">1</span></div><div class="line">                diag2[x + y] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> lamp_dict.get(N * (x) + y - <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x) + y - <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x] -= <span class="number">1</span></div><div class="line">                column[y - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x - (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x + (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y + <span class="number">1</span> &lt; N <span class="keyword">and</span> lamp_dict.get(N * (x) + y + <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x) + y + <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x] -= <span class="number">1</span></div><div class="line">                column[y + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x - (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x + (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">           </div><div class="line">            <span class="comment"># row x - 1</span></div><div class="line">            <span class="keyword">if</span> N * (x - <span class="number">1</span>) + y &gt;= <span class="number">0</span> <span class="keyword">and</span> lamp_dict.get(N * (x - <span class="number">1</span>) + y, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x - <span class="number">1</span>) + y] = <span class="number">0</span></div><div class="line">                row[x - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y] -= <span class="number">1</span></div><div class="line">                diag1[x - <span class="number">1</span> - y] -= <span class="number">1</span></div><div class="line">                diag2[x - <span class="number">1</span> + y] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> lamp_dict.get(N * (x - <span class="number">1</span>) + y - <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x - <span class="number">1</span>) + y - <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x - <span class="number">1</span> - (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x - <span class="number">1</span> + (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y + <span class="number">1</span> &lt; N <span class="keyword">and</span> lamp_dict.get(N * (x - <span class="number">1</span>) + y + <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x - <span class="number">1</span>) + y + <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x - <span class="number">1</span> - (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x - <span class="number">1</span> + (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">              </div><div class="line">            <span class="comment"># row x + 1  </span></div><div class="line">            <span class="keyword">if</span> N * (x + <span class="number">1</span>) + y &lt; N * N <span class="keyword">and</span> lamp_dict.get(N * (x + <span class="number">1</span>) + y, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x + <span class="number">1</span>) + y] = <span class="number">0</span></div><div class="line">                row[x + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y] -= <span class="number">1</span></div><div class="line">                diag1[x + <span class="number">1</span> - y] -= <span class="number">1</span></div><div class="line">                diag2[x + <span class="number">1</span> + y] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> lamp_dict.get(N * (x + <span class="number">1</span>) + y - <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x + <span class="number">1</span>) + y - <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y - <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x + <span class="number">1</span> - (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x + <span class="number">1</span> + (y - <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">            </div><div class="line">            <span class="keyword">if</span> y + <span class="number">1</span> &lt; N <span class="keyword">and</span> lamp_dict.get(N * (x + <span class="number">1</span>) + y + <span class="number">1</span>, <span class="number">0</span>):</div><div class="line">                lamp_dict[N * (x + <span class="number">1</span>) + y + <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                row[x + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                column[y + <span class="number">1</span>] -= <span class="number">1</span></div><div class="line">                diag1[x + <span class="number">1</span> - (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">                diag2[x + <span class="number">1</span> + (y + <span class="number">1</span>)] -= <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">return</span> ret</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>May The Force Be With You.</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/21/Approximating-CNNs-With-Bag-of-Local-Features-Models-Works-Surprisingly-Well-on-ImageNet-论文解读/" rel="next" title="Approximating CNNs With Bag-of-Local-Features Models Works Surprisingly Well on ImageNet 论文解读">
+                <i class="fa fa-chevron-left"></i> Approximating CNNs With Bag-of-Local-Features Models Works Surprisingly Well on ImageNet 论文解读
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/profile.jpg"
+               alt="Patrick_psq" />
+          <p class="site-author-name" itemprop="name">Patrick_psq</p>
+          <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#997-Find-the-Town-Judge"><span class="nav-number">1.</span> <span class="nav-text">997. Find the Town Judge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#998-Maximum-Binary-Tree-II"><span class="nav-number">2.</span> <span class="nav-text">998. Maximum Binary Tree II</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#999-Available-Captures-for-Rook"><span class="nav-number">3.</span> <span class="nav-text">999. Available Captures for Rook</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1001-Grid-Illumination"><span class="nav-number">4.</span> <span class="nav-text">1001. Grid Illumination</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick_psq</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'patrick-psq';
+      var disqus_identifier = '2019/02/24/LeetCode-Weekly-Contest-125/';
+      var disqus_title = "LeetCode Weekly Contest 125";
+      var disqus_url = 'http://yoursite.com/2019/02/24/LeetCode-Weekly-Contest-125/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+<!-- MathJax Start -->
+<!-- MathJax documentation: http://docs.mathjax.org/en/latest/index.html -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {  // tex2jax preprocessor
+      inlineMath: [ ['$','$'] ],  // delimiters for in-line math
+      displayMath: [ ['$$','$$'] ],  // delimiters for displayed equations
+      processEscapes: true,  // enable \$ to represent a single dollar sign
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']  // MathJax will not process contents inside these tags 
+    },
+    TeX: {  // TeX/LaTeX input processor
+      equationNumbers: { autoNumber: "AMS" },  // only number those equations in specific AMSmath environments
+      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]  // introduce AMS extensions and suppress generating error messages 
+    },
+    "HTML-CSS": {  // HTML-CSS output processor (this is the default output of MathJax)
+      scale: 110,  // The scaling factor of math with respect to the surrounding text
+      linebreaks: { automatic: true } // automatically breaks the line if necessary
+    },
+    SVG: {  // SVG output processor
+      scale: 110,  // The scaling factor of math with respect to the surrounding text
+      linebreaks: { automatic: true } // automatically breaks the line if necessary
+    },
+    menuSettings: {  // settings for the mathematics contextual menu
+      zoom: "Hover"  // set equation zooming to be triggered by a single mouse click
+    }
+  });
+ 
+  MathJax.Hub.Queue(function() { // Fix <code> tags after MathJax finishes running, this is a hack to overcome a shortcoming of Markdown
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
+</script>
+<!-- MathJax End -->
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("UG6Ef6yp7QecbSj8Xk3rmHlt-gzGzoHsz", "Dr0E4K0SRzKyd0J8ovr2P9P7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+</body>
+</html>
