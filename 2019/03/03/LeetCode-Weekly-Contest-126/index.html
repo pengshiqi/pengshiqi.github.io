@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Python," />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -86,19 +86,17 @@
 
 
 
-<meta name="description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
-<meta name="keywords" content="Python">
+<meta name="description" content="Time: Mar 3rd, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
+<meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python中的time模块">
-<meta property="og:url" content="http://yoursite.com/2016/08/15/python-time/index.html">
+<meta property="og:title" content="LeetCode Weekly Contest 126">
+<meta property="og:url" content="http://yoursite.com/2019/03/03/LeetCode-Weekly-Contest-126/index.html">
 <meta property="og:site_name" content="Last Whisper">
-<meta property="og:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
-<meta property="og:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
-<meta property="og:updated_time" content="2017-08-27T10:04:28.000Z">
+<meta property="og:description" content="Time: Mar 3rd, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
+<meta property="og:updated_time" content="2019-03-03T10:06:49.656Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python中的time模块">
-<meta name="twitter:description" content="因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。 时间表示方式">
-<meta name="twitter:image" content="http://i2.buimg.com/4851/f3eb5255fd74f548.png">
+<meta name="twitter:title" content="LeetCode Weekly Contest 126">
+<meta name="twitter:description" content="Time: Mar 3rd, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
 
 
 
@@ -119,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/15/python-time/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/03/LeetCode-Weekly-Contest-126/"/>
 
-  <title> python中的time模块 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> LeetCode Weekly Contest 126 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="en">
@@ -261,7 +259,7 @@
             
             
               
-                python中的time模块
+                LeetCode Weekly Contest 126
               
             
           </h1>
@@ -273,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">Posted on</span>
-            <time itemprop="dateCreated" datetime="2016-08-15T17:40:06+08:00" content="2016-08-15">
-              2016-08-15
+            <time itemprop="dateCreated" datetime="2019-03-03T12:04:21+08:00" content="2019-03-03">
+              2019-03-03
             </time>
           </span>
 
@@ -287,8 +285,8 @@
               <span class="post-meta-item-text">In</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -303,8 +301,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/15/python-time/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/15/python-time/" itemprop="commentsCount"></span>
+                <a href="/2019/03/03/LeetCode-Weekly-Contest-126/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/03/LeetCode-Weekly-Contest-126/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -314,7 +312,7 @@
 
           
           
-             <span id="/2016/08/15/python-time/" class="leancloud_visitors" data-flag-title="python中的time模块">
+             <span id="/2019/03/03/LeetCode-Weekly-Contest-126/" class="leancloud_visitors" data-flag-title="LeetCode Weekly Contest 126">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -336,201 +334,18 @@
       
 
       
-        <p>因为最近总是会用到time这个模块，需要经常时间戳和时间字符串转换，而我又不太记得，故整理了一下python中的time模块，记录下来。</p>
-<h3 id="时间表示方式"><a href="#时间表示方式" class="headerlink" title="时间表示方式"></a>时间表示方式</h3><a id="more"></a>
-<ol>
-<li>在python中，通常有这几种方式来表示时间：<ul>
-<li>时间戳</li>
-<li>格式化的时间字符串</li>
-<li>元组（九个元素）</li>
-</ul>
-</li>
-<li>UTC（Coordinate Universal Time），世界标准时间。在中国为UTC+8 。</li>
-<li>时间戳(timestamp)。时间戳表示的是从 <em>1970年1月1日 00：00：00</em> 开始按毫秒计算的偏移量。返回时间戳的方式有time(),clock()等。</li>
-<li>元组(struct_time)。共有9个元素，返回struct_time的函数主要有gmtime(),localtime(),strptime()等。<br>例如：<br><img src="http://i2.buimg.com/4851/f3eb5255fd74f548.png" alt="icon"><br>各字段的含义如下：</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>索引（index）</th>
-<th>属性（attribute）</th>
-<th>值（values）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>tm_year</td>
-<td>eg.2016</td>
-</tr>
-<tr>
-<td>1</td>
-<td>tm_mon</td>
-<td>1-12</td>
-</tr>
-<tr>
-<td>2</td>
-<td>tm_mday</td>
-<td>1-31</td>
-</tr>
-<tr>
-<td>3</td>
-<td>tm_hour</td>
-<td>0-23</td>
-</tr>
-<tr>
-<td>4</td>
-<td>tm_min</td>
-<td>0-59</td>
-</tr>
-<tr>
-<td>5</td>
-<td>tm_sec</td>
-<td>0-59</td>
-</tr>
-<tr>
-<td>6</td>
-<td>tm_wday</td>
-<td>0-6</td>
-</tr>
-<tr>
-<td>7</td>
-<td>tm_yday(一年中的第几天)</td>
-<td>1-366</td>
-</tr>
-<tr>
-<td>8</td>
-<td>tm_isdst(是否是夏令时)</td>
-<td>-1 (default)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ol>
-<li><p>time.localtime([secs]): 将一个时间戳转换成当前时区的struct_time。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.localtime()</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=15, tm_min=28, tm_sec=22, tm_wday=1, tm_yday=229, tm_isdst=0)</div><div class="line">&gt;&gt;&gt; time.localtime(1471334822)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=7, tm_sec=2, tm_wday=1, tm_yday=229, tm_isdst=0)</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.time(): 返回当前时间的时间戳。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.time()</div><div class="line">1471334993.112127</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.mktime(t): 将一个struct_time转换成时间戳。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.mktime(time.localtime())</div><div class="line">1471335138.0</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.sleep(secs): 线程推迟指定的时间运行，单位为秒。</p>
-</li>
-<li><p>time.clock(): 在不同系统上含义不同。在UNIX系统上，返回进程时间，是以秒为单位的浮点数。而在windows系统上，第一次调用返回进程运行时间，而之后的调用则是返回第一次调用到现在的运行时间。下面是在macOS上的运行示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077041</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077398</div><div class="line">&gt;&gt;&gt; time.clock()</div><div class="line">0.077726</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.asctime([t]): 把一个表示时间的元组或者struct_time转换形式表示出来。default参数为time.localtime()。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.asctime()</div><div class="line">&apos;Tue Aug 16 16:26:22 2016&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.ctime([secs]): 把一个时间戳转换成time.asctime()的形式。default参数为time.time()。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.ctime()</div><div class="line">&apos;Tue Aug 16 16:30:32 2016&apos;</div><div class="line">&gt;&gt;&gt; time.ctime(1471334822)</div><div class="line">&apos;Tue Aug 16 16:07:02 2016&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.strftime(format[,t]): 把一个代表时间的元组或者struct_time转化为格式化的时间字符串。default参数为time.localtime()。如果元组中任何一个参数越界，则会抛出一个ValueError的错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strftime(&apos;%Y-%m-%d %X&apos;, time.localtime())</div><div class="line">&apos;2016-08-16 16:43:05&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>time.strptime(string[,format]): 把一个格式化时间字符串转换成struct_time。它和strftime()是逆操作。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strptime(&apos;2016-08-16 16:43:05&apos;, &apos;%Y-%m-%d %X&apos;)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=43, tm_sec=5, tm_wday=1, tm_yday=229, tm_isdst=-1)</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>格式</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%a</td>
-<td>本地简化星期名称</td>
-</tr>
-<tr>
-<td>%A</td>
-<td>本地完整星期名称</td>
-</tr>
-<tr>
-<td>%b</td>
-<td>本地简化月份名称</td>
-</tr>
-<tr>
-<td>%B</td>
-<td>本地完整月份名称</td>
-</tr>
-<tr>
-<td>%c</td>
-<td>本地相应的日期和时间表示</td>
-</tr>
-<tr>
-<td>%d</td>
-<td>一个月第几天（01-31）</td>
-</tr>
-<tr>
-<td>%H</td>
-<td>一天第几个小时（24小时制）</td>
-</tr>
-<tr>
-<td>%I</td>
-<td>第几个小时（12小时制）</td>
-</tr>
-<tr>
-<td>%j</td>
-<td>一年中第几天（001-366）</td>
-</tr>
-<tr>
-<td>%m</td>
-<td>月份（01-12）</td>
-</tr>
-<tr>
-<td>%M</td>
-<td>分钟数（00-59）</td>
-</tr>
-<tr>
-<td>%p</td>
-<td>本地am或pm</td>
-</tr>
-<tr>
-<td>%S</td>
-<td>秒（01-61，闰年秒占两秒）</td>
-</tr>
-<tr>
-<td>%U</td>
-<td>一年中的星期数（00-53）</td>
-</tr>
-<tr>
-<td>%w</td>
-<td>一个星期中的第几天（0-6）</td>
-</tr>
-<tr>
-<td>%W</td>
-<td>和%U基本相同，不同的是%W以星期一为一个星期的开始</td>
-</tr>
-<tr>
-<td>%x</td>
-<td>本地相应日期</td>
-</tr>
-<tr>
-<td>%X</td>
-<td>本地相应时间</td>
-</tr>
-<tr>
-<td>%y</td>
-<td>去掉世纪的年份（00-99）</td>
-</tr>
-<tr>
-<td>%Y</td>
-<td>完整的年份</td>
-</tr>
-<tr>
-<td>%Z</td>
-<td>时区的名字</td>
-</tr>
-<tr>
-<td>%%</td>
-<td>‘%’字符</td>
-</tr>
-</tbody>
-</table>
+        <p>Time: Mar 3rd, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)</p>
+<a id="more"></a>
+<h3 id="1002-Find-Common-Characters"><a href="#1002-Find-Common-Characters" class="headerlink" title="1002. Find Common Characters"></a>1002. Find Common Characters</h3><p>collections.Counter 是个好东西</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">commonChars</span><span class="params">(self, A: List[str])</span> -&gt; List[str]:</span></div><div class="line">        <span class="keyword">if</span> len(A) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> []</div><div class="line">        </div><div class="line">        <span class="keyword">from</span> collections <span class="keyword">import</span> Counter</div><div class="line">        d = Counter(A[<span class="number">0</span>])</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, len(A)):</div><div class="line">            cur = Counter(A[i])</div><div class="line">            <span class="keyword">for</span> k, v <span class="keyword">in</span> d.items():</div><div class="line">                d[k] = min(d[k], cur.get(k, <span class="number">0</span>))</div><div class="line">        </div><div class="line">        ret = []</div><div class="line">        <span class="keyword">for</span> k, v <span class="keyword">in</span> d.items():</div><div class="line">            ret += [k] * v</div><div class="line">        <span class="keyword">return</span> ret</div></pre></td></tr></table></figure>
+<h3 id="1003-Check-If-Word-Is-Valid-After-Substitutions"><a href="#1003-Check-If-Word-Is-Valid-After-Substitutions" class="headerlink" title="1003. Check If Word Is Valid After Substitutions"></a>1003. Check If Word Is Valid After Substitutions</h3><p>递归题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isValid</span><span class="params">(self, S: str)</span> -&gt; bool:</span></div><div class="line">        <span class="keyword">if</span> len(S) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        </div><div class="line">        flag = <span class="keyword">False</span></div><div class="line">        new_S = <span class="string">""</span></div><div class="line">        </div><div class="line">        i = <span class="number">0</span></div><div class="line">        <span class="keyword">while</span> i &lt; len(S):</div><div class="line">            <span class="keyword">if</span> S[i: i + <span class="number">3</span>] == <span class="string">"abc"</span>:</div><div class="line">                i += <span class="number">3</span></div><div class="line">                flag = <span class="keyword">True</span></div><div class="line">                <span class="keyword">continue</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                new_S += S[i]</div><div class="line">                i += <span class="number">1</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> flag:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        </div><div class="line">        <span class="keyword">if</span> len(new_S) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">        </div><div class="line">        <span class="keyword">return</span> self.isValid(new_S)</div></pre></td></tr></table></figure>
+<h3 id="1004-Max-Consecutive-Ones-III"><a href="#1004-Max-Consecutive-Ones-III" class="headerlink" title="1004. Max Consecutive Ones III"></a>1004. Max Consecutive Ones III</h3><p>记录每个0出现的位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">longestOnes</span><span class="params">(self, a: List[int], k: int)</span> -&gt; int:</span></div><div class="line">        zero_pos = []</div><div class="line">        f = []</div><div class="line">        </div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</div><div class="line">            <span class="keyword">if</span> a[i] == <span class="number">0</span>:</div><div class="line">                zero_pos.append(i)</div><div class="line">                </div><div class="line">            </div><div class="line">            <span class="keyword">if</span> len(zero_pos) &lt;= k:</div><div class="line">                f.append(i + <span class="number">1</span>)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                f.append(i - zero_pos[- k - <span class="number">1</span>])</div><div class="line">                    </div><div class="line">        ret = <span class="number">0</span></div><div class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> f:</div><div class="line">            ret = max(ret, x)</div><div class="line">        <span class="keyword">return</span> ret</div></pre></td></tr></table></figure>
+<h3 id="1000-Minimum-Cost-to-Merge-Stones"><a href="#1000-Minimum-Cost-to-Merge-Stones" class="headerlink" title="1000. Minimum Cost to Merge Stones"></a>1000. Minimum Cost to Merge Stones</h3><p>这是个9分题…</p>
+<p>先写了个贪心，果然不太对… 还是要dp才行…</p>
+<p>合并石子的升级版，原问题是每次合并两堆，改成了每次合并K堆。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -574,7 +389,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Python/" rel="tag">#Python</a>
+            <a href="/tags/LeetCode/" rel="tag">#LeetCode</a>
           
         </div>
       
@@ -583,17 +398,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/12/Redis-mac/" rel="next" title="Redis 在 Mac 上的安装与使用">
-                <i class="fa fa-chevron-left"></i> Redis 在 Mac 上的安装与使用
+              <a href="/2019/02/24/LeetCode-Weekly-Contest-125/" rel="next" title="LeetCode Weekly Contest 125">
+                <i class="fa fa-chevron-left"></i> LeetCode Weekly Contest 125
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/17/mac-tree/" rel="prev" title="Unix系统下的tree命令——展示目录树结构">
-                Unix系统下的tree命令——展示目录树结构 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -721,7 +532,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#时间表示方式"><span class="nav-number">1.</span> <span class="nav-text">时间表示方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用函数"><span class="nav-number">2.</span> <span class="nav-text">常用函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1002-Find-Common-Characters"><span class="nav-number">1.</span> <span class="nav-text">1002. Find Common Characters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1003-Check-If-Word-Is-Valid-After-Substitutions"><span class="nav-number">2.</span> <span class="nav-text">1003. Check If Word Is Valid After Substitutions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1004-Max-Consecutive-Ones-III"><span class="nav-number">3.</span> <span class="nav-text">1004. Max Consecutive Ones III</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1000-Minimum-Cost-to-Merge-Stones"><span class="nav-number">4.</span> <span class="nav-text">1000. Minimum Cost to Merge Stones</span></a></li></ol></div>
             
           </div>
         </section>
@@ -848,9 +659,9 @@
 
     <script type="text/javascript">
       var disqus_shortname = 'patrick-psq';
-      var disqus_identifier = '2016/08/15/python-time/';
-      var disqus_title = "python中的time模块";
-      var disqus_url = 'http://yoursite.com/2016/08/15/python-time/';
+      var disqus_identifier = '2019/03/03/LeetCode-Weekly-Contest-126/';
+      var disqus_title = "LeetCode Weekly Contest 126";
+      var disqus_url = 'http://yoursite.com/2019/03/03/LeetCode-Weekly-Contest-126/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
