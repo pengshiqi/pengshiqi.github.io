@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-03-03T10:06:49.656Z</updated>
+  <updated>2019-03-03T14:13:31.467Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Star Shape Prior in Fully Convolutional Networks for Skin Lesion Segmentation 论文解读</title>
+    <link href="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/</id>
+    <published>2019-03-03T11:30:08.000Z</published>
+    <updated>2019-03-03T14:13:31.467Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是发表在 MICCAI 2018 上的一篇关于病灶图像分割的文章。</p><p>arxiv链接在<a href="https://arxiv.org/abs/1806.08437" target="_blank" rel="external">https://arxiv.org/abs/1806.08437</a>。</p><a id="more"></a><hr><h2 id="Motivations"><a href="#Motivations" class="headerlink" title="Motivations"></a>Motivations</h2><p>深度卷积网络已经是做像素级分类预测任务的首要手段，但是目前还没有一个很好的方法去将人类的先验知识融入到模型中。</p><p>作者的灵感来源是之前在能量方程最小化方面的工作（ASM，graph-based methods…），于是在这篇文章中，将Veksler star shape prior设计成了损失函数，来惩罚non-star shape的FCN预测，以保证分割结果的形状。作者提出的方法在ISBI 2017皮肤分割数据集上排名 1/21。</p><h2 id="Methodology"><a href="#Methodology" class="headerlink" title="Methodology"></a>Methodology</h2><p><strong>Star Shape Regularized Loss</strong></p><p>Star shape的定义是这样的：</p><blockquote><p>Assuming c is the center of object O, object O is a star shape object if, for any point p interior to the object, all the pixels q lying on the straight line segment connecting p to the object center c are inside the object.</p></blockquote><p>如下图(a)所示。</p><p><img src="../images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png" style="zoom:90%"></p><p>然后基于star shape的定义，作者设计了这样一个损失函数：</p><p><img src="../images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image2.png" style="zoom:80%"></p><p>其中，$y_{ip}$是在图像$i$中像素$p$的真实标签。</p><p>这个loss要求(1)如果p和q有相同的gt标签且(2)p被分类错误，那么p和q应该有相同的预测标签。</p><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者基于两个FCN进行了实验：（1）U-net；（2）ResNet-DUC (Dense Upsampling Convolution)。</p><p>实验数据集是ISBI 2017，2000(train) + 150(val) + 600(test)，其中仅有0.14%的图片不是star-shaped。</p><p>下表是实验结果：</p><p>（所有方法的SP都很高，但这篇文章的方法把SE提高了近5个点，Dice和Jaccard提高了1%。）</p><p><img src="../images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image3.png" style="zoom:90%"></p><p>下图展示的是有无Star shape约束时的效果对比。</p><p><img src="../images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image4.png" style="zoom:90%"></p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章的主要内容是，受到传统的能量最小化方法的启发，将对目标分割区域的形状先验知识通过约束条件添加进深度网络模型，让模型的分割结果呈现出预期的状态。</p><p>这种思路我们可以思考借鉴。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是发表在 MICCAI 2018 上的一篇关于病灶图像分割的文章。&lt;/p&gt;
+&lt;p&gt;arxiv链接在&lt;a href=&quot;https://arxiv.org/abs/1806.08437&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://arxiv.org/abs/1806.08437&lt;/a&gt;。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
+    
+    
+      <category term="Image Segmentation" scheme="http://yoursite.com/tags/Image-Segmentation/"/>
+    
+      <category term="Medical" scheme="http://yoursite.com/tags/Medical/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode Weekly Contest 126</title>
@@ -452,35 +477,6 @@
       <category term="Computer Vision" scheme="http://yoursite.com/tags/Computer-Vision/"/>
     
       <category term="Papers" scheme="http://yoursite.com/tags/Papers/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在CodaLab上提交MURA竞赛的结果</title>
-    <link href="http://yoursite.com/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/"/>
-    <id>http://yoursite.com/2018/06/25/在CodaLab上提交MURA竞赛的结果/</id>
-    <published>2018-06-25T12:15:42.000Z</published>
-    <updated>2018-11-27T06:13:35.129Z</updated>
-    
-    <content type="html"><![CDATA[<p>What is MURA?</p><blockquote><p>MURA (<strong>mu</strong>sculoskeletal <strong>ra</strong>diographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.</p></blockquote><p>这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone X-Ray Deep Learning Competition)，这是它的<a href="https://stanfordmlgroup.github.io/competitions/mura/" target="_blank" rel="external">官网</a>。</p><p>数据集是七类人体部位的X光，分为normal和abnormal两种，需要训练一个模型，能够完成这样一个二分类的诊断任务。</p><p>Baseline是一个169层的DenseNet，我们用PyTorch实现了它。</p><p>答案的提交是通过CodaLab这个网站，官方给出了这样一个<a href="https://worksheets.codalab.org/worksheets/0x42dda565716a4ee08d61f0a23656d8c0/" target="_blank" rel="external">提交教程</a>：</p><a id="more"></a><p><strong>Step 1:</strong></p><p>创建一个新的WorkSheet。</p><p><strong>Step 2:</strong></p><p>复制一份虚拟的数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cl add bundle mura-utils//valid .</div><div class="line">cl add bundle mura-utils//valid_image_paths.csv .</div></pre></td></tr></table></figure><p><strong>Step 3:</strong></p><p>将你的代码和模型打包后上传，压缩成zip后上传，系统会自动解压。</p><p>这份伪造数据的路径保存在<code>valid_image_paths.csv</code>中，格式为：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/&lt;IMAGE&gt;</div></pre></td></tr></table></figure><p>你的程序需要能够输出一份对于每一个study的预测结果，形如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/,&#123;0,1&#125;</div></pre></td></tr></table></figure><p><strong>Step 4:</strong></p><p>在伪造数据集上运行你预训练好的模型。这是他们给出的运行命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid src:src &quot;python src/&lt;path-to-prediction-program&gt; valid_image_paths.csv predictions.csv&quot; -n run-predictions</div></pre></td></tr></table></figure><p> 这里需要用到docker，我在docker hub准备了一个docker镜像，sqpeng1996/mura2:v5，里面有python 3.6，pytorch, torchnet, sklearn等代码需要的库。</p><p>使用命令为:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py valid_images_paths.csv predictions.csv&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</div></pre></td></tr></table></figure><p>这里特别要注意的是需要多请求一些memory，（或者把batch size改为1）,不然无法跑通。</p><p>如果这一步的state变成了ready，那就说明没问题了。然后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl make run-predictions/predictions.csv -n predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>MODELNAME不能包含空格，最好也避免特殊字符。</p><p>最后执行：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl macro mura-utils/valid-eval-v1.1 predictions-&#123;MODELNAME&#125;</div></pre></td></tr></table></figure><p>就能看到结果了（因为这里是伪造的数据，所以结果不重要）。</p><p><strong>Step 5：</strong></p><p>提交：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cl edit predictions-&#123;MODELNAME&#125; --tags mura-submit</div></pre></td></tr></table></figure><p>把 <strong>predictions-{MODELNAME} </strong> bundle的 URL发邮件给 jirvin16@stanford.edu 就可以了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;What is MURA?&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;MURA (&lt;strong&gt;mu&lt;/strong&gt;sculoskeletal &lt;strong&gt;ra&lt;/strong&gt;diographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone X-Ray Deep Learning Competition)，这是它的&lt;a href=&quot;https://stanfordmlgroup.github.io/competitions/mura/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;官网&lt;/a&gt;。&lt;/p&gt;
-&lt;p&gt;数据集是七类人体部位的X光，分为normal和abnormal两种，需要训练一个模型，能够完成这样一个二分类的诊断任务。&lt;/p&gt;
-&lt;p&gt;Baseline是一个169层的DenseNet，我们用PyTorch实现了它。&lt;/p&gt;
-&lt;p&gt;答案的提交是通过CodaLab这个网站，官方给出了这样一个&lt;a href=&quot;https://worksheets.codalab.org/worksheets/0x42dda565716a4ee08d61f0a23656d8c0/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;提交教程&lt;/a&gt;：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="杂" scheme="http://yoursite.com/categories/%E6%9D%82/"/>
-    
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
     
   </entry>
   
