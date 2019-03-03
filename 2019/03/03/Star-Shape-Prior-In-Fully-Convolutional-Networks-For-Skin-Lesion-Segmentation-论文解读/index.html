@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Medical,Image Segmentation," />
+  <meta name="keywords" content="Image Segmentation,Medical," />
 
 
 
@@ -87,21 +87,21 @@
 
 
 <meta name="description" content="这是发表在 MICCAI 2018 上的一篇关于病灶图像分割的文章。 arxiv链接在https://arxiv.org/abs/1806.08437。">
-<meta name="keywords" content="Medical,Image Segmentation">
+<meta name="keywords" content="Image Segmentation,Medical">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Star Shape Prior in Fully Convolutional Networks for Skin Lesion Segmentation 论文解读">
 <meta property="og:url" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这是发表在 MICCAI 2018 上的一篇关于病灶图像分割的文章。 arxiv链接在https://arxiv.org/abs/1806.08437。">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image2.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image3.png">
-<meta property="og:image" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image4.png">
-<meta property="og:updated_time" content="2019-03-03T14:15:29.179Z">
+<meta property="og:image" content="http://yoursite.com/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png">
+<meta property="og:image" content="http://yoursite.com/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image2.png">
+<meta property="og:image" content="http://yoursite.com/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image3.png">
+<meta property="og:image" content="http://yoursite.com/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image4.png">
+<meta property="og:updated_time" content="2019-03-03T14:18:41.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Star Shape Prior in Fully Convolutional Networks for Skin Lesion Segmentation 论文解读">
 <meta name="twitter:description" content="这是发表在 MICCAI 2018 上的一篇关于病灶图像分割的文章。 arxiv链接在https://arxiv.org/abs/1806.08437。">
-<meta name="twitter:image" content="http://yoursite.com/2019/03/03/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png">
 
 
 
@@ -351,18 +351,18 @@
 <p>Assuming c is the center of object O, object O is a star shape object if, for any point p interior to the object, all the pixels q lying on the straight line segment connecting p to the object center c are inside the object.</p>
 </blockquote>
 <p>如下图(a)所示。</p>
-<p><img src="./images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png" style="zoom:90%"></p>
+<p><img src="/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image1.png" style="zoom:90%"></p>
 <p>然后基于star shape的定义，作者设计了这样一个损失函数：</p>
-<p><img src="./images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image2.png" style="zoom:80%"></p>
+<p><img src="/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image2.png" style="zoom:80%"></p>
 <p>其中，$y_{ip}$是在图像$i$中像素$p$的真实标签。</p>
 <p>这个loss要求(1)如果p和q有相同的gt标签且(2)p被分类错误，那么p和q应该有相同的预测标签。</p>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者基于两个FCN进行了实验：（1）U-net；（2）ResNet-DUC (Dense Upsampling Convolution)。</p>
 <p>实验数据集是ISBI 2017，2000(train) + 150(val) + 600(test)，其中仅有0.14%的图片不是star-shaped。</p>
 <p>下表是实验结果：</p>
 <p>（所有方法的SP都很高，但这篇文章的方法把SE提高了近5个点，Dice和Jaccard提高了1%。）</p>
-<p><img src="./images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image3.png" style="zoom:90%"></p>
+<p><img src="/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image3.png" style="zoom:90%"></p>
 <p>下图展示的是有无Star shape约束时的效果对比。</p>
-<p><img src="./images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image4.png" style="zoom:90%"></p>
+<p><img src="/images/Star-Shape-Prior-In-Fully-Convolutional-Networks-For-Skin-Lesion-Segmentation-论文解读/image4.png" style="zoom:90%"></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章的主要内容是，受到传统的能量最小化方法的启发，将对目标分割区域的形状先验知识通过约束条件添加进深度网络模型，让模型的分割结果呈现出预期的状态。</p>
 <p>这种思路我们可以思考借鉴。</p>
 
@@ -408,9 +408,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Medical/" rel="tag">#Medical</a>
-          
             <a href="/tags/Image-Segmentation/" rel="tag">#Image Segmentation</a>
+          
+            <a href="/tags/Medical/" rel="tag">#Medical</a>
           
         </div>
       
