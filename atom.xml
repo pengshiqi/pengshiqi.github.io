@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-09T05:24:40.504Z</updated>
+  <updated>2019-06-12T15:55:48.833Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>翻墙教程[2]：用国外VPS搭建自己的ShadowsocksR服务</title>
+    <link href="http://yoursite.com/2019/06/12/build-shadowsocksR-VPN%20/"/>
+    <id>http://yoursite.com/2019/06/12/build-shadowsocksR-VPN /</id>
+    <published>2019-06-12T15:29:57.000Z</published>
+    <updated>2019-06-12T15:55:48.833Z</updated>
+    
+    <content type="html"><![CDATA[<p>这次简单写一下如何在VPS上启动ShadowsocksR服务。</p><a id="more"></a><p>教程来自<strong>秋水逸冰</strong>。</p><h3 id="关于本脚本"><a href="#关于本脚本" class="headerlink" title="关于本脚本"></a>关于本脚本</h3><p>1、一键安装 Shadowsocks-Python， ShadowsocksR， Shadowsocks-Go， Shadowsocks-libev 版（四选一）服务端；<br>2、各版本的启动脚本及配置文件名不再重合；<br>3、每次运行可安装一种版本；<br>4、支持以多次运行来安装多个版本，且各个版本可以共存（注意端口号需设成不同）；<br>5、若已安装多个版本，则卸载时也需多次运行（每次卸载一种）；</p><h3 id="默认配置"><a href="#默认配置" class="headerlink" title="默认配置"></a>默认配置</h3><p>服务器端口：自己设定（如不设定，默认从 9000-19999 之间随机生成）<br>密码：自己设定（如不设定，默认为 teddysun.com）<br>加密方式：自己设定（如不设定，Python 和 libev 版默认为 aes-256-gcm，R 和 Go 版默认为 aes-256-cfb）<br>协议（protocol）：自己设定（如不设定，默认为 origin）（仅限 ShadowsocksR 版）<br>混淆（obfs）：自己设定（如不设定，默认为 plain）（仅限 ShadowsocksR 版）<br><strong>备注：</strong>脚本默认创建单用户配置文件，如需配置多用户，请手动修改相应的配置文件后重启即可。</p><h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>使用root用户登录，运行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</div><div class="line"></div><div class="line">chmod +x shadowsocks-all.sh</div><div class="line"></div><div class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</div></pre></td></tr></table></figure><h3 id="安装完成后，脚本提示如下"><a href="#安装完成后，脚本提示如下" class="headerlink" title="安装完成后，脚本提示如下"></a>安装完成后，脚本提示如下</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Congratulations, your_shadowsocks_version install completed!</div><div class="line">Your Server IP        :your_server_ip</div><div class="line">Your Server Port      :your_server_port</div><div class="line">Your Password         :your_password</div><div class="line">Your Encryption Method:your_encryption_method</div><div class="line"></div><div class="line">Your QR Code: (For Shadowsocks Windows, OSX, Android and iOS clients)</div><div class="line"> ss://your_encryption_method:your_password@your_server_ip:your_server_port</div><div class="line">Your QR Code has been saved as a PNG file path:</div><div class="line"> your_path.png</div><div class="line"></div><div class="line">Welcome to visit:https://teddysun.com/486.html</div><div class="line">Enjoy it!</div></pre></td></tr></table></figure><h3 id="卸载方法"><a href="#卸载方法" class="headerlink" title="卸载方法"></a>卸载方法</h3><p>若已安装多个版本，则卸载时也需多次运行（每次卸载一种）</p><p>使用root用户登录，运行以下命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./shadowsocks-all.sh uninstall</div></pre></td></tr></table></figure><h3 id="启动脚本"><a href="#启动脚本" class="headerlink" title="启动脚本"></a>启动脚本</h3><p>启动脚本后面的参数含义，从左至右依次为：启动，停止，重启，查看状态。</p><p>Shadowsocks-Python 版：<br><code>/etc/init.d/shadowsocks-python start | stop | restart | status</code></p><p>ShadowsocksR 版：<br><code>/etc/init.d/shadowsocks-r start | stop | restart | status</code></p><p>Shadowsocks-Go 版：<br><code>/etc/init.d/shadowsocks-go start | stop | restart | status</code></p><p>Shadowsocks-libev 版：<br><code>/etc/init.d/shadowsocks-libev start | stop | restart | status</code></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这次简单写一下如何在VPS上启动ShadowsocksR服务。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="杂" scheme="http://yoursite.com/categories/%E6%9D%82/"/>
+    
+    
+      <category term="Shadowsocks" scheme="http://yoursite.com/tags/Shadowsocks/"/>
+    
+  </entry>
   
   <entry>
     <title>LeetCode Weekly Contest 140</title>
@@ -435,32 +457,6 @@
     
     
       <category term="LeetCode" scheme="http://yoursite.com/tags/LeetCode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Grad-CAM:Visual Explanations from Deep Networks via Gradient-based Localization 论文解读</title>
-    <link href="http://yoursite.com/2018/12/23/Grad-CAM-Visual-Explanations-from-Deep-Networks-via-Gradient-based-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
-    <id>http://yoursite.com/2018/12/23/Grad-CAM-Visual-Explanations-from-Deep-Networks-via-Gradient-based-Localization-论文解读/</id>
-    <published>2018-12-23T10:08:12.000Z</published>
-    <updated>2018-12-23T10:10:41.394Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是ICCV2017的文章，链接： <a href="https://arxiv.org/pdf/1610.02391v1.pdf" target="_blank" rel="external">https://arxiv.org/pdf/1610.02391v1.pdf</a>。</p><a id="more"></a>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是ICCV2017的文章，链接： &lt;a href=&quot;https://arxiv.org/pdf/1610.02391v1.pdf&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://arxiv.org/pdf/1610.02391v1.pdf&lt;/a&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
-    
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
-    
-      <category term="Paper Report" scheme="http://yoursite.com/tags/Paper-Report/"/>
-    
-      <category term="Computer Vision" scheme="http://yoursite.com/tags/Computer-Vision/"/>
     
   </entry>
   
