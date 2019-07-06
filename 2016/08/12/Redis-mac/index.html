@@ -340,6 +340,7 @@
         <h3 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h3><p>Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</p>
 <p>Redis是一个速度非常快的非关系数据库（non-relational database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。<br><a id="more"></a></p>
 <p>一些数据库和缓存服务器的特性与功能对比：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -388,6 +389,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="Redis-安装"><a href="#Redis-安装" class="headerlink" title="Redis 安装"></a>Redis 安装</h3><p>我使用的安装环境是 OS X EI Capitan 10.11.6。</p>
 <p>首先，在<a href="http://redis.io/download" target="_blank" rel="external">Redis官网</a>中下载稳定的 .tar.gz 压缩包，解压后，进入该文件夹，输入命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make</div></pre></td></tr></table></figure>
@@ -407,6 +409,7 @@
 <p><img src="http://i1.piimg.com/4851/07e331b5fe00d188.png" alt="icon"></p>
 <p>说明redis在本地启动成功！</p>
 <h3 id="Redis-使用"><a href="#Redis-使用" class="headerlink" title="Redis 使用"></a>Redis 使用</h3><p>Redis 提供5种数据结构：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -437,7 +440,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="String"><a href="#String" class="headerlink" title="String"></a>String</h4><p>应用于 String 类型的操作主要有 SET、GET和DEL。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -460,9 +465,11 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; set hello world</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; get hello</div><div class="line">&quot;world&quot;</div><div class="line">127.0.0.1:6379&gt; del hello</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; get hello</div><div class="line">(nil)</div></pre></td></tr></table></figure>
-<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><table>
+<h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>命令</th>
@@ -488,9 +495,11 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; rpush list-key item</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; rpush list-key item2</div><div class="line">(integer) 2</div><div class="line">127.0.0.1:6379&gt; rpush list-key item</div><div class="line">(integer) 3</div><div class="line">127.0.0.1:6379&gt; lrange list-key 0 -1</div><div class="line">1) &quot;item&quot;</div><div class="line">2) &quot;item2&quot;</div><div class="line">3) &quot;item&quot;</div><div class="line">127.0.0.1:6379&gt; lindex list-key 1</div><div class="line">&quot;item2&quot;</div><div class="line">127.0.0.1:6379&gt; lpop list-key</div><div class="line">&quot;item&quot;</div><div class="line">127.0.0.1:6379&gt; lrange list-key 0 -1</div><div class="line">1) &quot;item2&quot;</div><div class="line">2) &quot;item&quot;</div></pre></td></tr></table></figure>
-<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><table>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>命令</th>
@@ -516,10 +525,12 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; sadd set-key item</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; sadd set-key item2</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; sadd set-key item3</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; sadd set-key item</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; smembers set-key</div><div class="line">1) &quot;item3&quot;</div><div class="line">2) &quot;item2&quot;</div><div class="line">3) &quot;item&quot;</div><div class="line">127.0.0.1:6379&gt; sismember set-key item4</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; sismember set-key item</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; srem set-key item2</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; srem set-key item2</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; smembers set-key</div><div class="line">1) &quot;item3&quot;</div><div class="line">2) &quot;item&quot;</div></pre></td></tr></table></figure>
 <p>此外，集合还有 SINTER、SUNION、SDIFF 操作来实现交集、并集、差集运算。</p>
-<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><table>
+<h4 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>命令</th>
@@ -545,9 +556,11 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; hset hash-key sub-key1 value1</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; hset hash-key sub-key2 value2</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; hset hash-key sub-key1 value1</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; hgetall hash-key</div><div class="line">1) &quot;sub-key1&quot;</div><div class="line">2) &quot;value1&quot;</div><div class="line">3) &quot;sub-key2&quot;</div><div class="line">4) &quot;value2&quot;</div><div class="line">127.0.0.1:6379&gt; hdel hash-key sub-key2</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; hdel hash-key sub-key2</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; hget hash-key sub-key1</div><div class="line">&quot;value1&quot;</div><div class="line">127.0.0.1:6379&gt; hgetall hash-key</div><div class="line">1) &quot;sub-key1&quot;</div><div class="line">2) &quot;value1&quot;</div></pre></td></tr></table></figure>
-<h4 id="Zset"><a href="#Zset" class="headerlink" title="Zset"></a>Zset</h4><table>
+<h4 id="Zset"><a href="#Zset" class="headerlink" title="Zset"></a>Zset</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>命令</th>
@@ -573,6 +586,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>用法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; zadd zset-key 728 member1</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd zset-key 982 member0</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zadd zset-key 982 member0</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; zrange zset-key 0 -1 withscores</div><div class="line">1) &quot;member1&quot;</div><div class="line">2) &quot;728&quot;</div><div class="line">3) &quot;member0&quot;</div><div class="line">4) &quot;982&quot;</div><div class="line">127.0.0.1:6379&gt; zrangebyscore zset-key 0 800 withscores</div><div class="line">1) &quot;member1&quot;</div><div class="line">2) &quot;728&quot;</div><div class="line">127.0.0.1:6379&gt; zrem zset-key member1</div><div class="line">(integer) 1</div><div class="line">127.0.0.1:6379&gt; zrem zset-key member1</div><div class="line">(integer) 0</div><div class="line">127.0.0.1:6379&gt; zrange zset-key 0 -1 withscores</div><div class="line">1) &quot;member0&quot;</div><div class="line">2) &quot;982&quot;</div></pre></td></tr></table></figure>
 

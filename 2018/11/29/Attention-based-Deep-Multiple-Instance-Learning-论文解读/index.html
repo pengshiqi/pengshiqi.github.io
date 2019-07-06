@@ -350,16 +350,21 @@
 <li>a transformation to the bag probability.</li>
 </ol>
 <p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p>
-<h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = { x_1, \dots, x_K }$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in { 0, 1}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
+<h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = \{ x_1, \dots, x_K \}$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in \{ 0, 1\}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
 <p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/formula.png" style="zoom:45%"></p>
-<p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于<br>$$<br>Y = \mathop{\max}\limits_{k} {y_k} \tag{2}<br>$$<br>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p>
+<p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于</p>
+<script type="math/tex; mode=display">
+Y = \mathop{\max}\limits_{k} \{y_k\} \tag{2}</script><p>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p>
 <p>MIL问题可以看做<code>Fundamental Theorem of Symmetric Functions</code>的一个特例。</p>
 <blockquote>
 <p><strong>Theorem 1.</strong> </p>
-<p>A scoring function for a set of instances $X$, $S(X) \in R$, is a symmetric function (i.e., permutation- invariant to the elements in $X$), if and only if it can be decomposed in the following form:<br>$$<br>S(X) = g(\sum_{x \in X}f(x))  \tag{3}，<br>$$<br>where $f$ and $g$ are suitable transformations.</p>
+<p>A scoring function for a set of instances $X$, $S(X) \in R$, is a symmetric function (i.e., permutation- invariant to the elements in $X$), if and only if it can be decomposed in the following form:</p>
+<script type="math/tex; mode=display">
+S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitable transformations.</p>
 <p><strong>Theorem 2.</strong> </p>
-<p>For any $\epsilon &gt; 0$, a Hausdorff continuous symmetric function $S(X) \in R$ can be arbitrarily approximated by a function in the form $g(\max_{x \in X}f(x))$, where max is the element-wise vector maximum operator and $f$ and $g$ are continuous functions, that is:<br>$$<br>| S(X) - g(\max_{x \in X}f(x)) | &lt; \epsilon ，\tag{4}<br>$$</p>
-</blockquote>
+<p>For any $\epsilon &gt; 0$, a Hausdorff continuous symmetric function $S(X) \in R$ can be arbitrarily approximated by a function in the form $g(\max_{x \in X}f(x))$, where max is the element-wise vector maximum operator and $f$ and $g$ are continuous functions, that is: </p>
+<script type="math/tex; mode=display">
+| S(X) - g(\max_{x \in X}f(x)) | < \epsilon ，\tag{4}</script></blockquote>
 <p>这两个定理对于bag的分类任务给出了一般的求解步骤：</p>
 <ol>
 <li>a transformation of instances using the function $f$</li>

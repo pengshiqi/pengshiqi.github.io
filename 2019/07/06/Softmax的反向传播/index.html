@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/07/06/Softmax的反向传播/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这几天在手写CNN，记录一下这其中遇到的几个问题。">
-<meta property="og:updated_time" content="2019-07-06T08:24:54.185Z">
+<meta property="og:updated_time" content="2019-07-06T08:49:06.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Softmax的反向传播">
 <meta name="twitter:description" content="这几天在手写CNN，记录一下这其中遇到的几个问题。">
@@ -340,10 +340,50 @@
 <h4 id="1-softmax-函数的定义"><a href="#1-softmax-函数的定义" class="headerlink" title="1. softmax 函数的定义"></a>1. softmax 函数的定义</h4><p>设 $ X = [x_1, x_2, \dots, x_n]$，那么 $ Y = softmax(X) = [y1, y2, \dots, y_n] $，其中 $y_i = \frac{e^{x_i}}{\sum_{j=1}^n e^{x_j}}$，$\sum_{i=1}^n y_i = 1$。</p>
 <p>在numpy实现中，为了避免浮点数溢出，需要将$X$中的元素减去$max(X)$:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="string">"""Compute softmax values for each sets of scores in x."""</span></div><div class="line">    e_x = np.exp(x - np.expand_dims(np.max(x, axis=<span class="number">1</span>), axis=<span class="number">1</span>))</div><div class="line">    <span class="keyword">return</span> e_x / np.expand_dims(e_x.sum(axis=<span class="number">1</span>), axis=<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<h4 id="2-softmax-函数的求导-frac-part-y-i-part-x-j"><a href="#2-softmax-函数的求导-frac-part-y-i-part-x-j" class="headerlink" title="2. softmax 函数的求导 $\frac{\part{y_i}}{\part{x_j}}$"></a>2. softmax 函数的求导 $\frac{\part{y_i}}{\part{x_j}}$</h4><p>(1) 当 $i = j$ 时，<br>$$<br>\begin{align}<br>\frac{\part{y_i}}{\part{x_j}} &amp;= \frac{\part{y_i}}{\part{x_i}} \\<br>                              &amp;= \frac{\part{}}{\part{x_i}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\<br>                              &amp;= \frac{e^{x_i}<em>(\sum_k{e^{x_k})} - e^{x_i}</em>e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= \frac{e^{x_i}}{\sum_k{e^{x_k}}} - \frac{e^{x_i} * e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= y_i - y_i^2 \\<br>                              &amp;= y_i(1-y_i)<br>\end{align}<br>$$</p>
-<p>(2) 当 $i \neq j$ 时，<br>$$<br>\begin{align}<br>\frac{\part{y_i}}{\part{x_j}} &amp;=  \frac{\part{}}{\part{x_j}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\<br>                              &amp;= - \frac{e^{x_j}<em>e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= - \frac{e^{x_i}}{\sum_k{e^{x_k}}} </em> \frac{e^{x_j}}{\sum_k{e^{x_k}}} \\<br>                              &amp;= - y_i y_j<br>\end{align}<br>$$<br>综上所述，<br>$$<br>\frac{\part{y_i}}{\part{x_j}} = \left{<br>             \begin{array}{<strong>lr</strong>}<br>             y_i - y_i <em> y_i, &amp; i = j\\<br>             0 - y_i </em> y_j,   &amp; i \neq j<br>             \end{array}<br>\right.<br>$$</p>
-<h4 id="3-softmax-cross-entropy"><a href="#3-softmax-cross-entropy" class="headerlink" title="3. softmax + cross-entropy"></a>3. softmax + cross-entropy</h4><p>交叉熵损失函数： $\mathcal{L} = -\sum_k {\hat{y_k} \log y_k}$</p>
-<p>其中 $\hat{y_k}$ 是标签，$y_k$是softmax函数的输出值。<br>$$<br>\begin{align}<br>\frac{\part{\mathcal{L}}}{\part{x_k}} &amp;= \sum_i \frac{\part{\mathcal{L}}}{\part{y_i}} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \sum_i \frac{\part{(\hat{y_i} <em> \log y_i)}}{\part{y_i}} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \sum_i \frac{\hat{y_i}}{y_i} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \frac{\hat{y_k}}{y_k} \frac{\part{y_k}}{\part{x_k}} - \sum_{i \neq k} \frac{\hat{y_i}}{y_i} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \frac{\hat{y_k}}{y_k} (y_k - y_k^2) - \sum_{i \neq k}\frac{\hat{y_i}}{y_i} </em> (-y_i y_k) \\<br>                                      &amp;= -\hat{y_k} (1-y_k) + \sum_{i \neq k} \hat{y_i} y_k \\<br>                                      &amp;= -\hat{y_k} + \sum_i \hat{y_i} * y_k \\<br>                                      &amp;= y_k - \hat{y_k}<br>\end{align}<br>$$<br>最终的这个结果可以说是非常简单了。</p>
+<h4 id="2-softmax-函数的求导-frac-partial-y-i-partial-x-j"><a href="#2-softmax-函数的求导-frac-partial-y-i-partial-x-j" class="headerlink" title="2. softmax 函数的求导 $\frac{\partial{y_i}}{\partial{x_j}}$"></a>2. softmax 函数的求导 $\frac{\partial{y_i}}{\partial{x_j}}$</h4><p>(1) 当 $i = j$ 时，</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{split}
+\frac{\partial{y_i}}{\partial{x_j}} &= \frac{\partial{y_i}}{\partial{x_i}} \\
+                              &= \frac{\partial{}}{\partial{x_i}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\
+                              &= \frac{e^{x_i}*(\sum_k{e^{x_k})} - e^{x_i}*e^{x_i}}{(\sum_k{e^{x_k}})^2} \\
+                              &= \frac{e^{x_i}}{\sum_k{e^{x_k}}} - \frac{e^{x_i} * e^{x_i}}{(\sum_k{e^{x_k}})^2} \\
+                              &= y_i - y_i^2 \\
+                              &= y_i(1-y_i)
+\end{split}
+\end{equation}</script><p>(2) 当 $i \neq j$ 时，</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{split}
+\frac{\partial{y_i}}{\partial{x_j}} &=  \frac{\partial{}}{\partial{x_j}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\
+                              &= - \frac{e^{x_j}*e^{x_i}}{(\sum_k{e^{x_k}})^2} \\
+                              &= - \frac{e^{x_i}}{\sum_k{e^{x_k}}} * \frac{e^{x_j}}{\sum_k{e^{x_k}}} \\
+                              &= - y_i y_j 
+\end{split}
+\end{equation}</script><p>综上所述，</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{\partial{y_i}}{\partial{x_j}} = \left\{  
+             \begin{array}{**lr**}  
+             y_i - y_i * y_i, & i = j\\  
+             0 - y_i * y_j,   & i \neq j    
+             \end{array}  
+\right.
+\end{equation}</script><h4 id="3-softmax-cross-entropy"><a href="#3-softmax-cross-entropy" class="headerlink" title="3. softmax + cross-entropy"></a>3. softmax + cross-entropy</h4><p>交叉熵损失函数： $\mathcal{L} = -\sum_k {\hat{y_k} \log y_k}$</p>
+<p>其中 $\hat{y_k}$ 是标签，$y_k$是softmax函数的输出值。</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\begin{split}
+\frac{\partial{\mathcal{L}}}{\partial{x_k}} &= \sum_i \frac{\partial{\mathcal{L}}}{\partial{y_i}} \frac{\partial{y_i}}{\partial{x_k}} \\
+                                      &= - \sum_i \frac{\partial{(\hat{y_i} * \log y_i)}}{\partial{y_i}} \frac{\partial{y_i}}{\partial{x_k}} \\
+                                      &= - \sum_i \frac{\hat{y_i}}{y_i} \frac{\partial{y_i}}{\partial{x_k}} \\
+                                      &= - \frac{\hat{y_k}}{y_k} \frac{\partial{y_k}}{\partial{x_k}} - \sum_{i \neq k} \frac{\hat{y_i}}{y_i} \frac{\partial{y_i}}{\partial{x_k}} \\
+                                      &= - \frac{\hat{y_k}}{y_k} (y_k - y_k^2) - \sum_{i \neq k}\frac{\hat{y_i}}{y_i} * (-y_i y_k) \\
+                                      &= -\hat{y_k} (1-y_k) + \sum_{i \neq k} \hat{y_i} y_k \\
+                                      &= -\hat{y_k} + \sum_i \hat{y_i} * y_k \\
+                                      &= y_k - \hat{y_k}
+\end{split}
+\end{equation}</script><p>最终的这个结果可以说是非常简单了。</p>
 
       
     </div>
@@ -530,7 +570,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-softmax-函数的定义"><span class="nav-number">1.</span> <span class="nav-text">1. softmax 函数的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-softmax-函数的求导-frac-part-y-i-part-x-j"><span class="nav-number">2.</span> <span class="nav-text">2. softmax 函数的求导 $\frac{\part{y_i}}{\part{x_j}}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-softmax-cross-entropy"><span class="nav-number">3.</span> <span class="nav-text">3. softmax + cross-entropy</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-softmax-函数的定义"><span class="nav-number">1.</span> <span class="nav-text">1. softmax 函数的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-softmax-函数的求导-frac-partial-y-i-partial-x-j"><span class="nav-number">2.</span> <span class="nav-text">2. softmax 函数的求导 $\frac{\partial{y_i}}{\partial{x_j}}$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-softmax-cross-entropy"><span class="nav-number">3.</span> <span class="nav-text">3. softmax + cross-entropy</span></a></li></ol></div>
             
           </div>
         </section>

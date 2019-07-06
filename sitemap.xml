@@ -2,16 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/</loc>
+    
+    <lastmod>2019-07-06T08:51:53.945Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/07/06/Softmax%E7%9A%84%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/</loc>
     
-    <lastmod>2019-07-06T08:24:54.185Z</lastmod>
+    <lastmod>2019-07-06T08:49:06.426Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
     
-    <lastmod>2019-07-06T08:22:00.822Z</lastmod>
+    <lastmod>2019-07-06T08:36:04.409Z</lastmod>
     
   </url>
   
@@ -306,13 +313,6 @@
     <loc>http://yoursite.com/2016/09/21/build-shadowsocks-VPN/</loc>
     
     <lastmod>2018-11-27T05:44:21.080Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2017/09/14/LDA-Latent-Dirichlet-Allocation/</loc>
-    
-    <lastmod>2018-11-27T05:42:54.592Z</lastmod>
     
   </url>
   

@@ -349,6 +349,7 @@
 <li>时间戳(timestamp)。时间戳表示的是从 <em>1970年1月1日 00：00：00</em> 开始按毫秒计算的偏移量。返回时间戳的方式有time(),clock()等。</li>
 <li>元组(struct_time)。共有9个元素，返回struct_time的函数主要有gmtime(),localtime(),strptime()等。<br>例如：<br><img src="http://i2.buimg.com/4851/f3eb5255fd74f548.png" alt="icon"><br>各字段的含义如下：</li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -405,6 +406,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ol>
 <li><p>time.localtime([secs]): 将一个时间戳转换成当前时区的struct_time。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.localtime()</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=15, tm_min=28, tm_sec=22, tm_wday=1, tm_yday=229, tm_isdst=0)</div><div class="line">&gt;&gt;&gt; time.localtime(1471334822)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=7, tm_sec=2, tm_wday=1, tm_yday=229, tm_isdst=0)</div></pre></td></tr></table></figure>
@@ -433,6 +435,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; time.strptime(&apos;2016-08-16 16:43:05&apos;, &apos;%Y-%m-%d %X&apos;)</div><div class="line">time.struct_time(tm_year=2016, tm_mon=8, tm_mday=16, tm_hour=16, tm_min=43, tm_sec=5, tm_wday=1, tm_yday=229, tm_isdst=-1)</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -531,6 +534,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
       
     </div>
