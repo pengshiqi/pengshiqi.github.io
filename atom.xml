@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-05T09:11:53.480Z</updated>
+  <updated>2019-07-06T08:24:54.185Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Softmax的反向传播</title>
+    <link href="http://yoursite.com/2019/07/06/Softmax%E7%9A%84%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/"/>
+    <id>http://yoursite.com/2019/07/06/Softmax的反向传播/</id>
+    <published>2019-07-06T07:07:24.000Z</published>
+    <updated>2019-07-06T08:24:54.185Z</updated>
+    
+    <content type="html"><![CDATA[<p>这几天在手写CNN，记录一下这其中遇到的几个问题。</p><a id="more"></a><p>对于一个分类问题，一般的做法是对最后线性层的输出做一次softmax操作，然后再与one-hot形式的label计算交叉熵损失。</p><h4 id="1-softmax-函数的定义"><a href="#1-softmax-函数的定义" class="headerlink" title="1. softmax 函数的定义"></a>1. softmax 函数的定义</h4><p>设 $ X = [x_1, x_2, \dots, x_n]$，那么 $ Y = softmax(X) = [y1, y2, \dots, y_n] $，其中 $y_i = \frac{e^{x_i}}{\sum_{j=1}^n e^{x_j}}$，$\sum_{i=1}^n y_i = 1$。</p><p>在numpy实现中，为了避免浮点数溢出，需要将$X$中的元素减去$max(X)$:</p><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">softmax</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="string">"""Compute softmax values for each sets of scores in x."""</span></div><div class="line">    e_x = np.exp(x - np.expand_dims(np.max(x, axis=<span class="number">1</span>), axis=<span class="number">1</span>))</div><div class="line">    <span class="keyword">return</span> e_x / np.expand_dims(e_x.sum(axis=<span class="number">1</span>), axis=<span class="number">1</span>)</div></pre></td></tr></table></figure><h4 id="2-softmax-函数的求导-frac-part-y-i-part-x-j"><a href="#2-softmax-函数的求导-frac-part-y-i-part-x-j" class="headerlink" title="2. softmax 函数的求导 $\frac{\part{y_i}}{\part{x_j}}$"></a>2. softmax 函数的求导 $\frac{\part{y_i}}{\part{x_j}}$</h4><p>(1) 当 $i = j$ 时，<br>$$<br>\begin{align}<br>\frac{\part{y_i}}{\part{x_j}} &amp;= \frac{\part{y_i}}{\part{x_i}} \\<br>                              &amp;= \frac{\part{}}{\part{x_i}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\<br>                              &amp;= \frac{e^{x_i}<em>(\sum_k{e^{x_k})} - e^{x_i}</em>e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= \frac{e^{x_i}}{\sum_k{e^{x_k}}} - \frac{e^{x_i} * e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= y_i - y_i^2 \\<br>                              &amp;= y_i(1-y_i)<br>\end{align}<br>$$</p><p>(2) 当 $i \neq j$ 时，<br>$$<br>\begin{align}<br>\frac{\part{y_i}}{\part{x_j}} &amp;=  \frac{\part{}}{\part{x_j}}(\frac{e^{x_i}}{\sum_k{e^{x_k}}}) \\<br>                              &amp;= - \frac{e^{x_j}<em>e^{x_i}}{(\sum_k{e^{x_k}})^2} \\<br>                              &amp;= - \frac{e^{x_i}}{\sum_k{e^{x_k}}} </em> \frac{e^{x_j}}{\sum_k{e^{x_k}}} \\<br>                              &amp;= - y_i y_j<br>\end{align}<br>$$<br>综上所述，<br>$$<br>\frac{\part{y_i}}{\part{x_j}} = \left{<br>             \begin{array}{<strong>lr</strong>}<br>             y_i - y_i <em> y_i, &amp; i = j\\<br>             0 - y_i </em> y_j,   &amp; i \neq j<br>             \end{array}<br>\right.<br>$$</p><h4 id="3-softmax-cross-entropy"><a href="#3-softmax-cross-entropy" class="headerlink" title="3. softmax + cross-entropy"></a>3. softmax + cross-entropy</h4><p>交叉熵损失函数： $\mathcal{L} = -\sum_k {\hat{y_k} \log y_k}$</p><p>其中 $\hat{y_k}$ 是标签，$y_k$是softmax函数的输出值。<br>$$<br>\begin{align}<br>\frac{\part{\mathcal{L}}}{\part{x_k}} &amp;= \sum_i \frac{\part{\mathcal{L}}}{\part{y_i}} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \sum_i \frac{\part{(\hat{y_i} <em> \log y_i)}}{\part{y_i}} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \sum_i \frac{\hat{y_i}}{y_i} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \frac{\hat{y_k}}{y_k} \frac{\part{y_k}}{\part{x_k}} - \sum_{i \neq k} \frac{\hat{y_i}}{y_i} \frac{\part{y_i}}{\part{x_k}} \\<br>                                      &amp;= - \frac{\hat{y_k}}{y_k} (y_k - y_k^2) - \sum_{i \neq k}\frac{\hat{y_i}}{y_i} </em> (-y_i y_k) \\<br>                                      &amp;= -\hat{y_k} (1-y_k) + \sum_{i \neq k} \hat{y_i} y_k \\<br>                                      &amp;= -\hat{y_k} + \sum_i \hat{y_i} * y_k \\<br>                                      &amp;= y_k - \hat{y_k}<br>\end{align}<br>$$<br>最终的这个结果可以说是非常简单了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这几天在手写CNN，记录一下这其中遇到的几个问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/categories/Machine-Learning/"/>
+    
+    
+      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
+    
+  </entry>
   
   <entry>
     <title>Interview 2019 Autumn</title>
@@ -439,31 +461,6 @@
     
     
       <category term="Weakly Supervised Object Localization" scheme="http://yoursite.com/tags/Weakly-Supervised-Object-Localization/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读</title>
-    <link href="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
-    <id>http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/</id>
-    <published>2019-01-20T09:15:08.000Z</published>
-    <updated>2019-01-20T14:04:25.604Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。</p><p><a href="https://arxiv.org/abs/1811.10842" target="_blank" rel="external">arxiv 链接</a>。</p><a id="more"></a><hr><h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>弱监督语义分割任务是只给出图片的标注，通过训练网络得到像素级的分割结果。</p><p>当前state-of-the-art的方法是通过图片的标注生成 proxy segmentation mask，然后再以此为标签训练分割网络。作者认为，这种方式独立处理每张图片，没有考虑<code>cross-image relationship</code>。</p><p>于是，作者在这篇文章中提出了<code>end-to-end affinity module</code>来对图片间的关系建模，这样一张图片可以得到其他图片的补充信息，而且一组图片间还可以共享监督信息，来提高模型效果。</p><p>在Pascal VOC 2012数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果。</p><h2 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h2><p>该方法可以分为两部分：</p><ol><li>生成初始的 proxy segmentation masks;</li><li>通过 cross-image affinity module 来训练 segmentation network。</li></ol><p>首先，和之前的方法一样，通过CAM来生成 initial seeds。</p><p>然后是 affinity module。AM通过两张图片的 embedded feature map，计算它们的 affinity，然后传递 supplementary messages。</p><p><strong>Affinity 的计算</strong>：给定两个nodes、query function 和 key function，Affinity = query(image1) * key(image2)。这里的距离度量函数用的是点积（因为简单），其他的（高斯核函数、余弦距离）也可以。</p><p> <strong>Message passing</strong>： 计算出各个nodes间的affinity后，归一化，并以此为权重将所有有用的信息相加。</p><p>整个Affinity module的结果如下图所示：</p><p><img src="/images/CIAN 论文解读/image1.png" style="zoom:100%"></p><p>上述的两张图片间的 affinity module 可以扩展到多张图片间，即 group affinity module(G-AM)，以及一张图片内部的 self affinity module(S-AM)。</p><p>整体网络结构如下图所示：</p><p><img src="/images/CIAN 论文解读/image2.png" style="zoom:100%"></p><p>输入batch分为许多groups，每个group内部的图片至少有一个共同标签。通过backbone之后分为两支，G-AM和S-AM，分别根据 cross-image affinity 和 intra-image affinity 来计算出messages，以此增强原始feature，去预测分割结果。两支网络的参数全部共享。</p><h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>在Pascal VOC 2012 数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果，超越了之前的state-of-the-art。</p><p>然后作者也做了许多 ablation study 来证明其方法的鲁棒性，具体可以参见文章。</p><p>我觉得比较有趣的是作者对affinity的可视化，可以更好地帮助我们理解同一个类别的图片间的相似性。</p><p><img src="/images/CIAN 论文解读/image3.png" style="zoom:60%"></p><h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章主要通过挖掘图片间的关联度（cross-image relationship）来提高弱监督分割的效果，这个值得我们借鉴学习，可以考虑将其应用到其他的深度学习任务（classification… etc）上。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1811.10842&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;arxiv 链接&lt;/a&gt;。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Paper Report" scheme="http://yoursite.com/categories/Paper-Report/"/>
-    
-    
-      <category term="Machine Learning" scheme="http://yoursite.com/tags/Machine-Learning/"/>
-    
-      <category term="Weakly Supervised Segmentation" scheme="http://yoursite.com/tags/Weakly-Supervised-Segmentation/"/>
     
   </entry>
   

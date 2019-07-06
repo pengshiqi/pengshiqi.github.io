@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/07/06/Softmax%E7%9A%84%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD/</loc>
+    
+    <lastmod>2019-07-06T08:24:54.185Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
+    
+    <lastmod>2019-07-06T08:22:00.822Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2019/07/05/Interview-2019-Autumn/</loc>
     
     <lastmod>2019-07-05T09:11:53.480Z</lastmod>
@@ -222,13 +236,6 @@
     <loc>http://yoursite.com/about/index.html</loc>
     
     <lastmod>2018-11-27T06:10:48.235Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/01/18/EM-Algorithm/</loc>
-    
-    <lastmod>2018-11-27T06:08:24.144Z</lastmod>
     
   </url>
   
