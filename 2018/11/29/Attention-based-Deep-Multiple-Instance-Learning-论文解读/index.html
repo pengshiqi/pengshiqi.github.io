@@ -90,16 +90,16 @@
 <meta name="keywords" content="Multiple Instance Learning,Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
-<meta property="og:url" content="http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
-<meta property="og:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/formula.png">
-<meta property="og:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/img1.png">
-<meta property="og:updated_time" content="2018-12-02T14:06:18.829Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/img1.png">
+<meta property="og:updated_time" content="2019-07-22T06:38:52.677Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
 <meta name="twitter:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
-<meta name="twitter:image" content="http://yoursite.com/images/Attention-based%20Deep%20Multiple%20Instance%20Learning%20论文解读/formula.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/"/>
 
   <title> Attention-based Deep Multiple Instance Learning 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -351,7 +351,7 @@
 </ol>
 <p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p>
 <h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = \{ x_1, \dots, x_K \}$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in \{ 0, 1\}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
-<p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/formula.png" style="zoom:45%"></p>
+<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png" style="zoom:45%"></p>
 <p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于</p>
 <script type="math/tex; mode=display">
 Y = \mathop{\max}\limits_{k} \{y_k\} \tag{2}</script><p>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p>
@@ -377,7 +377,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
 </blockquote>
 <h4 id="Attention-based-MIL-pooling"><a href="#Attention-based-MIL-pooling" class="headerlink" title="Attention-based MIL pooling"></a>Attention-based MIL pooling</h4><p>使用max-operator有两点不足：pre-defined and non-trainable。希望使用attention mechanism来增加模型的灵活性和可解释性。</p>
 <p>公式也不复杂，就是各个instances在low-embedding后的softmax加权平均，和之前的MIL pooling的对比如下图所示:</p>
-<p><img src="/images/Attention-based Deep Multiple Instance Learning 论文解读/img1.png" alt="img1"></p>
+<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/img1.png" alt="img1"></p>
 <p>最后实验部分，作者给出了这个方法在MNIST数据集和一个组织病理学数据集上的实验，证明其有效性。</p>
 
       
@@ -518,7 +518,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -700,7 +700,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/';
       var disqus_title = "Attention-based Deep Multiple Instance Learning 论文解读";
-      var disqus_url = 'http://yoursite.com/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/';
+      var disqus_url = 'http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

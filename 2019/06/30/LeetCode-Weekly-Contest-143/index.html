@@ -90,15 +90,15 @@
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Weekly Contest 143">
-<meta property="og:url" content="http://yoursite.com/2019/06/30/LeetCode-Weekly-Contest-143/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/06/30/LeetCode-Weekly-Contest-143/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="Time: Jun 30th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
-<meta property="og:image" content="http://yoursite.com/images/LeetCode-Weekly-Contest/143.png">
-<meta property="og:updated_time" content="2019-06-30T05:59:59.521Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/06/30/LeetCode-Weekly-Contest-143/143.png">
+<meta property="og:updated_time" content="2019-07-22T06:43:41.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Weekly Contest 143">
 <meta name="twitter:description" content="Time: Jun 30th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
-<meta name="twitter:image" content="http://yoursite.com/images/LeetCode-Weekly-Contest/143.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/06/30/LeetCode-Weekly-Contest-143/143.png">
 
 
 
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/30/LeetCode-Weekly-Contest-143/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/06/30/LeetCode-Weekly-Contest-143/"/>
 
   <title> LeetCode Weekly Contest 143 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -339,7 +339,7 @@
         <p>Time: Jun 30th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)</p>
 <a id="more"></a>
 <p>第3题在12:04分才通过…可惜了…</p>
-<p><img src="/images/LeetCode-Weekly-Contest/143.png" style="zoom:100%"></p>
+<p><img src="/2019/06/30/LeetCode-Weekly-Contest-143/143.png" style="zoom:100%"></p>
 <h3 id="1103-Distribute-Candies-to-People"><a href="#1103-Distribute-Candies-to-People" class="headerlink" title="1103. Distribute Candies to People"></a>1103. Distribute Candies to People</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; distributeCandies(<span class="keyword">int</span> candies, <span class="keyword">int</span> n) &#123;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret(n, <span class="number">0</span>);</div><div class="line">        <span class="keyword">int</span> cur = <span class="number">1</span>, idx = <span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span> (candies) &#123;</div><div class="line">            <span class="keyword">if</span> (idx == n) idx = <span class="number">0</span>;</div><div class="line">            <span class="keyword">if</span> (candies &lt;= cur) &#123;</div><div class="line">                ret[idx] += candies;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            ret[idx] += cur;</div><div class="line">            candies -= cur;</div><div class="line">            cur++; </div><div class="line">            idx++; </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h3 id="1104-Path-In-Zigzag-Labelled-Binary-Tree"><a href="#1104-Path-In-Zigzag-Labelled-Binary-Tree" class="headerlink" title="1104. Path In Zigzag Labelled Binary Tree"></a>1104. Path In Zigzag Labelled Binary Tree</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; pathInZigZagTree(<span class="keyword">int</span> label) &#123;</div><div class="line">        <span class="keyword">int</span> level = (<span class="keyword">int</span>)log2(label);</div><div class="line">        </div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ret;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> x;</div><div class="line">        x = label - (<span class="number">1</span> &lt;&lt; level);</div><div class="line">        <span class="keyword">if</span> (level &amp; <span class="number">1</span>) &#123;</div><div class="line">            x = (<span class="number">1</span> &lt;&lt; level) - <span class="number">1</span> - x;</div><div class="line">        &#125; </div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (; level &gt;= <span class="number">0</span>; --level) &#123;</div><div class="line">            <span class="keyword">if</span> (level &amp; <span class="number">1</span>) &#123;</div><div class="line">                ret.push_back((<span class="number">1</span> &lt;&lt; level) + (<span class="number">1</span> &lt;&lt; level) - <span class="number">1</span> - x);   </div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                ret.push_back((<span class="number">1</span> &lt;&lt; level) + x);   </div><div class="line">            &#125;</div><div class="line">            x /= <span class="number">2</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        reverse(ret.begin(), ret.end());</div><div class="line">        <span class="keyword">return</span> ret;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
 <h3 id="1105-Filling-Bookcase-Shelves"><a href="#1105-Filling-Bookcase-Shelves" class="headerlink" title="1105. Filling Bookcase Shelves"></a>1105. Filling Bookcase Shelves</h3><p>DP题…</p>
@@ -484,7 +484,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -666,7 +666,7 @@
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2019/06/30/LeetCode-Weekly-Contest-143/';
       var disqus_title = "LeetCode Weekly Contest 143";
-      var disqus_url = 'http://yoursite.com/2019/06/30/LeetCode-Weekly-Contest-143/';
+      var disqus_url = 'http://pengshiqi.github.io/2019/06/30/LeetCode-Weekly-Contest-143/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

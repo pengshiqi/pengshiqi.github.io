@@ -90,17 +90,17 @@
 <meta name="keywords" content="Machine Learning,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dimension Reduction using PCA and t-SNE">
-<meta property="og:url" content="http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="Most datasets have a high number of dimensions along which the data is distributed. It is key to understand how to visualize high-dimensional datasets. This can be achieved using techniques known as d">
-<meta property="og:image" content="http://yoursite.com/images/Dimension%20Reduction%20using%20PCA%20and%20t-SNE/img1.png">
-<meta property="og:image" content="http://yoursite.com/images/Dimension%20Reduction%20using%20PCA%20and%20t-SNE/img2.png">
-<meta property="og:image" content="http://yoursite.com/images/Dimension%20Reduction%20using%20PCA%20and%20t-SNE/img3.png">
-<meta property="og:updated_time" content="2018-11-27T05:44:45.114Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img1.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img2.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img3.png">
+<meta property="og:updated_time" content="2019-07-22T06:39:57.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dimension Reduction using PCA and t-SNE">
 <meta name="twitter:description" content="Most datasets have a high number of dimensions along which the data is distributed. It is key to understand how to visualize high-dimensional datasets. This can be achieved using techniques known as d">
-<meta name="twitter:image" content="http://yoursite.com/images/Dimension%20Reduction%20using%20PCA%20and%20t-SNE/img1.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img1.png">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/"/>
 
   <title> Dimension Reduction using PCA and t-SNE | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -361,7 +361,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">rndperm = np.random.permutation(df.shape[<span class="number">0</span>])</div></pre></td></tr></table></figure>
 <p>Then we generate 30 plots of randomly selected images.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">%matplotlib inline</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line"><span class="comment"># plot the graph</span></div><div class="line">plt.gray()</div><div class="line">fig = plt.figure(figsize=(<span class="number">16</span>, <span class="number">7</span>))</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">30</span>):</div><div class="line">    ax = fig.add_subplot(<span class="number">3</span>, <span class="number">10</span>, i + <span class="number">1</span>)</div><div class="line">    ax.matshow(df.loc[rndperm[i], feat_cols].values.reshape((<span class="number">28</span>, <span class="number">28</span>)).astype(float))</div><div class="line"></div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<p><img src="/images/Dimension Reduction using PCA and t-SNE/img1.png" alt="img1"></p>
+<p><img src="/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img1.png" alt="img1"></p>
 <p>These images are all essentially 28-by-28 pixel images and therefore have a total of 784 dimensions, each holding the value of one specific pixel.</p>
 <p>Let’s implement dimensional reductions on this dataset.</p>
 <h2 id="PCA-Principal-Component-Analysis"><a href="#PCA-Principal-Component-Analysis" class="headerlink" title="PCA (Principal Component Analysis)"></a>PCA (Principal Component Analysis)</h2><p>PCA is a technique for reducing the number of dimensions in a dataset while retaining most information. </p>
@@ -371,7 +371,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</div><div class="line"></div><div class="line">pca = PCA(n_components=<span class="number">2</span>)</div><div class="line">pca_result = pca.fit_transform(df[feat_cols].values)</div><div class="line"></div><div class="line">df[<span class="string">'pca-one'</span>] = pca_result[:,<span class="number">0</span>]</div><div class="line">df[<span class="string">'pca-two'</span>] = pca_result[:,<span class="number">1</span>] </div><div class="line"></div><div class="line">print(<span class="string">'Explained variation per principal component: &#123;&#125;'</span>.format(pca.explained_variance_ratio_))</div></pre></td></tr></table></figure>
 <p>We create a scatterplot of the first and second pricipal component and color each of the different types of digits with a different color.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> ggplot <span class="keyword">import</span> *</div><div class="line"></div><div class="line">chart = ggplot( df.loc[rndperm[:<span class="number">3000</span>],:], aes(x=<span class="string">'pca-one'</span>, y=<span class="string">'pca-two'</span>, color=<span class="string">'label'</span>) ) \</div><div class="line">        + geom_point(size=<span class="number">75</span>,alpha=<span class="number">0.8</span>) \</div><div class="line">        + ggtitle(<span class="string">"First and Second Principal Components colored by digit"</span>)</div><div class="line">chart</div></pre></td></tr></table></figure>
-<p><img src="/images/Dimension Reduction using PCA and t-SNE/img2.png" alt="img2"></p>
+<p><img src="/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img2.png" alt="img2"></p>
 <p>From the graph we can see that the two components definitely hold some information, but clearly not enough to set all of them apart.</p>
 <h2 id="t-SNE-t-Distributed-Stochastic-Neighbouring-Entities"><a href="#t-SNE-t-Distributed-Stochastic-Neighbouring-Entities" class="headerlink" title="t-SNE (t-Distributed Stochastic Neighbouring Entities)"></a>t-SNE (t-Distributed Stochastic Neighbouring Entities)</h2><p>t-SNE is another technique for dimension reduction and is particular well suited for the visualization of high-dimensional datasets. Contrary to PCA, it is not a mathematical technique but a probablistic one. </p>
 <p>The <a href="http://jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf" target="_blank" rel="external">original paper</a> describes the working of t-SNE as:</p>
@@ -387,7 +387,7 @@
 <p>Contrary to the recommendation above we will first try to run the algorithm on the actual dimensions of the data (784) and see how it does. To make sure we don’t burden our machine in terms of memory and power/time we will only use the first 7,000 samples to run the algorithm on.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> time</div><div class="line"></div><div class="line"><span class="keyword">from</span> sklearn.manifold <span class="keyword">import</span> TSNE</div><div class="line"></div><div class="line">n_sne = <span class="number">7000</span></div><div class="line"></div><div class="line">time_start = time.time()</div><div class="line">tsne = TSNE(n_components=<span class="number">2</span>, verbose=<span class="number">1</span>, perplexity=<span class="number">40</span>, n_iter=<span class="number">300</span>)</div><div class="line">tsne_results = tsne.fit_transform(df.loc[rndperm[:n_sne],feat_cols].values)</div><div class="line"></div><div class="line">print(<span class="string">'t-SNE done! Time elapsed: &#123;&#125; seconds'</span>.format(time.time()-time_start))</div></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">df_tsne = df.loc[rndperm[:n_sne],:].copy()</div><div class="line">df_tsne[<span class="string">'x-tsne'</span>] = tsne_results[:,<span class="number">0</span>]</div><div class="line">df_tsne[<span class="string">'y-tsne'</span>] = tsne_results[:,<span class="number">1</span>]</div><div class="line"></div><div class="line">chart = ggplot( df_tsne, aes(x=<span class="string">'x-tsne'</span>, y=<span class="string">'y-tsne'</span>, color=<span class="string">'label'</span>) ) \</div><div class="line">        + geom_point(size=<span class="number">70</span>,alpha=<span class="number">0.1</span>) \</div><div class="line">        + ggtitle(<span class="string">"tSNE dimensions colored by digit"</span>)</div><div class="line">chart</div></pre></td></tr></table></figure>
-<p><img src="/images/Dimension Reduction using PCA and t-SNE/img3.png" alt="img3"></p>
+<p><img src="/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/img3.png" alt="img3"></p>
 <p>This is already a significant improvement over the PCA visualization we used earlier. We can see that the digits are very clearly clustered in their own little group.</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a href="https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b" target="_blank" rel="external">Visualising high-dimensional datasets using PCA and t-SNE in Python</a></p>
 
@@ -529,7 +529,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -711,7 +711,7 @@
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/';
       var disqus_title = "Dimension Reduction using PCA and t-SNE";
-      var disqus_url = 'http://yoursite.com/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/';
+      var disqus_url = 'http://pengshiqi.github.io/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

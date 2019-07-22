@@ -90,17 +90,17 @@
 <meta name="keywords" content="Machine Learning,Weakly Supervised Segmentation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
-<meta property="og:url" content="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。 arxiv 链接。">
-<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image1.png">
-<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image2.png">
-<meta property="og:image" content="http://yoursite.com/images/CIAN%20论文解读/image3.png">
-<meta property="og:updated_time" content="2019-01-20T14:04:25.604Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image1.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image2.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image3.png">
+<meta property="og:updated_time" content="2019-07-22T06:39:31.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
 <meta name="twitter:description" content="这是中科院投稿 CVPR 2019 的一篇关于弱监督语义分割的文章。 arxiv 链接。">
-<meta name="twitter:image" content="http://yoursite.com/images/CIAN%20论文解读/image1.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image1.png">
 
 
 
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/"/>
 
   <title> CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -356,15 +356,15 @@
 <p><strong>Affinity 的计算</strong>：给定两个nodes、query function 和 key function，Affinity = query(image1) * key(image2)。这里的距离度量函数用的是点积（因为简单），其他的（高斯核函数、余弦距离）也可以。</p>
 <p> <strong>Message passing</strong>： 计算出各个nodes间的affinity后，归一化，并以此为权重将所有有用的信息相加。</p>
 <p>整个Affinity module的结果如下图所示：</p>
-<p><img src="/images/CIAN 论文解读/image1.png" style="zoom:100%"></p>
+<p><img src="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image1.png" style="zoom:100%"></p>
 <p>上述的两张图片间的 affinity module 可以扩展到多张图片间，即 group affinity module(G-AM)，以及一张图片内部的 self affinity module(S-AM)。</p>
 <p>整体网络结构如下图所示：</p>
-<p><img src="/images/CIAN 论文解读/image2.png" style="zoom:100%"></p>
+<p><img src="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image2.png" style="zoom:100%"></p>
 <p>输入batch分为许多groups，每个group内部的图片至少有一个共同标签。通过backbone之后分为两支，G-AM和S-AM，分别根据 cross-image affinity 和 intra-image affinity 来计算出messages，以此增强原始feature，去预测分割结果。两支网络的参数全部共享。</p>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>在Pascal VOC 2012 数据集上，他们达到了 64.1% mIOU (val) 和 64.7% mIOU(test) 的效果，超越了之前的state-of-the-art。</p>
 <p>然后作者也做了许多 ablation study 来证明其方法的鲁棒性，具体可以参见文章。</p>
 <p>我觉得比较有趣的是作者对affinity的可视化，可以更好地帮助我们理解同一个类别的图片间的相似性。</p>
-<p><img src="/images/CIAN 论文解读/image3.png" style="zoom:60%"></p>
+<p><img src="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/image3.png" style="zoom:60%"></p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章主要通过挖掘图片间的关联度（cross-image relationship）来提高弱监督分割的效果，这个值得我们借鉴学习，可以考虑将其应用到其他的深度学习任务（classification… etc）上。</p>
 
       
@@ -505,7 +505,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -687,7 +687,7 @@
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/';
       var disqus_title = "CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读";
-      var disqus_url = 'http://yoursite.com/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/';
+      var disqus_url = 'http://pengshiqi.github.io/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

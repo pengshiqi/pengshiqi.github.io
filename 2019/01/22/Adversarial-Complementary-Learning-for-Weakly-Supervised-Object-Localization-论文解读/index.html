@@ -90,19 +90,19 @@
 <meta name="keywords" content="Weakly Supervised Object Localization">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
-<meta property="og:url" content="http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
-<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
-<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image5.png">
-<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png">
-<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png">
-<meta property="og:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png">
-<meta property="og:updated_time" content="2019-01-26T04:28:12.684Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image5.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png">
+<meta property="og:updated_time" content="2019-07-22T06:37:57.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
 <meta name="twitter:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https://arxiv.org/abs/1804.06962，作者的开源代码在 xiaomengyc/ACoL 。">
-<meta name="twitter:image" content="http://yoursite.com/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/"/>
 
   <title> Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -357,20 +357,20 @@
 <li>动态擦除可以让第二支分类器更有效地发现新的目标区域。</li>
 </ol>
 <p>在ILSVRC数据集上，该方法可以达到45.14%的Top-1的定位错误率。</p>
-<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png" style="zoom:60%"></p>
+<h2 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h2><p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image1.png" style="zoom:60%"></p>
 <p>上图是对ACoL的一个解释。假设我们要定位一匹马，分类器A会发现一些显著区域（马的头和后腿），在分类器B的feature map中将这些部分擦除，可以让分类器B发现其他的显著区域（马的前腿），将这两部分融合起来，就能得到完整的目标区域（马）。</p>
 <h3 id="Revisiting-CAM"><a href="#Revisiting-CAM" class="headerlink" title="Revisiting CAM"></a>Revisiting CAM</h3><p>原本的CAM需要在训练完VGG网络后，将其全连接层替换为GAP层再训练一次，作者提出了一种更方便得到CAM的方法。</p>
 <p>图片通过FCN后得到feature map，在后面接两个3x3 的conv层和一个C-channel的1x1 conv层，然后通过GAP和softmax做分类。通过1x1 conv层后的feature map就是localization maps，与原始CAM是等价的。</p>
-<p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image5.png" style="zoom:100%"></p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image5.png" style="zoom:100%"></p>
 <p>上图是作者提出的方法与原始CAM的结果对比以及模型对比。</p>
-<h3 id="The-proposed-ACoL"><a href="#The-proposed-ACoL" class="headerlink" title="The proposed ACoL"></a>The proposed ACoL</h3><p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png" style="zoom:100%"></p>
+<h3 id="The-proposed-ACoL"><a href="#The-proposed-ACoL" class="headerlink" title="The proposed ACoL"></a>The proposed ACoL</h3><p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image2.png" style="zoom:100%"></p>
 <p>ACoL的整体框架如上图所示，包括三个部分：Backbone、分类器A和分类器B。</p>
 <p>Backbone是一个全卷积网络（Fully Convolutional Network），用作特征提取器（feature extractor）。分类器A和分类器B都可以按照上述CAM的方式得到object localization maps，不过它们的输入不同，分类器B的输入是FCN的feature map减去分类器A的object localization maps中最显著区域后得到的部分。最终目标物体的localization maps由两支的结果融合后得到，融合方式是两支的结果取max。</p>
 <p>算法流程如下所示：</p>
-<p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png" style="zoom:100%"></p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image3.png" style="zoom:100%"></p>
 <h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p>作者在ILSVRC、CUB-200-2011和Caltech-256三个数据集上进行了实验，使用VGG和GoogLeNet两种Backbone进行实验，主要与CAM进行对比，都能超越CAM的准确率，具体实验数据参见文章。</p>
 <p>Ablation study是尝试不同的threshold对结果的影响，0.6或0.7可以达到最好的效果。</p>
-<p><img src="/images/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png" style="zoom:100%"></p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/image4.png" style="zoom:100%"></p>
 <p>上图是ACoL与CAM在目标定位的结果对比示例，可以看到，ACoL更能捕捉到整个物体，这就是作者的出发点。</p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>这篇文章的贡献点主要在两个方面：</p>
 <ol>
@@ -514,7 +514,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -696,7 +696,7 @@
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/';
       var disqus_title = "Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读";
-      var disqus_url = 'http://yoursite.com/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/';
+      var disqus_url = 'http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-论文解读/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');

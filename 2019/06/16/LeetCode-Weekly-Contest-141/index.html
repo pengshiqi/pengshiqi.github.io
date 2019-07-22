@@ -90,15 +90,15 @@
 <meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="LeetCode Weekly Contest 141">
-<meta property="og:url" content="http://yoursite.com/2019/06/16/LeetCode-Weekly-Contest-141/index.html">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="Time: Jun 16th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
-<meta property="og:image" content="http://yoursite.com/images/LeetCode-Weekly-Contest/141.png">
-<meta property="og:updated_time" content="2019-06-25T03:30:39.653Z">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/141.png">
+<meta property="og:updated_time" content="2019-07-22T06:43:34.768Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode Weekly Contest 141">
 <meta name="twitter:description" content="Time: Jun 16th, 2019 @ 10:30 AM - 12:00 AM  (GMT+8)">
-<meta name="twitter:image" content="http://yoursite.com/images/LeetCode-Weekly-Contest/141.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/141.png">
 
 
 
@@ -119,7 +119,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/16/LeetCode-Weekly-Contest-141/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/"/>
 
   <title> LeetCode Weekly Contest 141 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
@@ -340,7 +340,7 @@
 <a id="more"></a>
 <p>上周重新评测了…本来75名的，后来掉到了160多…果然还是菜…</p>
 <p>这周罚时了20min…因为罚时掉了100多名…</p>
-<p><img src="/images/LeetCode-Weekly-Contest/141.png" style="zoom:100%"></p>
+<p><img src="/2019/06/16/LeetCode-Weekly-Contest-141/141.png" style="zoom:100%"></p>
 <h3 id="1089-Duplicate-Zeros"><a href="#1089-Duplicate-Zeros" class="headerlink" title="1089. Duplicate Zeros"></a>1089. Duplicate Zeros</h3><p>打卡题。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">duplicateZeros</span><span class="params">(self, arr: List[int])</span> -&gt; <span class="keyword">None</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Do not return anything, modify arr in-place instead.</div><div class="line">        """</div><div class="line">        t = [x <span class="keyword">for</span> x <span class="keyword">in</span> arr]</div><div class="line">        index1 = <span class="number">0</span></div><div class="line">        index2 = <span class="number">0</span></div><div class="line">        <span class="keyword">while</span> index2 &lt; len(arr):</div><div class="line">            <span class="keyword">if</span> t[index1] == <span class="number">0</span>:</div><div class="line">                arr[index2] = <span class="number">0</span></div><div class="line">                <span class="keyword">if</span> index2 + <span class="number">1</span> &gt;= len(arr):</div><div class="line">                    <span class="keyword">return</span></div><div class="line">                arr[index2 + <span class="number">1</span>] = <span class="number">0</span></div><div class="line">                index2 += <span class="number">2</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                arr[index2] = t[index1]</div><div class="line">                index2 += <span class="number">1</span></div><div class="line">            index1 += <span class="number">1</span></div></pre></td></tr></table></figure>
 <h3 id="1090-Largest-Values-From-Labels"><a href="#1090-Largest-Values-From-Labels" class="headerlink" title="1090. Largest Values From Labels"></a>1090. Largest Values From Labels</h3><p>排序题。</p>
@@ -490,7 +490,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-count">49</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -672,7 +672,7 @@
       var disqus_shortname = 'patrick-psq';
       var disqus_identifier = '2019/06/16/LeetCode-Weekly-Contest-141/';
       var disqus_title = "LeetCode Weekly Contest 141";
-      var disqus_url = 'http://yoursite.com/2019/06/16/LeetCode-Weekly-Contest-141/';
+      var disqus_url = 'http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/';
 
       function run_disqus_script(disqus_script){
         var dsq = document.createElement('script');
