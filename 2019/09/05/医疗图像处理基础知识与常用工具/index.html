@@ -86,15 +86,18 @@
 
 
 
+<meta name="description" content="总结一下近期做医学影像的过程中遇到的一些基础知识，与常用的Python工具包。">
 <meta name="keywords" content="Python,Medical Imaging">
 <meta property="og:type" content="article">
 <meta property="og:title" content="医疗图像处理基础知识与常用工具">
 <meta property="og:url" content="http://pengshiqi.github.io/2019/09/05/医疗图像处理基础知识与常用工具/index.html">
 <meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="总结一下近期做医学影像的过程中遇到的一些基础知识，与常用的Python工具包。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-05T08:01:25.049Z">
+<meta property="og:updated_time" content="2019-09-05T10:07:34.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="医疗图像处理基础知识与常用工具">
+<meta name="twitter:description" content="总结一下近期做医学影像的过程中遇到的一些基础知识，与常用的Python工具包。">
 
 
 
@@ -344,7 +347,21 @@
       
 
       
-        <a id="more"></a>
+        <p>总结一下近期做医学影像的过程中遇到的一些基础知识，与常用的Python工具包。</p>
+<a id="more"></a>
+<h3 id="1-术语"><a href="#1-术语" class="headerlink" title="1. 术语"></a>1. 术语</h3><h4 id="1-1-切面"><a href="#1-1-切面" class="headerlink" title="1.1 切面"></a><strong>1.1 切面</strong></h4><p>矢状面 sagittal，冠状面 coronal，横断面 axial/transverse。</p>
+<h4 id="1-2-方向"><a href="#1-2-方向" class="headerlink" title="1.2 方向"></a><strong>1.2 方向</strong></h4><p>左 left 右 right 前 anterior 后 posterior 上 superior 下 inferior</p>
+<h4 id="1-3-坐标系统"><a href="#1-3-坐标系统" class="headerlink" title="1.3 坐标系统"></a><strong>1.3</strong> 坐标系统</h4><p>世界坐标系、解剖坐标系、图像坐标系。</p>
+<h3 id="2-Nifti格式（-nii，-nii-gz）"><a href="#2-Nifti格式（-nii，-nii-gz）" class="headerlink" title="2. Nifti格式（.nii，.nii.gz）"></a>2. Nifti格式（.nii，.nii.gz）</h3><p><code>Nifti</code> 格式使用 <code>RAS (Right, Anterior, Superior)</code> 作为坐标系的正方向.</p>
+<h4 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h4><p>使用<code>SimpleITK</code>读取：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> SimpleITK <span class="keyword">as</span> sitk</span><br><span class="line">itk_image = sitk.ReadImage(<span class="string">"file_path.nii"</span>)</span><br><span class="line">arr_image = sitk.GetArrayFromImage(itk_image)</span><br></pre></td></tr></table></figure>
+<p>使用<code>nibabel</code>读取：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nibabel <span class="keyword">as</span> nib</span><br><span class="line">nib_image = nib.load(<span class="string">"file_path.nii"</span>)</span><br><span class="line">header = nib_image.header</span><br><span class="line">arr_image = nib_image.get_fdata()</span><br></pre></td></tr></table></figure>
+<h4 id="保存"><a href="#保存" class="headerlink" title="保存"></a>保存</h4><p>使用 <code>nibabel</code> 保存时如果有参照图像的话最好直接使用参照图象的 header 进行保存 (如: label可以使用图像的header). 如果没有可以参照的header时, 就需要自己给定仿射矩阵或者header. 保存的命令如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入 Nifti1Image 的三维数组的轴应该是 (x, y, z) 的顺序, 而一般之前输出的为 (z, y, x) 的顺序, 所以需要转置一下.</span></span><br><span class="line">out_image = np.transpose(arr_image, (<span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>))</span><br><span class="line">out = nib.Nifti1Image(out_image, affine=affine, header=header)</span><br><span class="line">nib.save(out, out_path)</span><br></pre></td></tr></table></figure>
+<p>这里的 <code>affine</code> 参数和 <code>header</code> 参数一般只填一个比较好。如果有参照图像则直接使用参照图像的 <code>header</code> , 没有的话使用 <code>affine</code> 参数。</p>
+<h3 id="3-DICOM格式"><a href="#3-DICOM格式" class="headerlink" title="3. DICOM格式"></a>3. DICOM格式</h3><p>DICOM格式的文件可以使用<code>pydicom</code> 和<code>SimpleITK</code>进行处理，pydicom可以读取header等元数据，sitk更方便直接获取数值信息。</p>
+<h3 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h3><p><a href="https://www.jarvis73.cn/2019/06/24/Medical-Imaging-Guide/" target="_blank" rel="noopener">医学影像简介(Medical Imaging Guide)</a></p>
 
       
     </div>
@@ -535,7 +552,7 @@
               
             
             
-              <p class="post-toc-empty">This post does not have a Table of Contents</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-术语"><span class="nav-number">1.</span> <span class="nav-text">1. 术语</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-切面"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 切面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-方向"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 方向</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-坐标系统"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 坐标系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Nifti格式（-nii，-nii-gz）"><span class="nav-number">2.</span> <span class="nav-text">2. Nifti格式（.nii，.nii.gz）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读取"><span class="nav-number">2.1.</span> <span class="nav-text">读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#保存"><span class="nav-number">2.2.</span> <span class="nav-text">保存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-DICOM格式"><span class="nav-number">3.</span> <span class="nav-text">3. DICOM格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References:</span></a></li></ol></div>
             
           </div>
         </section>
