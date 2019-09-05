@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,23 +63,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Multiple Instance Learning,Machine Learning," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml" />
+  <meta name="keywords" content="Multiple Instance Learning,Machine Learning,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1">
 
 
 
@@ -93,13 +93,14 @@
 <meta property="og:url" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
-<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png">
-<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/img1.png">
-<meta property="og:updated_time" content="2019-07-22T06:38:52.677Z">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://pengshiqi.github.io/.io//formula.png">
+<meta property="og:image" content="http://pengshiqi.github.io/.io//img1.png">
+<meta property="og:updated_time" content="2019-07-22T06:38:52.678Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
 <meta name="twitter:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
-<meta name="twitter:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/.io//formula.png">
 
 
 
@@ -120,12 +121,12 @@
 
 
 
-  <link rel="canonical" href="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/">
 
   <title> Attention-based Deep Multiple Instance Learning 论文解读 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -146,12 +147,12 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Last Whisper</span>
       <span class="logo-line-after"><i></i></span>
@@ -178,7 +179,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
           </a>
@@ -188,7 +189,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             Categories
           </a>
@@ -198,7 +199,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             About
           </a>
@@ -208,7 +209,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
           </a>
@@ -218,7 +219,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             Tags
           </a>
@@ -251,7 +252,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -280,14 +281,14 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Paper-Report/" itemprop="url" rel="index">
                     <span itemprop="name">Paper Report</span>
                   </a>
@@ -338,7 +339,7 @@
 
       
         <p>这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。</p>
-<p>文章的开源代码在 <a href="https://github.com/AMLab-Amsterdam/AttentionDeepMIL" target="_blank" rel="external">AttentionDeepMIL</a> 。</p>
+<p>文章的开源代码在 <a href="https://github.com/AMLab-Amsterdam/AttentionDeepMIL" target="_blank" rel="noopener">AttentionDeepMIL</a> 。</p>
 <a id="more"></a>
 <hr>
 <p>MIL将许多instances看作一个bag，然后对这个bag赋予一个label。 在这篇文章中，作者将MIL问题看作是学习bag标签的Bernoulli分布（二项分布），通过优化对数似然函数来训练模型，提出了一个 <code>neural network-based permutation-invariant aggregation operator that corresponds to the attention mechanism</code> 。</p>
@@ -350,8 +351,8 @@
 <li>a transformation to the bag probability.</li>
 </ol>
 <p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p>
-<h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = \{ x_1, \dots, x_K \}$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in \{ 0, 1\}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
-<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/formula.png" style="zoom:45%"></p>
+<h4 id="Multiple-Instance-Learning"><a href="#Multiple-Instance-Learning" class="headerlink" title="Multiple Instance Learning"></a>Multiple Instance Learning</h4><p>对于a bag of instances: $X = { x_1, \dots, x_K }$，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签$y_k \in { 0, 1}, k=1,\dots, K$，假设bag的标签这么定义：（这个公式的排版有点捉急了…）</p>
+<p><img src="/.io//formula.png" style="zoom:45%"></p>
 <p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于</p>
 <script type="math/tex; mode=display">
 Y = \mathop{\max}\limits_{k} \{y_k\} \tag{2}</script><p>通过优化log-likelihood function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数$\theta(X) \in [0, 1]$，即给定bag $X$时$Y=1$的概率。</p>
@@ -377,7 +378,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
 </blockquote>
 <h4 id="Attention-based-MIL-pooling"><a href="#Attention-based-MIL-pooling" class="headerlink" title="Attention-based MIL pooling"></a>Attention-based MIL pooling</h4><p>使用max-operator有两点不足：pre-defined and non-trainable。希望使用attention mechanism来增加模型的灵活性和可解释性。</p>
 <p>公式也不复杂，就是各个instances在low-embedding后的softmax加权平均，和之前的MIL pooling的对比如下图所示:</p>
-<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-论文解读/img1.png" alt="img1"></p>
+<p><img src="/.io//img1.png" alt="img1"></p>
 <p>最后实验部分，作者给出了这个方法在MNIST数据集和一个组织病理学数据集上的实验，证明其有效性。</p>
 
       
@@ -401,13 +402,13 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay">
           <p>微信打赏</p>
         </div>
       
       
         <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay">
           <p>支付宝打赏</p>
         </div>
       
@@ -498,7 +499,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -508,17 +509,15 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/profile.jpg"
-               alt="Patrick_psq" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/profile.jpg" alt="Patrick_psq">
           <p class="site-author-name" itemprop="name">Patrick_psq</p>
           <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way.</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -526,7 +525,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -535,7 +534,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -587,7 +586,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>
@@ -758,8 +757,7 @@ S(X) = g(\sum_{x \in X}f(x))  \tag{3}，</script><p>where $f$ and $g$ are suitab
       }
   });
 </script>
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
 </script>
 <!-- MathJax End -->
 

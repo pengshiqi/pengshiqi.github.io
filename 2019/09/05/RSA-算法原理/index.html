@@ -1,0 +1,952 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="RSA算法是一种非对称加密算法，是计算机通信安全的基石，由Ron Rivest、Adi Shamir和Leonard Adleman在1977年共同提出，背后的故事可以看wikipedia或者这篇文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Last Whisper">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/09/05/RSA-算法原理/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="RSA算法是一种非对称加密算法，是计算机通信安全的基石，由Ron Rivest、Adi Shamir和Leonard Adleman在1977年共同提出，背后的故事可以看wikipedia或者这篇文章。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-05T09:36:32.495Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Last Whisper">
+<meta name="twitter:description" content="RSA算法是一种非对称加密算法，是计算机通信安全的基石，由Ron Rivest、Adi Shamir和Leonard Adleman在1977年共同提出，背后的故事可以看wikipedia或者这篇文章。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 6318630373483873000,
+      author: 'Admin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/09/05/RSA-算法原理/">
+
+  <title>  | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Last Whisper</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Posted on</span>
+            <time itemprop="dateCreated" datetime="2019-09-05T14:06:45+08:00" content="2019-09-05">
+              2019-09-05
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2019/09/05/RSA-算法原理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/09/05/RSA-算法原理/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2019/09/05/RSA-算法原理/" class="leancloud_visitors" data-flag-title="">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">visitors </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>RSA算法是一种非对称加密算法，是计算机通信安全的基石，由Ron Rivest、Adi Shamir和Leonard Adleman在1977年共同提出，背后的故事可以看<a href="https://zh.wikipedia.org/wiki/RSA加密演算法" target="_blank" rel="noopener">wikipedia</a>或者<a href="http://localhost-8080.com/2013/12/history-of-rsa/#more-1659" target="_blank" rel="noopener">这篇文章</a>。</p>
+<a id="more"></a>
+<h2 id="1-故事背景"><a href="#1-故事背景" class="headerlink" title="1. 故事背景"></a>1. 故事背景</h2><p>1976年以前，所有的加密方法都是同一种模式：</p>
+<blockquote>
+<p>(1) 甲方选择某种加密规则，对信息加密；</p>
+<p>(2) 乙方使用同一种规则，对信息解密。</p>
+</blockquote>
+<p>由于加密和解密规则相同（称为”密钥“），这被称为”对称加密算法“。</p>
+<p>在这种加密模式下，甲方需要将加密规则告诉乙方，于是，保存和传递密钥便成了最大的问题。</p>
+<p>1976年，美国计算机学家Whitfield Diffie 和 Martin Hellman提出了一种非对称加密的构思：</p>
+<blockquote>
+<p>(1) 乙方生成两把密钥（公钥和私钥）。公钥是公开的，任何人都可以获得，私钥则是保密的。</p>
+<p>(2) 甲方获取乙方的公钥，然后用它对信息加密。</p>
+<p>(3) 乙方得到加密后的信息，用私钥解密。</p>
+</blockquote>
+<p>如果公钥加密的信息只有私钥能解密，那么只要私钥不泄露，通信就是安全的。</p>
+<p>1977年，Rivest、Shamir 和 Adleman 设计出了RSA算法，实现了非对称加密。</p>
+<p>毫不夸张地说，只要有计算机网络的地方，就有RSA算法。</p>
+<h2 id="2-数学背景"><a href="#2-数学背景" class="headerlink" title="2. 数学背景"></a>2. 数学背景</h2><p><strong>互质</strong>：</p>
+<p>如果两个正整数，除了1之外，没有其他公因子，那么称这两个数互质(coprime)。</p>
+<p><strong>欧拉函数：</strong></p>
+<p>欧拉函数$\varphi(n)$表示：小于等于$n$的正整数中，与$n$互质的正整数个数。</p>
+<p>关于欧拉函数有几个常用公式：</p>
+<ul>
+<li><p>$\varphi(1) = 1$</p>
+</li>
+<li><p>如果$p$是质数，则 $\varphi(p) = p - 1$</p>
+</li>
+<li><p>如果$p$是质数，则 $\varphi(p^k) = p^k - p^{k -1}$</p>
+</li>
+<li><p>如果$p$可以分解为两个互质的整数之积（$p=n_1 \times n_2$），则 $\varphi(p) = \varphi(n_1 n_2) = \varphi(n_1) \varphi(n_2) $</p>
+</li>
+<li><p>对于任意大于1的正整数，都可以分解质因数：$p = p_1^{k_1} p_2^{k_2}\dots p_r^{k_r}$，则有 </p>
+<script type="math/tex; mode=display">
+\varphi(p) = p(1-\frac{1}{p_1}) (1-\frac{1}{p_2}) \dots (1-\frac{1}{p_r})</script></li>
+</ul>
+<p><strong>欧拉定理：</strong></p>
+<p>欧拉函数的用处在于欧拉定理：</p>
+<p>如果两个正整数$a$和$p$互质，则有 $a^{\varphi(p)} \equiv 1 \,\,(mod \,\, p)$</p>
+<p>当$p$为质数时，有 $\varphi(p) = p - 1$，此时即为费马小定理： $a^{p - 1} \equiv 1 \,\,(mod \,\, p)$</p>
+<h2 id="3-RSA-算法原理"><a href="#3-RSA-算法原理" class="headerlink" title="3. RSA 算法原理"></a>3. RSA 算法原理</h2><p>现在假设一个场景，Alice 和 Bob 要进行加密通信，Alice该怎么生成公钥和私钥呢？</p>
+<p><strong>第一步，随机选择两个质数$p$和$q$。</strong></p>
+<p>Alice选择了61和53。（实际应用中，这两个质数越大，越难以破解）</p>
+<p><strong>第二步，计算$p$和$q$的乘积。</strong></p>
+<p>$n = p \times q = 61 \times 53 = 3233$</p>
+<p>$n$的长度就是密钥长度，$3233$写成二进制是$110010100001$，所以这个密钥就有12位。</p>
+<p>实际应用中，RSA密钥一般是$1024$位，重要的场合是$2048$位。</p>
+<p><strong>第三步，计算$n$的欧拉函数。</strong></p>
+<p>$\varphi(n) = \varphi(p) \varphi(q) = (p-1)(q-1) = 60 \times 52 = 3120$</p>
+<p><strong>第四步，随机选择一个整数$e$，条件是$1 &lt; e &lt; \varphi(n)$，且$e$与$\varphi(n)$互质。</strong></p>
+<p>Alice在$1$到$3120$之间选择了$17$。 （实际应用中，常选择65537。）</p>
+<p><strong>第五步，计算$e$对于$\varphi(n)$的乘法逆元$d$。</strong></p>
+<p>乘法逆元$d$满足： $ed \equiv 1 \,\, (mod \,\, \varphi(n))$</p>
+<p>等价于： $ed - 1 = k\varphi(n)$</p>
+<p>求解$d$即为求解： $ex + \varphi(n) y = 1$</p>
+<p>带入$e$和$\varphi(n)$的数值： $17x + 3120y = 1$</p>
+<p>由扩展欧几里得算法可以求得一组解为： $(x, y) = (2753, -15)$，即 $d = 2753$。</p>
+<p><strong>第六步，将$n$和$e$封装成公钥，$n$和$d$封装成私钥。</strong></p>
+<p>所以公钥就是 $(3233, 17)$，私钥是 $(3233, 2753)$。</p>
+<h2 id="4-RSA算法的可靠性"><a href="#4-RSA算法的可靠性" class="headerlink" title="4. RSA算法的可靠性"></a>4. RSA算法的可靠性</h2><p>公钥用到了$n$和$e$，私钥用到了$n$和$d$，如果$d$泄露了，那么就相当于私钥泄露了。</p>
+<p><strong>能否在已知$n$和$e$的情况下推导出$d$？</strong></p>
+<ul>
+<li>（1） $ed \equiv 1 \,\, (mod \,\, \varphi(n))$，只有知道$e$和$\varphi(n)$才能知道$d$。</li>
+<li>（2） $\varphi(n) = (p-1)(q-1)$，只有知道$p$和$q$才能知道$\varphi(n)$。</li>
+<li>（3）$n=pq$，只有将$n$进行因数分解，才能知道$p$和$q$。</li>
+</ul>
+<p>所以，RSA算法的安全性就在于 <strong>对于大整数的因数分解是极为困难的</strong>。</p>
+<p>目前可以被破解的最长RSA密钥为768位。</p>
+<h2 id="5-加密和解密"><a href="#5-加密和解密" class="headerlink" title="5. 加密和解密"></a>5. 加密和解密</h2><p>有了公钥和私钥，就能加密和解密了。</p>
+<p><strong>（1）使用公钥$(n, e)$进行加密</strong></p>
+<p>假设Bob要向Alice发送信息$m$，$m$必须是整数（字符串可以取 ASCII值或者Unicode值），且$m &lt; n$。</p>
+<p>所谓加密，就是计算出$c$：</p>
+<script type="math/tex; mode=display">
+m^e \equiv c \,\, (mod \,\, n)</script><p>假设Bob要传递的信息是$m=65$，那么有：</p>
+<script type="math/tex; mode=display">
+65^{17} \equiv c \,\, (mod \,\,3233) \\
+c = 2790</script><p>Bob就把$2790$发送给了Alice。</p>
+<p><strong>（2）使用私钥$(n, d)$进行解密</strong></p>
+<p>Alice接收到Bob发来的信息$c=2790$后进行解密。</p>
+<p>可以证明下式成立：</p>
+<script type="math/tex; mode=display">
+c^d \equiv m \,\, (mod \,\, n)</script><p>于是有：</p>
+<script type="math/tex; mode=display">
+2790^{2753} \equiv m \,\, (mod \,\, 3233) \\
+m = 65</script><p>这样Alice就知道了Bob加密前的原文是$m=65$。</p>
+<p>至此，加密-解密的过程全部完成。</p>
+<p>可以看到，要解出$m$，就必须知道$d$，要想知道$d$，就必须分解$n$，这是极难做到的。</p>
+<p><strong>私钥解密的证明：</strong></p>
+<p>最后来证明👇这个式子：</p>
+<script type="math/tex; mode=display">
+c^d \equiv m \,\, (mod \,\, n)</script><p>根据加密规则：</p>
+<script type="math/tex; mode=display">
+m^e \equiv c \,\, (mod \,\, n)</script><p>于是$c$可以写成如下形式：</p>
+<script type="math/tex; mode=display">
+c = m^e - kn</script><p>带入解密式有：</p>
+<script type="math/tex; mode=display">
+(m^e - kn)^d \equiv m \,\, (mod \,\, n)</script><p>它等价于求证：</p>
+<script type="math/tex; mode=display">
+m^{ed} \equiv m \,\, (mod \,\, n)</script><p>由于：</p>
+<script type="math/tex; mode=display">
+ed \equiv 1 \,\, (mod \,\, \varphi(n))</script><p>所以：</p>
+<script type="math/tex; mode=display">
+ed = 1 + h\varphi(n)</script><p>将$ed$带入有：</p>
+<script type="math/tex; mode=display">
+m^{1 + h\varphi(n)} \equiv m \,\, (mod \,\, n)</script><p>接下来，分两种情况证明这个式子：</p>
+<p>(1) $m$与$n$互质</p>
+<p>根据欧拉定理，此时有：</p>
+<script type="math/tex; mode=display">
+m^{\varphi(n)} \equiv 1 \,\, (mod \,\, n)</script><p>故：</p>
+<script type="math/tex; mode=display">
+(m^{\varphi(n)})^h \times m \equiv m \,\, (mod \,\, n)</script><p>得证。</p>
+<p>(2)  $m$与$n$🙅‍♂️互质</p>
+<p>此时，由于$n = p\times q$，那么因为$m$和$n$含有非1公因子且$m&lt;n$，所以$m$必然等于$kp$或者$kq$。</p>
+<p>不妨假设$m=kp$，因为$q$是质数，由欧拉定理有：</p>
+<script type="math/tex; mode=display">
+(kp)^{q-1} \equiv 1 \,\, (mod \,\, q)</script><p>进一步有：</p>
+<script type="math/tex; mode=display">
+[(kp)^{q-1}]^{h(p-1)} \times kp \equiv kp \,\, (mod \,\, q)</script><p>即：</p>
+<script type="math/tex; mode=display">
+(kp)^{ed} \equiv kp \,\, (mod \,\, q)</script><p>可以改写成：</p>
+<script type="math/tex; mode=display">
+(kp)^{ed} = tq + kp</script><p>此时，$t$必然能被$p$整除，可以写成$t = t’p$：</p>
+<script type="math/tex; mode=display">
+(kp)^{ed} = t'pq + kp</script><p>因为$m=kp, n=pq$，所以有：</p>
+<script type="math/tex; mode=display">
+m^{ed} \equiv m \,\, (mod \,\, n)</script><p>得证。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><p><a href="http://localhost-8080.com/2013/12/history-of-rsa/#more-1659" target="_blank" rel="noopener">RSA 算法是如何诞生的</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2013/06/rsa_algorithm_part_one.html" target="_blank" rel="noopener">RSA算法原理（一）</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2013/07/rsa_algorithm_part_two.html" target="_blank" rel="noopener">RSA算法原理（二）</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>May The Force Be With You.</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay">
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay">
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/05/除法的取模运算——乘法逆元/" rel="next" title="除法的取模运算——乘法逆元">
+                <i class="fa fa-chevron-left"></i> 除法的取模运算——乘法逆元
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/05/医疗图像处理基础知识与常用工具/" rel="prev" title="医疗图像处理基础知识与常用工具">
+                医疗图像处理基础知识与常用工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/profile.jpg" alt="Patrick_psq">
+          <p class="site-author-name" itemprop="name">Patrick_psq</p>
+          <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-name">posts</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-故事背景"><span class="nav-number">1.</span> <span class="nav-text">1. 故事背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-数学背景"><span class="nav-number">2.</span> <span class="nav-text">2. 数学背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-RSA-算法原理"><span class="nav-number">3.</span> <span class="nav-text">3. RSA 算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-RSA算法的可靠性"><span class="nav-number">4.</span> <span class="nav-text">4. RSA算法的可靠性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-加密和解密"><span class="nav-number">5.</span> <span class="nav-text">5. 加密和解密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References:</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick_psq</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'patrick-psq';
+      var disqus_identifier = '2019/09/05/RSA-算法原理/';
+      var disqus_title = "";
+      var disqus_url = 'http://pengshiqi.github.io/2019/09/05/RSA-算法原理/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
+  
+
+
+
+
+  
+  
+
+  
+<!-- MathJax Start -->
+<!-- MathJax documentation: http://docs.mathjax.org/en/latest/index.html -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {  // tex2jax preprocessor
+      inlineMath: [ ['$','$'] ],  // delimiters for in-line math
+      displayMath: [ ['$$','$$'] ],  // delimiters for displayed equations
+      processEscapes: true,  // enable \$ to represent a single dollar sign
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']  // MathJax will not process contents inside these tags 
+    },
+    TeX: {  // TeX/LaTeX input processor
+      equationNumbers: { autoNumber: "AMS" },  // only number those equations in specific AMSmath environments
+      extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]  // introduce AMS extensions and suppress generating error messages 
+    },
+    "HTML-CSS": {  // HTML-CSS output processor (this is the default output of MathJax)
+      scale: 110,  // The scaling factor of math with respect to the surrounding text
+      linebreaks: { automatic: true } // automatically breaks the line if necessary
+    },
+    SVG: {  // SVG output processor
+      scale: 110,  // The scaling factor of math with respect to the surrounding text
+      linebreaks: { automatic: true } // automatically breaks the line if necessary
+    },
+    menuSettings: {  // settings for the mathematics contextual menu
+      zoom: "Hover"  // set equation zooming to be triggered by a single mouse click
+    }
+  });
+ 
+  MathJax.Hub.Queue(function() { // Fix <code> tags after MathJax finishes running, this is a hack to overcome a shortcoming of Markdown
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
+</script>
+<!-- MathJax End -->
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("UG6Ef6yp7QecbSj8Xk3rmHlt-gzGzoHsz", "Dr0E4K0SRzKyd0J8ovr2P9P7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+</body>
+</html>

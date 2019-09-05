@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,23 +63,23 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Deep Learning," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml" />
+  <meta name="keywords" content="Deep Learning,">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+  <link rel="alternate" href="/atom.xml" title="Last Whisper" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1">
 
 
 
@@ -93,12 +93,13 @@
 <meta property="og:url" content="http://pengshiqi.github.io/2019/07/26/池化层和BN层的Numpy实现/index.html">
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="这里实现的是 naive max pooling层和 BN 层。">
-<meta property="og:image" content="http://pengshiqi.github.io/2019/07/26/池化层和BN层的Numpy实现/pooling.png">
-<meta property="og:updated_time" content="2019-07-26T03:07:34.035Z">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://pengshiqi.github.io/.io//pooling.png">
+<meta property="og:updated_time" content="2019-07-26T03:07:34.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="池化层和BN层的Numpy实现">
 <meta name="twitter:description" content="这里实现的是 naive max pooling层和 BN 层。">
-<meta name="twitter:image" content="http://pengshiqi.github.io/2019/07/26/池化层和BN层的Numpy实现/pooling.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/.io//pooling.png">
 
 
 
@@ -119,12 +120,12 @@
 
 
 
-  <link rel="canonical" href="http://pengshiqi.github.io/2019/07/26/池化层和BN层的Numpy实现/"/>
+  <link rel="canonical" href="http://pengshiqi.github.io/2019/07/26/池化层和BN层的Numpy实现/">
 
   <title> 池化层和BN层的Numpy实现 | Last Whisper </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="en">
 
   
 
@@ -145,12 +146,12 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-meta ">
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Last Whisper</span>
       <span class="logo-line-after"><i></i></span>
@@ -177,7 +178,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
           </a>
@@ -187,7 +188,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             Categories
           </a>
@@ -197,7 +198,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             About
           </a>
@@ -207,7 +208,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
           </a>
@@ -217,7 +218,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             Tags
           </a>
@@ -250,7 +251,7 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal " itemscope="" itemtype="http://schema.org/Article">
 
     
       <header class="post-header">
@@ -279,14 +280,14 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
               <span class="post-meta-item-text">In</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope="" itemtype="https://schema.org/Thing">
                   <a href="/categories/Deep-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Deep Learning</span>
                   </a>
@@ -339,15 +340,15 @@
         <p>这里实现的是 naive max pooling层和 BN 层。</p>
 <a id="more"></a>
 <h3 id="Max-Pooling-层的实现"><a href="#Max-Pooling-层的实现" class="headerlink" title="Max Pooling 层的实现"></a>Max Pooling 层的实现</h3><p><strong>Forward pass:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pooling_forward_naive</span><span class="params">(x, pool_param)</span>:</span></div><div class="line">    N, C, H, W = x.shape</div><div class="line">    HH, WW, stride = pool_param[<span class="string">"pool_height"</span>], pool_param[<span class="string">"pool_width"</span>], pool_param[<span class="string">"stride"</span>]</div><div class="line">    H_out = <span class="number">1</span> + int((H - HH) / stride)</div><div class="line">    W_out = <span class="number">1</span> + int((W - WW) / stride)</div><div class="line">    out = np.zeros((N, C, H_out, W_out))</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(H_out):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(W_out):</div><div class="line">            out[..., i, j] = np.max(x[..., i * stride: i * stride + HH, j * stride: j * stride + WW], axis=(<span class="number">2</span>,<span class="number">3</span>))</div><div class="line">    </div><div class="line">    cache = (x, out, pool_param)</div><div class="line">    <span class="keyword">return</span> out, cache</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pooling_forward_naive</span><span class="params">(x, pool_param)</span>:</span></span><br><span class="line">    N, C, H, W = x.shape</span><br><span class="line">    HH, WW, stride = pool_param[<span class="string">"pool_height"</span>], pool_param[<span class="string">"pool_width"</span>], pool_param[<span class="string">"stride"</span>]</span><br><span class="line">    H_out = <span class="number">1</span> + int((H - HH) / stride)</span><br><span class="line">    W_out = <span class="number">1</span> + int((W - WW) / stride)</span><br><span class="line">    out = np.zeros((N, C, H_out, W_out))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(H_out):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(W_out):</span><br><span class="line">            out[..., i, j] = np.max(x[..., i * stride: i * stride + HH, j * stride: j * stride + WW], axis=(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">    </span><br><span class="line">    cache = (x, out, pool_param)</span><br><span class="line">    <span class="keyword">return</span> out, cache</span><br></pre></td></tr></table></figure>
 <p><strong>Backward pass:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pooling_backward_naive</span><span class="params">(dout, cache)</span>:</span></div><div class="line">    x, out, pool_param = cache</div><div class="line">    N, C, H_out, W_out = dout.shape</div><div class="line">    HH, WW, stride = pool_param[<span class="string">"pool_height"</span>], pool_param[<span class="string">"pool_width"</span>], pool_param[<span class="string">"stride"</span>]</div><div class="line">    dx = np.zeros_like(x)</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(H_out):</div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(W_out):</div><div class="line">            <span class="comment"># 计算位置</span></div><div class="line">            mark = x[..., i * stride: i * stride + HH, j * stride: j * stride + WW] == out[..., i, j]</div><div class="line">            dx[..., i * stride: i * stride + HH, j * stride: j * stride + WW] = mark * dout[..., i, j]</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> dx</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">max_pooling_backward_naive</span><span class="params">(dout, cache)</span>:</span></span><br><span class="line">    x, out, pool_param = cache</span><br><span class="line">    N, C, H_out, W_out = dout.shape</span><br><span class="line">    HH, WW, stride = pool_param[<span class="string">"pool_height"</span>], pool_param[<span class="string">"pool_width"</span>], pool_param[<span class="string">"stride"</span>]</span><br><span class="line">    dx = np.zeros_like(x)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(H_out):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(W_out):</span><br><span class="line">            <span class="comment"># 计算位置</span></span><br><span class="line">            mark = x[..., i * stride: i * stride + HH, j * stride: j * stride + WW] == out[..., i, j]</span><br><span class="line">            dx[..., i * stride: i * stride + HH, j * stride: j * stride + WW] = mark * dout[..., i, j]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> dx</span><br></pre></td></tr></table></figure>
 <p>max将梯度传递给最大的那一项， 其余项梯度均为0。构造一个实现这个逻辑的mark与dout相乘即可。</p>
 <p>举例如下：</p>
-<p><img src="/2019/07/26/池化层和BN层的Numpy实现/pooling.png" style="zoom:100%"></p>
+<p><img src="/.io//pooling.png" style="zoom:100%"></p>
 <h3 id="Spatial-BN-层的实现"><a href="#Spatial-BN-层的实现" class="headerlink" title="Spatial BN 层的实现"></a>Spatial BN 层的实现</h3><p>对于CNN网络来说， 每个Channel都被视作一个独立的dimension， 因此， 共有 N <em> H </em> W 个dimension, 按照此方向reshape并带入原方法中即可。</p>
 <p><strong>Reference:</strong></p>
-<p><a href="http://fanding.xyz/" target="_blank" rel="external">http://fanding.xyz/2017/09/11/CNN卷积网络的Python实现(四)-池化和BN层的实现/</a></p>
+<p><a href="http://fanding.xyz/" target="_blank" rel="noopener">http://fanding.xyz/2017/09/11/CNN卷积网络的Python实现(四)-池化和BN层的实现/</a></p>
 
       
     </div>
@@ -370,13 +371,13 @@
     <div id="QR" style="display: none;">
       
         <div id="wechat" style="display: inline-block">
-          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay"/>
+          <img id="wechat_qr" src="http://obw22u9v2.bkt.clouddn.com/wechatpayWechatIMG1.jpeg" alt="Patrick_psq WeChat Pay">
           <p>微信打赏</p>
         </div>
       
       
         <div id="alipay" style="display: inline-block">
-          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay"/>
+          <img id="alipay_qr" src="http://obw22u9v2.bkt.clouddn.com/alipay2alipay.png" alt="Patrick_psq Alipay">
           <p>支付宝打赏</p>
         </div>
       
@@ -465,7 +466,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -475,17 +476,15 @@
       
 
       <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/profile.jpg"
-               alt="Patrick_psq" />
+        <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/images/profile.jpg" alt="Patrick_psq">
           <p class="site-author-name" itemprop="name">Patrick_psq</p>
           <p class="site-description motion-element" itemprop="description">Where there is a will, there is a way.</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -493,7 +492,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -502,7 +501,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">29</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
@@ -554,7 +553,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2019</span>
@@ -725,8 +724,7 @@
       }
   });
 </script>
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">  // link to the MathJax CDN
 </script>
 <!-- MathJax End -->
 
