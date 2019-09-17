@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="Time: Jul 27th, 2019 @ 10:30 PM - 12:00 PM  (GMT+8)">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://pengshiqi.github.io/.io//5.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/07/27/LeetCode-Biweekly-Contest-5/5.png">
 <meta property="og:updated_time" content="2019-07-27T16:00:03.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LeetCode-Biweekly-Contest-5">
 <meta name="twitter:description" content="Time: Jul 27th, 2019 @ 10:30 PM - 12:00 PM  (GMT+8)">
-<meta name="twitter:image" content="http://pengshiqi.github.io/.io//5.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/07/27/LeetCode-Biweekly-Contest-5/5.png">
 
 
 
@@ -269,6 +269,8 @@
         
 
         <div class="post-meta">
+          
+          
           <span class="post-time">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
@@ -340,7 +342,7 @@
         <p>Time: Jul 27th, 2019 @ 10:30 PM - 12:00 PM  (GMT+8)</p>
 <a id="more"></a>
 <p>总体来说，Biweekly Contest 还是比 Weekly Contest 简单不少的。。。</p>
-<p><img src="/.io//5.png" style="zoom:100%"></p>
+<p><img src="//pengshiqi.github.io/2019/07/27/LeetCode-Biweekly-Contest-5/5.png" style="zoom:100%"></p>
 <h3 id="1133-Largest-Unique-Number"><a href="#1133-Largest-Unique-Number" class="headerlink" title="1133.Largest Unique Number"></a>1133.Largest Unique Number</h3><p>打卡题。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">largestUniqueNumber</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span>&#123;</span><br><span class="line">        sort(a.begin(), a.end());</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> ret = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = a.size() - <span class="number">1</span>; i &gt;= <span class="number">0</span> &amp;&amp; ret == <span class="number">-1</span>;) &#123;</span><br><span class="line">            <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">int</span> cur = a[i];</span><br><span class="line">            <span class="keyword">while</span> (i &gt;= <span class="number">0</span> &amp;&amp; a[i] == cur) &#123;</span><br><span class="line">                cnt++; i--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (cnt == <span class="number">1</span>) &#123;</span><br><span class="line">                ret = a[i + <span class="number">1</span>]; </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="1134-Armstrong-Number"><a href="#1134-Armstrong-Number" class="headerlink" title="1134. Armstrong Number"></a>1134. Armstrong Number</h3><p>打卡题*2。</p>
@@ -485,7 +487,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -493,7 +495,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -502,7 +504,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

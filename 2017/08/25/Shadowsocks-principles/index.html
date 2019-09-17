@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Last Whisper">
 <meta property="og:description" content="据说明年3月将大量封禁 VPN ，于是想研究一下 Shadowsocks 的原理，看看是否还能使用。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://pengshiqi.github.io/.io//shadowsocks2.png">
-<meta property="og:image" content="http://pengshiqi.github.io/.io//shadowsocks3.png">
-<meta property="og:image" content="http://pengshiqi.github.io/.io//shadowsocks4.png">
-<meta property="og:image" content="http://pengshiqi.github.io/.io//shadowsocks5.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks2.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks3.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks4.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks5.png">
 <meta property="og:updated_time" content="2019-07-22T06:40:59.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shadowsocks 原理">
 <meta name="twitter:description" content="据说明年3月将大量封禁 VPN ，于是想研究一下 Shadowsocks 的原理，看看是否还能使用。">
-<meta name="twitter:image" content="http://pengshiqi.github.io/.io//shadowsocks2.png">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks2.png">
 
 
 
@@ -272,6 +272,8 @@
         
 
         <div class="post-meta">
+          
+          
           <span class="post-time">
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-o"></i>
@@ -349,21 +351,21 @@
 <li><strong> A fast tunnel proxy that helps you bypass firewalls </strong> </li>
 </ul>
 <h2 id="Long-long-ago…"><a href="#Long-long-ago…" class="headerlink" title="Long long ago…"></a>Long long ago…</h2><p>在很久很久以前，我们访问各种网站都是简单而直接的，用户的请求通过互联网发送到服务提供方，服务提供方直接将信息反馈给用户。</p>
-<p><img src="/.io//shadowsocks2.png" alt="icon"></p>
+<p><img src="//pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks2.png" alt="icon"></p>
 <h2 id="When-evil-comes…"><a href="#When-evil-comes…" class="headerlink" title="When evil comes…"></a>When evil comes…</h2><p>然后有一天，GFW 就出现了，它像一个收过路费的强盗一样夹在用户(client)和服务(server)之间，每当用户需要信息，都需要经过GFW，GFW会将它不喜欢的内容过滤掉。于是当用户触发GFW的过滤规则的时候，就会收到<code>Connection Reset</code>这样的相应内容，而无法接收到正常的请求内容。</p>
-<p><img src="/.io//shadowsocks3.png" alt="icon"></p>
+<p><img src="//pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks3.png" alt="icon"></p>
 <h2 id="SSH-tunnel"><a href="#SSH-tunnel" class="headerlink" title="SSH tunnel"></a>SSH tunnel</h2><p>于是人们想到了利用境外服务器代理的方式来绕过GFW的过滤，其中包含了各种HTTP代理服务、Socks服务、VPN服务…其中<code>SSH Tunnel</code>方式比较有代表性。</p>
 <p>1) 首先用户和境外服务器基于 SSH 建立起一条加密的通道。</p>
 <p>2) 3) 用户通过建立起的隧道进行代理，通过SSH server向真实的服务器发起请求。</p>
 <p>4) 5) 服务器通过SSH server，再通过创建好的隧道返回给用户。</p>
-<p><img src="/.io//shadowsocks4.png" alt="icon"></p>
+<p><img src="//pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks4.png" alt="icon"></p>
 <p>由于SSH本身就是基于RSA加密技术的，所以GFW无法从数据传输的过程中进行关键词分析，避免了被重置链接的问题。但由于创建隧道和数据传输的过程中，SSH本身的特征很明显，所以GFW一度通过分析连接的特征进行干扰，导致SSH存在被定向干扰的问题。</p>
 <h2 id="Shadowsocks"><a href="#Shadowsocks" class="headerlink" title="Shadowsocks"></a>Shadowsocks</h2><p>于是<code>clowwindy</code>同学分享并开源了他的解决方案。</p>
 <p>简单地理解，Shadowsocks就是将原来SSH创建的Socks5协议拆开成Server端和Client端，所以下面这个原理图基本上和利用SSH Tunnel类似。</p>
 <p>1) 6) 客户端发出的请求基于Socks5协议跟SS local端进行通讯，由于这个SS local一般是本机或路由器局域网的其他机器，不经过GFW，所以解决了上面被GFW通过特征分析进行干扰的问题。</p>
 <p>2) 5) SS local 和 SS server两端通过多种可选的加密方法进行通讯，<strong>经过GFW的时候是常规的TCP包，没有明显的特征码而且GFW也无法对通讯数据进行解密！</strong></p>
 <p>3) 4) SS server将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务器，获取响应原路返回。</p>
-<p><img src="/.io//shadowsocks5.png" alt="icon"></p>
+<p><img src="//pengshiqi.github.io/2017/08/25/Shadowsocks-principles/shadowsocks5.png" alt="icon"></p>
 <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>因此，Shadowsocks的优点在于它通过流量混淆隐秘解决了GFW通过分析流量特征从而干扰的问题，这是它优于SSH和VPN翻墙的地方（但VPN更注重加密安全性）。缺点也依然明显，需要一点点技术和资源（墙外VPS服务器）来搭建Shadowsocks服务。</p>
 <h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
 <li><p><a href="https://vc2tea.com/whats-shadowsocks/" target="_blank" rel="noopener">写给非专业人士看的 Shadowsocks 简介</a></p>
@@ -506,7 +508,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">57</span>
               <span class="site-state-item-name">posts</span>
             </a>
           </div>
@@ -514,7 +516,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -523,7 +525,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">31</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
