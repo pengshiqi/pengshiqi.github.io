@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="网页爬虫是一种非常有用的获取数据的方式，之前每次需要爬虫时都上网查一些资料，遂想写点东西，把用过的这些技巧都记录下来，以便日后方便使用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python中的爬虫技巧">
+<meta property="og:url" content="http://pengshiqi.github.io/2017/02/06/Crawl-skills-in-Python/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="网页爬虫是一种非常有用的获取数据的方式，之前每次需要爬虫时都上网查一些资料，遂想写点东西，把用过的这些技巧都记录下来，以便日后方便使用。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2017-02-06T05:57:31.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.021Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Crawl">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2017/02/06/Crawl-skills-in-Python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python中的爬虫技巧 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2017/02/06/Crawl-skills-in-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python中的爬虫技巧
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-02-06 13:57:31" itemprop="dateCreated datePublished" datetime="2017-02-06T13:57:31+08:00">2017-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>网页爬虫是一种非常有用的获取数据的方式，之前每次需要爬虫时都上网查一些资料，遂想写点东西，把用过的这些技巧都记录下来，以便日后方便使用。</p>
+<span id="more"></span>
+<h2 id="普通的html爬虫">普通的HTML爬虫</h2>
+<p>最普通的HTML爬虫分三步，第一步请求网页，得到网页的HTML文件；第二步解析网页；第三步从解析后的网页中提取数据。</p>
+<h4 id="请求网页">请求网页</h4>
+<p>请求网页好用的方式是 Python 中的 <code>Requests</code> 库，通过命令
+<code>pip install requests</code> 来安装。</p>
+<p><code>Requests</code> 库的宣言是：</p>
+<blockquote>
+<p>HTTP for human.</p>
+</blockquote>
+<p>给人类用的HTTP库。</p>
+<p>简单一点的用法就是直接请求URL：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://example.com&#x27;</span></span><br><span class="line">r = requests.get(url)</span><br></pre></td></tr></table></figure>
+<p>这样以GET方式request一个url，得到一个Response类的结果，存储在对象r中。</p>
+<p>但很多时候我们直接请求会失败，需要我们伪装成浏览器的样子，这时就需要加上headers(浏览器头)。并且直接用requests来请求，多次请求后，会出现请求次数太多被拒绝的问题，我们最好通过session来完成请求。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">my_headers = &#123;</span><br><span class="line">    <span class="string">&#x27;User-Agent&#x27;</span> : <span class="string">&#x27;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line">url = <span class="string">&#x27;http://example.com&#x27;</span></span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line">r = s.get(url, headers=my_headers)</span><br></pre></td></tr></table></figure>
+<h4 id="解析网页">解析网页</h4>
+<p>在请求到网页数据后，我们需要将得到的数据进行解析。</p>
+<p>一般用到的解析工具有 <code>BeautifulSoup</code> 和
+<code>xpath(lxml)</code>。</p>
+<p>我一般会用 <code>BeautifulSoup</code>，文档在<a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/">这里</a>，安装方式也是通过pip来安装：<code>pip install bs4</code>。</p>
+<p>使用如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># ... (request a url)</span></span><br><span class="line"></span><br><span class="line">soup = BeautifulSoup(r.text, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"><span class="comment"># or soup = BeautifulSoup(r.text, &#x27;lxml&#x27;)</span></span><br></pre></td></tr></table></figure>
+<p><code>r.text</code> 是需要被解析的网页内容，<code>html.parser</code>
+和 <code>lxml</code>是解析器。</p>
+<h4 id="提取数据">提取数据</h4>
+<p>提取数据的方式有好几种，可以通过 <code>soup.find()</code>
+来寻找指定标签，或者通过CSS选择器 <code>soup.select()</code>
+来提取。我个人倾向于用后者，更加灵活准确。</p>
+<p>具体用法参见<a target="_blank" rel="noopener" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/">官方文档</a>中相应内容。</p>
+<h2 id="ajax网页爬虫">AJAX网页爬虫</h2>
+<p>现在随着前后端分离已经成为趋势，越来越多的网页数据不是写在HTML中，而是通过AJAX请求来得到的，这样我们通过请求HTML已经不能得到我们想要的东西，我们可以通过直接请求AJAX的URL来达到我们的目的。</p>
+<p>这时我们需要花一些时间来观察，看看网页请求的 Resource
+中，哪个是我们需要的。</p>
+<p>使用Chrome浏览器，右键-&gt;检查元素，选到
+<code>Network</code>，并刷新网页，这时左边的 <code>name</code>
+栏中将会出现所有该网页请求的资源，依次查看每个资源的
+<code>preview</code>，看哪个资源是数据，找到后，直接用
+<code>requests</code>
+请求该URL即可，一般这种资源都是JSON格式，在python中就是个字典。</p>
+<h2 id="其他爬虫手段">其他爬虫手段</h2>
+<p>有的网页的数据既不是写在HTML中，也不是通过Ajax请求到的，这时之前的两种方法就不能爬到我们需要的数据，我们需要完全模拟浏览器行为才能爬取。使用的工具为
+<code>Selenium + PhantomJS</code>。</p>
+<p><code>Selenium</code>
+是一个强大的网络数据采集工具，最初是为网站自动化测试而开发的。近几年，他还被广泛用于获取精确的网站快照，因为他们可以直接运行在浏览器上。<code>Selenium</code>
+可以让浏览器自动加载页面，获取需要的数据，甚至页面截屏，或者判断网站上某些动作上是否发生。</p>
+<p><code>PhantomJS</code> 是一个无头的浏览器，<code>PhantomJS</code>
+会把网站加载到内存并执行页面上的
+JavaScript，但是不会向用户展示网页的图形化界面，可以用来处理
+cookie、JavaScript 及 header
+信息，以及任何你需要浏览器协助完成的事情。</p>
+<p><code>Selenium</code> 可以通过pip安装：
+<code>pip install selenium</code>， <code>PhantomJS</code>
+可以去官方网站下载得到。</p>
+<p>具体用法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本地的phantomjs路径</span></span><br><span class="line">PHANTOM_PATH = <span class="string">&#x27;/Users/patrick_psq/Downloads/phantomjs-2.1.1-macosx/bin/phantomjs&#x27;</span></span><br><span class="line"><span class="comment"># 需要爬取的URL</span></span><br><span class="line">url = <span class="string">r&#x27;http://example.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># PhantomJS 浏览器地址</span></span><br><span class="line">driver = webdriver.PhantomJS(executable_path=PHANTOM_PATH)</span><br><span class="line"><span class="comment"># 目标网页地址</span></span><br><span class="line">driver.get(url)</span><br><span class="line"><span class="comment"># 解析html 存入一个bs对象中</span></span><br><span class="line">bs_obj = BeautifulSoup(driver.page_source, <span class="string">&#x27;lxml&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="更多">更多</h2>
+<p>爬虫的技巧还有很多，不同的网页都要用不同的方式去分析，比如还有模拟登陆、切换ip、识别验证码等等，日后遇到这些问题时，再继续学习。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Crawl/" rel="tag"># Crawl</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/" rel="prev" title="如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)">
+      <i class="fa fa-chevron-left"></i> 如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/08/25/Shadowsocks-principles/" rel="next" title="Shadowsocks 原理">
+      Shadowsocks 原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%99%AE%E9%80%9A%E7%9A%84html%E7%88%AC%E8%99%AB"><span class="nav-number">1.</span> <span class="nav-text">普通的HTML爬虫</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E7%BD%91%E9%A1%B5"><span class="nav-number">1.0.1.</span> <span class="nav-text">请求网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E7%BD%91%E9%A1%B5"><span class="nav-number">1.0.2.</span> <span class="nav-text">解析网页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.0.3.</span> <span class="nav-text">提取数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax%E7%BD%91%E9%A1%B5%E7%88%AC%E8%99%AB"><span class="nav-number">2.</span> <span class="nav-text">AJAX网页爬虫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%88%AC%E8%99%AB%E6%89%8B%E6%AE%B5"><span class="nav-number">3.</span> <span class="nav-text">其他爬虫手段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E5%A4%9A"><span class="nav-number">4.</span> <span class="nav-text">更多</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

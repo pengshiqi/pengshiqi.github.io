@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1804.06962，作者的开源代码在 xiaomengyc&#x2F;ACoL 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。 arxiv链接在https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1804.06962，作者的开源代码在 xiaomengyc&#x2F;ACoL 。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image1.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image5.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image2.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image3.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image4.png">
+<meta property="article:published_time" content="2019-01-22T01:54:08.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.080Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Weakly Supervised Object Localization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image1.png">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Adversarial Complementary Learning for Weakly Supervised Object Localization 论文解读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-01-22 09:54:08" itemprop="dateCreated datePublished" datetime="2019-01-22T09:54:08+08:00">2019-01-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是发表在 CVPR 2018 上的一篇关于弱监督目标定位的文章。</p>
+<p>arxiv链接在<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1804.06962">https://arxiv.org/abs/1804.06962</a>，作者的开源代码在
+<a target="_blank" rel="noopener" href="https://github.com/xiaomengyc/ACoL">xiaomengyc/ACoL</a> 。</p>
+<span id="more"></span>
+<hr>
+<h2 id="motivations">Motivations</h2>
+<p>这篇文章提出了 <strong>A</strong>dversarial
+<strong>Co</strong>mplementary <strong>L</strong>earning (ACoL)
+的方法在<strong>仅有图片标签</strong>的情况下完成目标定位的任务。</p>
+<p>在CAM的文章中指出了最后一个卷积层得到的feature
+map可以得到各个类别的位置信息，但同时也存在一些问题：</p>
+<ol type="1">
+<li>CAM过度依赖显著特征来对图片分类；</li>
+<li>不能定位到整个目标物体（比如一只猫只能定位到头部）。</li>
+</ol>
+<p>作者展现了一个新的网络框架，该框架使用了两支并行的分类器，其中一支动态地定位出一些显著的目标区域，然后通过擦除其中的某些区域并反馈给另一支分类器，能够让其发现新的目标区域，以此提升目标定位的效果。</p>
+<p>ACoL有两个优点：</p>
+<ol type="1">
+<li>该模型可以端到端地训练；</li>
+<li>动态擦除可以让第二支分类器更有效地发现新的目标区域。</li>
+</ol>
+<p>在ILSVRC数据集上，该方法可以达到45.14%的Top-1的定位错误率。</p>
+<h2 id="method">Method</h2>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image1.png" style="zoom:60%"></p>
+<p>上图是对ACoL的一个解释。假设我们要定位一匹马，分类器A会发现一些显著区域（马的头和后腿），在分类器B的feature
+map中将这些部分擦除，可以让分类器B发现其他的显著区域（马的前腿），将这两部分融合起来，就能得到完整的目标区域（马）。</p>
+<h3 id="revisiting-cam">Revisiting CAM</h3>
+<p>原本的CAM需要在训练完VGG网络后，将其全连接层替换为GAP层再训练一次，作者提出了一种更方便得到CAM的方法。</p>
+<p>图片通过FCN后得到feature map，在后面接两个3x3
+的conv层和一个C-channel的1x1 conv层，然后通过GAP和softmax做分类。通过1x1
+conv层后的feature map就是localization maps，与原始CAM是等价的。</p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image5.png" style="zoom:100%"></p>
+<p>上图是作者提出的方法与原始CAM的结果对比以及模型对比。</p>
+<h3 id="the-proposed-acol">The proposed ACoL</h3>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image2.png" style="zoom:100%"></p>
+<p>ACoL的整体框架如上图所示，包括三个部分：Backbone、分类器A和分类器B。</p>
+<p>Backbone是一个全卷积网络（Fully Convolutional
+Network），用作特征提取器（feature
+extractor）。分类器A和分类器B都可以按照上述CAM的方式得到object
+localization maps，不过它们的输入不同，分类器B的输入是FCN的feature
+map减去分类器A的object localization
+maps中最显著区域后得到的部分。最终目标物体的localization
+maps由两支的结果融合后得到，融合方式是两支的结果取max。</p>
+<p>算法流程如下所示：</p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image3.png" style="zoom:100%"></p>
+<h2 id="experiments">Experiments</h2>
+<p>作者在ILSVRC、CUB-200-2011和Caltech-256三个数据集上进行了实验，使用VGG和GoogLeNet两种Backbone进行实验，主要与CAM进行对比，都能超越CAM的准确率，具体实验数据参见文章。</p>
+<p>Ablation
+study是尝试不同的threshold对结果的影响，0.6或0.7可以达到最好的效果。</p>
+<p><img src="/2019/01/22/Adversarial-Complementary-Learning-for-Weakly-Supervised-Object-Localization-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/image4.png" style="zoom:100%"></p>
+<p>上图是ACoL与CAM在目标定位的结果对比示例，可以看到，ACoL更能捕捉到整个物体，这就是作者的出发点。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>这篇文章的贡献点主要在两个方面：</p>
+<ol type="1">
+<li>提出了一个更简洁的得到CAM的方法；</li>
+<li>通过擦除feature
+map上最显著的区域，让模型关注到其他区域，以此提高模型目标定位的效果。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Weakly-Supervised-Object-Localization/" rel="tag"># Weakly Supervised Object Localization</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/01/20/CIAN-Cross-Image-Affinity-Net-for-Weakly-Supervised-Semantic-Segmentation-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/" rel="prev" title="CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读">
+      <i class="fa fa-chevron-left"></i> CIAN Cross-Image Affinity Net for Weakly Supervised Semantic Segmentation 论文解读
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/27/LeetCode-Weekly-Contest-121/" rel="next" title="LeetCode Weekly Contest 121">
+      LeetCode Weekly Contest 121 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#motivations"><span class="nav-number">1.</span> <span class="nav-text">Motivations</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#method"><span class="nav-number">2.</span> <span class="nav-text">Method</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#revisiting-cam"><span class="nav-number">2.1.</span> <span class="nav-text">Revisiting CAM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-proposed-acol"><span class="nav-number">2.2.</span> <span class="nav-text">The proposed ACoL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#experiments"><span class="nav-number">3.</span> <span class="nav-text">Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-number">4.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

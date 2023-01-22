@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Introduction LEMP Stack 是一组用来运行动态网站或者服务器的开源软件。它们是 Linux 操作系统，Nginx web服务器，后端数据存储在 MySQL 数据库，动态处理则是由 PHP 来完成。 这篇文章就是来说明如何在 Ubuntu 16.04 的服务器上安装 LEMP Stack。首先你需要有一个Ubuntu操作系统，然后我们来说明后面的部分如何完成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)">
+<meta property="og:url" content="http://pengshiqi.github.io/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="Introduction LEMP Stack 是一组用来运行动态网站或者服务器的开源软件。它们是 Linux 操作系统，Nginx web服务器，后端数据存储在 MySQL 数据库，动态处理则是由 PHP 来完成。 这篇文章就是来说明如何在 Ubuntu 16.04 的服务器上安装 LEMP Stack。首先你需要有一个Ubuntu操作系统，然后我们来说明后面的部分如何完成。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://obw22u9v2.bkt.clouddn.com/nginx.png">
+<meta property="og:image" content="http://obw22u9v2.bkt.clouddn.com/php_info.png">
+<meta property="article:published_time" content="2016-11-08T06:50:43.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.048Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Server">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://obw22u9v2.bkt.clouddn.com/nginx.png">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP) | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2016/11/08/how-to-install-LEMP-stack-in-Ubuntu-16-04/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何在 Ubuntu 16.04 上安装 LEMP Stack(Linux, Nginx, MySQL, PHP)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-11-08 14:50:43" itemprop="dateCreated datePublished" datetime="2016-11-08T14:50:43+08:00">2016-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="introduction">Introduction</h2>
+<p>LEMP Stack 是一组用来运行动态网站或者服务器的开源软件。它们是 Linux
+操作系统，Nginx web服务器，后端数据存储在 MySQL 数据库，动态处理则是由
+PHP 来完成。</p>
+<p>这篇文章就是来说明如何在 Ubuntu 16.04 的服务器上安装 LEMP
+Stack。首先你需要有一个Ubuntu操作系统，然后我们来说明后面的部分如何完成。</p>
+<span id="more"></span>
+<h2 id="prerequisite">Prerequisite</h2>
+<p>在完成这篇教程之前，你需要在你的服务器上有一个普通的、有sodu权限的非root用户账户。如果没有的话，就去看文末参考文献的第一篇教程吧。</p>
+<p>然后，用此账户登陆你的服务器，就可以开始配置啦！</p>
+<h2 id="step-1-install-the-nginx-web-server">Step 1: Install the Nginx
+Web Server</h2>
+<p>首先通过 apt-get 命令安装Nginx：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<p>如果你后台有运行 <em>ufw</em> 防火墙的话，就执行以下命令将 Nginx
+服务加入到防火墙的允许列表中:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow &#x27;Nginx HTTP&#x27;</span><br></pre></td></tr></table></figure>
+<p>通过命令来确认结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw status</span><br></pre></td></tr></table></figure>
+<p>结果应该是:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Status: active</span><br><span class="line"></span><br><span class="line">To                         Action      From</span><br><span class="line">--                         ------      ----</span><br><span class="line">OpenSSH                    ALLOW       Anywhere                  </span><br><span class="line">Nginx HTTP                 ALLOW       Anywhere                  </span><br><span class="line">OpenSSH (v6)               ALLOW       Anywhere (v6)             </span><br><span class="line">Nginx HTTP (v6)            ALLOW       Anywhere (v6)</span><br></pre></td></tr></table></figure>
+<p>然后在你的浏览器中输入你的服务器地址，就可以看到 Nginx
+的初始界面了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://server_domain_or_IP</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="http://obw22u9v2.bkt.clouddn.com/nginx.png" alt="icon">
+<figcaption aria-hidden="true">icon</figcaption>
+</figure>
+<h2 id="step-2-install-mysql-to-manage-site-data">Step 2: Install MySQL
+to Manage Site Data</h2>
+<p>可以简单的通过 apt-get 命令安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure>
+<p>你将会被询问，要求提供一个root账户的密码用来登录MySQL。</p>
+<p>通过以下命令在服务器上进入MySQL服务界面:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<p>输入root账户的密码后，即可进入MySQL交互式界面。</p>
+<p>此外，你还可以安装 <em>VALIDATE PASSWORD PLUGIN</em> 插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql_secure_installation</span><br></pre></td></tr></table></figure>
+<p>在此就不做过多的介绍了。</p>
+<h2 id="step-3-install-php-for-processing">Step 3: Install PHP for
+Processing</h2>
+<p>我们需要PHP的服务来处理动态内容，所以我们需要安装 <em>php-fpm
+(fastCGI process manager)</em> ，还是通过apt-get命令安装:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install php-fpm php-mysql</span><br></pre></td></tr></table></figure>
+<h4 id="configure-the-php-processor">Configure the PHP Processor</h4>
+<p>现在php模块已经安装了，我们需要修改一点点配置来保证php服务的安全。打开配置文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/php/7.0/fpm/php.ini</span><br></pre></td></tr></table></figure>
+<p>我们找到设置 <em>cgi.fix_pathinfo</em>
+参数的那一行，去掉注释的分号，并将它的值设置为0:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cgi.fix_pathinfo=0</span><br></pre></td></tr></table></figure>
+<p>关闭文件并保存。</p>
+<p>现在，我们重启我们的PHP Processor:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart php7.0-fpm</span><br></pre></td></tr></table></figure>
+<p>这样我们的改动就会生效了。</p>
+<h2 id="step-4-configure-nginx-to-use-the-php-processor">Step 4:
+Configure Nginx to Use the PHP Processor</h2>
+<p>现在，我们已经安装了所有必须的模块，最后一项工作就是告诉 Nginx 使用
+PHP processor 来处理动态内容。</p>
+<p>打开默认的Nginx服务器配置文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<p>除去所有的注释，这个文件的内容应是这样：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">    root /var/www/html;</span><br><span class="line">    index index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">    server_name _;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files $uri $uri/ =404;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们需要针对我们的站点将其修改为如下内容：</p>
+<pre>
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index <font color="red">index.php</font> index.html index.htm index.nginx-debian.html;
+
+    server_name <font color="red">server_domain_or_IP</font>;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    <font color="red">
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.0-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+    </font>
+}
+</pre>
+<p>保存并关闭文件。</p>
+<p>可以通过命令来测试你的Nginx是否配置成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -t</span><br></pre></td></tr></table></figure>
+<p>如果没有Error，就说明你配置成功了，否则，就需要检测上一步是否有拼写错误之类的。</p>
+<p>当你准备好了，就可以重新加载Nginx配置文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl reload nginx</span><br></pre></td></tr></table></figure>
+<h2 id="step-5-create-a-php-file-to-test-configuration">Step 5: Create a
+PHP File to Test Configuration</h2>
+<p>你的 <em>LEMP Stack</em>
+现在已经搭建完毕，我们可以做个简单的测试来看Nginx是否可以正确使用PHP
+processor来处理 <em>.php</em> 文件。</p>
+<p>在我们的文件根目录（document
+root）下创建一个测试用的php文件，并命名为 <em>info.php</em> :</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nano /var/www/html/info.php</span><br></pre></td></tr></table></figure>
+<p>它的内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">phpinfo</span>();</span><br></pre></td></tr></table></figure>
+<p>保存并关闭文件，这段代码将会显示我们服务器的信息。</p>
+<p>现在，你可以在浏览器中输入你的服务器IP + <em>/info.php</em>
+来访问这个网页：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://server_domain_or_IP/info.php</span><br></pre></td></tr></table></figure>
+<p>你将会看到如下网页，显示的是你服务器的信息：</p>
+<figure>
+<img src="http://obw22u9v2.bkt.clouddn.com/php_info.png" alt="icon">
+<figcaption aria-hidden="true">icon</figcaption>
+</figure>
+<p>这代表着你的测试成功了。</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>现在，你在你的 Ubuntu 16.04 的服务器上成功配置了 LEMP
+Stack，可以在它上面部署你自己的web应用啦~！</p>
+<p>PS: 本文来自 reference 的第二篇 Digital Ocean
+tutorial，粗略地翻译了一下，感觉好蛋疼。。。这么好的英文教程不应该被翻译成中文的。。。下次争取自己写一些英文的博文...TAT</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04">Initial
+Server Setup with Ubuntu 16.04</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04?utm_source=legacy_reroute">How
+To Install Linux, Nginx, MySQL, PHP (LEMP stack) in Ubuntu
+16.04</a></p></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Server/" rel="tag"># Server</a>
+              <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/10/03/python-virtual-environment/" rel="prev" title="Python中的虚拟环境">
+      <i class="fa fa-chevron-left"></i> Python中的虚拟环境
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/02/06/Crawl-skills-in-Python/" rel="next" title="Python中的爬虫技巧">
+      Python中的爬虫技巧 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prerequisite"><span class="nav-number">2.</span> <span class="nav-text">Prerequisite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-1-install-the-nginx-web-server"><span class="nav-number">3.</span> <span class="nav-text">Step 1: Install the Nginx
+Web Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-2-install-mysql-to-manage-site-data"><span class="nav-number">4.</span> <span class="nav-text">Step 2: Install MySQL
+to Manage Site Data</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-3-install-php-for-processing"><span class="nav-number">5.</span> <span class="nav-text">Step 3: Install PHP for
+Processing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#configure-the-php-processor"><span class="nav-number">5.0.1.</span> <span class="nav-text">Configure the PHP Processor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-4-configure-nginx-to-use-the-php-processor"><span class="nav-number">6.</span> <span class="nav-text">Step 4:
+Configure Nginx to Use the PHP Processor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#step-5-create-a-php-file-to-test-configuration"><span class="nav-number">7.</span> <span class="nav-text">Step 5: Create a
+PHP File to Test Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">9.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Attention-based Deep Multiple Instance Learning 论文解读">
+<meta property="og:url" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="这是发表在 ICML 2018 上的一篇关于 MIL 的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。 文章的开源代码在 AttentionDeepMIL 。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/formula.png">
+<meta property="og:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/img1.png">
+<meta property="article:published_time" content="2018-11-29T02:07:08.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.015Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Multiple Instance Learning">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/formula.png">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Attention-based Deep Multiple Instance Learning 论文解读 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Attention-based Deep Multiple Instance Learning 论文解读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-11-29 10:07:08" itemprop="dateCreated datePublished" datetime="2018-11-29T10:07:08+08:00">2018-11-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这是发表在 ICML 2018 上的一篇关于 MIL
+的文章，文章内容其实挺简单，但是讲的很好，其中MIL的思想可以借鉴。</p>
+<p>文章的开源代码在 <a target="_blank" rel="noopener" href="https://github.com/AMLab-Amsterdam/AttentionDeepMIL">AttentionDeepMIL</a>
+。</p>
+<span id="more"></span>
+<hr>
+<p>MIL将许多instances看作一个bag，然后对这个bag赋予一个label。
+在这篇文章中，作者将MIL问题看作是学习bag标签的Bernoulli分布（二项分布），通过优化对数似然函数来训练模型，提出了一个
+<code>neural network-based permutation-invariant aggregation operator that corresponds to the attention mechanism</code>
+。</p>
+<p>MIL处理的问题是：现在有许多instances，把它们看作一个bag，但是只给了一个bag的标签。MIL的主要目标就是学习一个模型来预测bag的标签，另外，还希望能够发现<code>key instances (the instances that trigger the bag label)</code>，这样能提高模型的可解释性。</p>
+<p>对bag probability的建模分为3步：</p>
+<ol type="1">
+<li>a transformation of instances to a low-dimensional embedding;</li>
+<li>a permutation-invariant(symmetric) aggregation function;</li>
+<li>a transformation to the bag probability.</li>
+</ol>
+<p>其中所有的参数都是由神经网络训练得到的（只有卷积层和全连接层）。</p>
+<h4 id="multiple-instance-learning">Multiple Instance Learning</h4>
+<p>对于a bag of instances: <span class="math inline">\(X = \{ x_1,
+\dots, x_K
+\}\)</span>，其中的instances既没有依赖关系，也没有顺序，对于不同的bag可以有不同的K值（数量）。其中每个instance都有未知标签<span class="math inline">\(y_k \in \{ 0, 1\}, k=1,\dots,
+K\)</span>，假设bag的标签这么定义：（这个公式的排版有点捉急了...）</p>
+<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/formula.png" style="zoom:45%"></p>
+<p>其实这就说明了MIL模型是<code>permutation-invariant</code>（排列无关/与顺序无关）的了，公式（1）也等价于
+<span class="math display">\[
+Y = \mathop{\max}\limits_{k} \{y_k\} \tag{2}
+\]</span> 通过优化log-likelihood
+function来训练MIL模型，bag标签的分布服从Bernoulli分布，参数<span class="math inline">\(\theta(X) \in [0, 1]\)</span>，即给定bag <span class="math inline">\(X\)</span>时<span class="math inline">\(Y=1\)</span>的概率。</p>
+<p>MIL问题可以看做<code>Fundamental Theorem of Symmetric Functions</code>的一个特例。</p>
+<blockquote>
+<p><strong>Theorem 1.</strong></p>
+<p>A scoring function for a set of instances <span class="math inline">\(X\)</span>, <span class="math inline">\(S(X) \in
+R\)</span>, is a symmetric function (i.e., permutation- invariant to the
+elements in <span class="math inline">\(X\)</span>), if and only if it
+can be decomposed in the following form: <span class="math display">\[
+S(X) = g(\sum_{x \in X}f(x))  \tag{3}，
+\]</span> where <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are suitable transformations.</p>
+</blockquote>
+<blockquote>
+<p><strong>Theorem 2.</strong></p>
+<p>For any <span class="math inline">\(\epsilon &gt; 0\)</span>, a
+Hausdorff continuous symmetric function <span class="math inline">\(S(X)
+\in R\)</span> can be arbitrarily approximated by a function in the form
+<span class="math inline">\(g(\max_{x \in X}f(x))\)</span>, where max is
+the element-wise vector maximum operator and <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> are continuous functions, that is:
+<span class="math display">\[
+| S(X) - g(\max_{x \in X}f(x)) | &lt; \epsilon ，\tag{4}
+\]</span></p>
+</blockquote>
+<p>这两个定理对于bag的分类任务给出了一般的求解步骤：</p>
+<ol type="1">
+<li>a transformation of instances using the function <span class="math inline">\(f\)</span></li>
+<li>a conbination of transformed instances using a symmetric function
+<span class="math inline">\(\sigma\)</span></li>
+<li>a transformation of combined instances transformed by <span class="math inline">\(f\)</span> using a function <span class="math inline">\(g\)</span></li>
+</ol>
+<p>应用起来就是: (1) CNN 提取特征; (2) pooling (max pooling | avg
+pooling | MIL pooling); (3) FC层。</p>
+<blockquote>
+<p><em>The embedding-level approach:</em> The function <span class="math inline">\(f\)</span> maps instances to a low-dimensional
+embedding. MIL pooling is used to obtain a bag representation that is
+independent of the number of instances in the bag. The bag
+representation is further processed by a bag-level classifier to provide
+<span class="math inline">\(\theta(X)\)</span>.</p>
+</blockquote>
+<h4 id="attention-based-mil-pooling">Attention-based MIL pooling</h4>
+<p>使用max-operator有两点不足：pre-defined and
+non-trainable。希望使用attention
+mechanism来增加模型的灵活性和可解释性。</p>
+<p>公式也不复杂，就是各个instances在low-embedding后的softmax加权平均，和之前的MIL
+pooling的对比如下图所示:</p>
+<p><img src="/2018/11/29/Attention-based-Deep-Multiple-Instance-Learning-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/img1.png" style="zoom:100%"></p>
+<p>最后实验部分，作者给出了这个方法在MNIST数据集和一个组织病理学数据集上的实验，证明其有效性。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Multiple-Instance-Learning/" rel="tag"># Multiple Instance Learning</a>
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/" rel="prev" title="Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读">
+      <i class="fa fa-chevron-left"></i> Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/09/LeetCode-Weekly-Contest-114/" rel="next" title="LeetCode Weekly Contest 114">
+      LeetCode Weekly Contest 114 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#multiple-instance-learning"><span class="nav-number">1.</span> <span class="nav-text">Multiple Instance Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#attention-based-mil-pooling"><span class="nav-number">2.</span> <span class="nav-text">Attention-based MIL pooling</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

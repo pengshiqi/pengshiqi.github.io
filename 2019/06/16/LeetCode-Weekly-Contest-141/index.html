@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Time: Jun 16th, 2019 @ 10:30 AM - 12:00 AM (GMT+8)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Weekly Contest 141">
+<meta property="og:url" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="Time: Jun 16th, 2019 @ 10:30 AM - 12:00 AM (GMT+8)">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/141.png">
+<meta property="article:published_time" content="2019-06-16T04:04:21.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.038Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="LeetCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/141.png">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>LeetCode Weekly Contest 141 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2019/06/16/LeetCode-Weekly-Contest-141/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode Weekly Contest 141
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-06-16 12:04:21" itemprop="dateCreated datePublished" datetime="2019-06-16T12:04:21+08:00">2019-06-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Time: Jun 16th, 2019 @ 10:30 AM - 12:00 AM (GMT+8)</p>
+<span id="more"></span>
+<p>上周重新评测了…本来75名的，后来掉到了160多…果然还是菜...</p>
+<p>这周罚时了20min…因为罚时掉了100多名...</p>
+<p><img src="/2019/06/16/LeetCode-Weekly-Contest-141/141.png" style="zoom:100%"></p>
+<h3 id="duplicate-zeros">1089. Duplicate Zeros</h3>
+<p>打卡题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">duplicateZeros</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        Do not return anything, modify arr in-place instead.</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        t = [x <span class="keyword">for</span> x <span class="keyword">in</span> arr]</span><br><span class="line">        index1 = <span class="number">0</span></span><br><span class="line">        index2 = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> index2 &lt; <span class="built_in">len</span>(arr):</span><br><span class="line">            <span class="keyword">if</span> t[index1] == <span class="number">0</span>:</span><br><span class="line">                arr[index2] = <span class="number">0</span></span><br><span class="line">                <span class="keyword">if</span> index2 + <span class="number">1</span> &gt;= <span class="built_in">len</span>(arr):</span><br><span class="line">                    <span class="keyword">return</span></span><br><span class="line">                arr[index2 + <span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">                index2 += <span class="number">2</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                arr[index2] = t[index1]</span><br><span class="line">                index2 += <span class="number">1</span></span><br><span class="line">            index1 += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="largest-values-from-labels">1090. Largest Values From
+Labels</h3>
+<p>排序题。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestValsFromLabels</span>(<span class="params">self, values: <span class="type">List</span>[<span class="built_in">int</span>], labels: <span class="type">List</span>[<span class="built_in">int</span>], num_wanted: <span class="built_in">int</span>, use_limit: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        bundle = <span class="built_in">zip</span>(values, labels)</span><br><span class="line">        bundle = <span class="built_in">sorted</span>(bundle, key=<span class="keyword">lambda</span> x: x[<span class="number">0</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">        </span><br><span class="line">        d = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        ret = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> bundle:</span><br><span class="line">            <span class="keyword">if</span> num_wanted == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> d[x[<span class="number">1</span>]] == use_limit:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            ret += x[<span class="number">0</span>]</span><br><span class="line">            d[x[<span class="number">1</span>]] += <span class="number">1</span></span><br><span class="line">            num_wanted -= <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> ret        </span><br></pre></td></tr></table></figure>
+<h3 id="shortest-path-in-binary-matrix">1091. Shortest Path in Binary
+Matrix</h3>
+<p>有障碍物的最短路径。</p>
+<p>这是个BFS题，我居然WA了三次。。。</p>
+<p>只能说，太久不写BFS，生疏了。</p>
+<p>而且，偷懒用了很多python的特性来实现queue…这样并不好...</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shortestPathBinaryMatrix</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># BFS</span></span><br><span class="line">        n = <span class="built_in">len</span>(grid)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> grid[<span class="number">0</span>][<span class="number">0</span>] == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        q = [(<span class="number">0</span>, <span class="number">0</span>)]</span><br><span class="line">        step = [<span class="number">1</span>]</span><br><span class="line">        </span><br><span class="line">        f = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                f[(i, j)] = <span class="literal">False</span></span><br><span class="line">        f[(<span class="number">0</span>, <span class="number">0</span>)] = <span class="literal">True</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (n - <span class="number">1</span>, n - <span class="number">1</span>) <span class="keyword">not</span> <span class="keyword">in</span> q:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(q) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> -<span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            x, y = q[<span class="number">0</span>]</span><br><span class="line">            cur_step = step[<span class="number">0</span>]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> x + <span class="number">1</span> &lt; n:</span><br><span class="line">                <span class="keyword">if</span> y + <span class="number">1</span> &lt; n <span class="keyword">and</span> grid[x + <span class="number">1</span>][y + <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x + <span class="number">1</span>, y + <span class="number">1</span>)]:</span><br><span class="line">                    q.append((x + <span class="number">1</span>, y + <span class="number">1</span>))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x + <span class="number">1</span>, y + <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> grid[x + <span class="number">1</span>][y] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x + <span class="number">1</span>, y)]:</span><br><span class="line">                    q.append((x + <span class="number">1</span>, y))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x + <span class="number">1</span>, y)] = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> grid[x + <span class="number">1</span>][y - <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x + <span class="number">1</span>, y - <span class="number">1</span>)]:</span><br><span class="line">                    q.append((x + <span class="number">1</span>, y - <span class="number">1</span>))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x + <span class="number">1</span>, y - <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> x - <span class="number">1</span> &gt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">if</span> y + <span class="number">1</span> &lt; n <span class="keyword">and</span> grid[x - <span class="number">1</span>][y + <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x - <span class="number">1</span>, y + <span class="number">1</span>)]:</span><br><span class="line">                    q.append((x - <span class="number">1</span>, y + <span class="number">1</span>))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x - <span class="number">1</span>, y + <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> grid[x - <span class="number">1</span>][y] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x - <span class="number">1</span>, y)]:</span><br><span class="line">                    q.append((x - <span class="number">1</span>, y))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x - <span class="number">1</span>, y)] = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> grid[x - <span class="number">1</span>][y - <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x - <span class="number">1</span>, y - <span class="number">1</span>)]:</span><br><span class="line">                    q.append((x - <span class="number">1</span>, y - <span class="number">1</span>))</span><br><span class="line">                    step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                    f[(x - <span class="number">1</span>, y - <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> y + <span class="number">1</span> &lt; n <span class="keyword">and</span> grid[x][y + <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x, y + <span class="number">1</span>)]:</span><br><span class="line">                q.append((x, y + <span class="number">1</span>))</span><br><span class="line">                step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                f[(x, y + <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">            <span class="keyword">if</span> y - <span class="number">1</span> &gt;= <span class="number">0</span> <span class="keyword">and</span> grid[x][y - <span class="number">1</span>] == <span class="number">0</span> <span class="keyword">and</span> <span class="keyword">not</span> f[(x, y - <span class="number">1</span>)]:</span><br><span class="line">                q.append((x, y - <span class="number">1</span>))</span><br><span class="line">                step.append(cur_step + <span class="number">1</span>)</span><br><span class="line">                f[(x, y - <span class="number">1</span>)] = <span class="literal">True</span></span><br><span class="line">            </span><br><span class="line">            q = q[<span class="number">1</span>:]</span><br><span class="line">            step = step[<span class="number">1</span>:]</span><br><span class="line">                    </span><br><span class="line">        <span class="keyword">return</span> step[q.index((n - <span class="number">1</span>, n - <span class="number">1</span>))]</span><br></pre></td></tr></table></figure>
+<h3 id="shortest-common-supersequence">1092. Shortest Common
+Supersequence</h3>
+<p>最短公共超序列，其实等价于求最长公共子序列。</p>
+<p>不仅要求长度，而且要把序列记录下来，hard中的简单题了。。。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shortestCommonSupersequence</span>(<span class="params">self, str1: <span class="built_in">str</span>, str2: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="comment"># 等价于最长公共子序列</span></span><br><span class="line">        l1 = <span class="built_in">len</span>(str1)</span><br><span class="line">        l2 = <span class="built_in">len</span>(str2)</span><br><span class="line">        f = [[<span class="number">0</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l2 + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l1 + <span class="number">1</span>)]</span><br><span class="line">        d = [[<span class="literal">None</span> <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l2 + <span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(l1 + <span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(l1):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(l2):</span><br><span class="line">                <span class="keyword">if</span> str1[i] == str2[j]:</span><br><span class="line">                    f[i + <span class="number">1</span>][j + <span class="number">1</span>] = f[i][j] + <span class="number">1</span></span><br><span class="line">                    d[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="string">&quot;ok&quot;</span></span><br><span class="line">                <span class="keyword">elif</span> f[i][j + <span class="number">1</span>] &gt; f[i + <span class="number">1</span>][j]:</span><br><span class="line">                    f[i + <span class="number">1</span>][j + <span class="number">1</span>] = f[i][j + <span class="number">1</span>]</span><br><span class="line">                    d[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="string">&quot;up&quot;</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    f[i + <span class="number">1</span>][j + <span class="number">1</span>] = f[i + <span class="number">1</span>][j]</span><br><span class="line">                    d[i + <span class="number">1</span>][j + <span class="number">1</span>] = <span class="string">&quot;left&quot;</span></span><br><span class="line">                </span><br><span class="line">        s = []</span><br><span class="line">        <span class="keyword">while</span> f[l1][l2]:</span><br><span class="line">            c = d[l1][l2]</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;ok&#x27;</span>:   <span class="comment">#匹配成功，插入该字符，并向左上角找下一个</span></span><br><span class="line">                s.append(str1[l1 - <span class="number">1</span>])</span><br><span class="line">                l1 -= <span class="number">1</span></span><br><span class="line">                l2 -= <span class="number">1</span> </span><br><span class="line">            <span class="keyword">if</span> c ==<span class="string">&#x27;left&#x27;</span>:  <span class="comment">#根据标记，向左找下一个</span></span><br><span class="line">                l2 -= <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;up&#x27;</span>:   <span class="comment">#根据标记，向上找下一个</span></span><br><span class="line">                l1 -= <span class="number">1</span></span><br><span class="line">        s.reverse()</span><br><span class="line">        s = <span class="string">&quot;&quot;</span>.join(s)</span><br><span class="line">                </span><br><span class="line">        ret = <span class="string">&quot;&quot;</span></span><br><span class="line">        idx1 = <span class="number">0</span></span><br><span class="line">        idx2 = <span class="number">0</span></span><br><span class="line">        p = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> p &lt; <span class="built_in">len</span>(s):</span><br><span class="line">            <span class="keyword">while</span> str1[idx1] != s[p]:</span><br><span class="line">                ret += str1[idx1]</span><br><span class="line">                idx1 += <span class="number">1</span></span><br><span class="line">            <span class="keyword">while</span> str2[idx2] != s[p]:</span><br><span class="line">                ret += str2[idx2]</span><br><span class="line">                idx2 += <span class="number">1</span></span><br><span class="line">            ret += s[p]</span><br><span class="line">            p += <span class="number">1</span></span><br><span class="line">            idx1 += <span class="number">1</span></span><br><span class="line">            idx2 += <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        ret += str1[idx1:]</span><br><span class="line">        ret += str2[idx2:]</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> ret</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/12/build-shadowsocksR-VPN/" rel="prev" title="翻墙教程[2]：用国外VPS搭建自己的ShadowsocksR服务">
+      <i class="fa fa-chevron-left"></i> 翻墙教程[2]：用国外VPS搭建自己的ShadowsocksR服务
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/25/LeetCode-72-Edit-Distance/" rel="next" title="LeetCode 72: Edit Distance">
+      LeetCode 72: Edit Distance <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#duplicate-zeros"><span class="nav-number">1.</span> <span class="nav-text">1089. Duplicate Zeros</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#largest-values-from-labels"><span class="nav-number">2.</span> <span class="nav-text">1090. Largest Values From
+Labels</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shortest-path-in-binary-matrix"><span class="nav-number">3.</span> <span class="nav-text">1091. Shortest Path in Binary
+Matrix</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shortest-common-supersequence"><span class="nav-number">4.</span> <span class="nav-text">1092. Shortest Common
+Supersequence</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

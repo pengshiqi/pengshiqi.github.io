@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="What is MURA?  MURA (musculoskeletal radiographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.  这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在CodaLab上提交MURA竞赛的结果">
+<meta property="og:url" content="http://pengshiqi.github.io/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="What is MURA?  MURA (musculoskeletal radiographs) is a large dataset of bone X-rays. Algorithms are tasked with determining whether an X-ray study is normal or abnormal.  这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-06-25T12:15:42.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.085Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Machine Learning">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>在CodaLab上提交MURA竞赛的结果 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2018/06/25/%E5%9C%A8CodaLab%E4%B8%8A%E6%8F%90%E4%BA%A4MURA%E7%AB%9E%E8%B5%9B%E7%9A%84%E7%BB%93%E6%9E%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在CodaLab上提交MURA竞赛的结果
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-25 20:15:42" itemprop="dateCreated datePublished" datetime="2018-06-25T20:15:42+08:00">2018-06-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>What is MURA?</p>
+<blockquote>
+<p>MURA (<strong>mu</strong>sculoskeletal <strong>ra</strong>diographs)
+is a large dataset of bone X-rays. Algorithms are tasked with
+determining whether an X-ray study is normal or abnormal.</p>
+</blockquote>
+<p>这是斯坦福大学机器学习组的骨骼X光深度学习比赛(Bone X-Ray Deep
+Learning Competition)，这是它的<a target="_blank" rel="noopener" href="https://stanfordmlgroup.github.io/competitions/mura/">官网</a>。</p>
+<p>数据集是七类人体部位的X光，分为normal和abnormal两种，需要训练一个模型，能够完成这样一个二分类的诊断任务。</p>
+<p>Baseline是一个169层的DenseNet，我们用PyTorch实现了它。</p>
+<p>答案的提交是通过CodaLab这个网站，官方给出了这样一个<a target="_blank" rel="noopener" href="https://worksheets.codalab.org/worksheets/0x42dda565716a4ee08d61f0a23656d8c0/">提交教程</a>：</p>
+<span id="more"></span>
+<p><strong>Step 1:</strong></p>
+<p>创建一个新的WorkSheet。</p>
+<p><strong>Step 2:</strong></p>
+<p>复制一份虚拟的数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cl add bundle mura-utils//valid .</span><br><span class="line">cl add bundle mura-utils//valid_image_paths.csv .</span><br></pre></td></tr></table></figure>
+<p><strong>Step 3:</strong></p>
+<p>将你的代码和模型打包后上传，压缩成zip后上传，系统会自动解压。</p>
+<p>这份伪造数据的路径保存在<code>valid_image_paths.csv</code>中，格式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/&lt;IMAGE&gt;</span><br></pre></td></tr></table></figure>
+<p>你的程序需要能够输出一份对于每一个study的预测结果，形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MURA-v1.1/&#123;valid,test&#125;/&lt;STUDYTYPE&gt;/&lt;PATIENT&gt;/&lt;STUDY&gt;/,&#123;0,1&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Step 4:</strong></p>
+<p>在伪造数据集上运行你预训练好的模型。这是他们给出的运行命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid src:src &quot;python src/&lt;path-to-prediction-program&gt; valid_image_paths.csv predictions.csv&quot; -n run-predictions</span><br></pre></td></tr></table></figure>
+<p>这里需要用到docker，我在docker
+hub准备了一个docker镜像，sqpeng1996/mura2:v5，里面有python 3.6，pytorch,
+torchnet, sklearn等代码需要的库。</p>
+<p>使用命令为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl run valid_image_paths.csv:valid_image_paths.csv MURA-v1.1:valid MURA:MURA &quot;python3 MURA/main.py valid_images_paths.csv predictions.csv&quot; -n run-predictions --request-docker-image sqpeng1996/mura2:v5 --request-cpus 4 --request-memory 32g</span><br></pre></td></tr></table></figure>
+<p>这里特别要注意的是需要多请求一些memory，（或者把batch
+size改为1）,不然无法跑通。</p>
+<p>如果这一步的state变成了ready，那就说明没问题了。然后执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl make run-predictions/predictions.csv -n predictions-&#123;MODELNAME&#125;</span><br></pre></td></tr></table></figure>
+<p>MODELNAME不能包含空格，最好也避免特殊字符。</p>
+<p>最后执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl macro mura-utils/valid-eval-v1.1 predictions-&#123;MODELNAME&#125;</span><br></pre></td></tr></table></figure>
+<p>就能看到结果了（因为这里是伪造的数据，所以结果不重要）。</p>
+<p><strong>Step 5：</strong></p>
+<p>提交：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cl edit predictions-&#123;MODELNAME&#125; --tags mura-submit</span><br></pre></td></tr></table></figure>
+<p>把 <strong>predictions-{MODELNAME} </strong> bundle的 URL发邮件给
+jirvin16@stanford.edu 就可以了。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/05/Dimension-Reduction-using-PCA-and-t-SNE/" rel="prev" title="Dimension Reduction using PCA and t-SNE">
+      <i class="fa fa-chevron-left"></i> Dimension Reduction using PCA and t-SNE
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/11/26/Learning-a-Discriminative-Filter-Bank-within-a-CNN-for-Fine-grained-Recognition-%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/" rel="next" title="Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读">
+      Learning a Discriminative Filter Bank within a CNN for Fine-grained Recognition 论文解读 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

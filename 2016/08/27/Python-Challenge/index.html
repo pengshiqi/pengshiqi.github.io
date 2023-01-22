@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="最近发现了一个有趣的闯关游戏，叫Python Challenge。在做题的同时，也能学习到一些新的python模块。 我的解题代码放在我的github上.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python Challenge">
+<meta property="og:url" content="http://pengshiqi.github.io/2016/08/27/Python-Challenge/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="最近发现了一个有趣的闯关游戏，叫Python Challenge。在做题的同时，也能学习到一些新的python模块。 我的解题代码放在我的github上.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2016-08-27T05:57:44.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:25.051Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2016/08/27/Python-Challenge/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Python Challenge | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2016/08/27/Python-Challenge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python Challenge
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-27 13:57:44" itemprop="dateCreated datePublished" datetime="2016-08-27T13:57:44+08:00">2016-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:25" itemprop="dateModified" datetime="2023-01-22T20:21:25+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">学习</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>最近发现了一个有趣的闯关游戏，叫<a target="_blank" rel="noopener" href="http://www.pythonchallenge.com/">Python
+Challenge</a>。在做题的同时，也能学习到一些新的python模块。</p>
+<p>我的解题代码放在<a target="_blank" rel="noopener" href="https://github.com/pengshiqi/PythonChallenge">我的github上</a>.
+<span id="more"></span></p>
+<h3 id="level-0">Level 0</h3>
+<p>将2的38次方替换掉URL中的0.</p>
+<h3 id="level-1">Level 1</h3>
+<p>字符整体后移两位，原本URL中的map后移两位便是 <em>OCR</em>。</p>
+<h3 id="level-2">Level 2</h3>
+<p>查看网页源代码，一串乱序的字符串中，夹杂着有用的信息，提取出其中的字母，得到
+<em>equality</em>.</p>
+<h3 id="level-3">Level 3</h3>
+<p>还是在网页源代码的注释中，找到 <em>恰好</em>
+三个大写字母从两侧包围一个小写字母的情况，找到单词
+<em>linkedlist</em>。</p>
+<h3 id="level-4">Level 4</h3>
+<p>点击图片看到 <em>and the next nothing is
+44827</em>，将URL的12345替换为44827后，得到45439，以此类推，很多次之后得到单词
+<em>peak</em>.</p>
+<h3 id="level-5">Level 5</h3>
+<p>和 peak hell 发音很像的是
+pickle,说明这题要用到python的pickle库。从banner.p处拿到文件，用pickle处理得到单词
+<em>channel</em>。</p>
+<h3 id="level-6">Level 6</h3>
+<p>图片是拉链 zip，而 zip 又有压缩文件的意思，所以讲URL的后缀改为zip得到
+channel.zip 的压缩文件。</p>
+<p>解压压缩文件后，从 readme 可知，又要不停地寻找 the next
+nothing，最后得到：collect the comments.</p>
+<p>原来，zip文件有comments属性，python 有 zipfile 库来处理。</p>
+<p>获得每个中间文件的comments，得到最后的单词 <em>oxygen</em>。</p>
+<h3 id="level-7">Level 7</h3>
+<p>图片中央有一条线，通过python的Image库来分析这条线，取这条线上的点的像素，并将其转换成ascii码，得到单词
+<em>integrity</em>。</p>
+<h3 id="level-8">Level 8</h3>
+<p>python的bz2模块。</p>
+<p>在网页源代码中有加密后的username和password，通过bz2.decompress()函数能解密之。输入
+huge 和 file 即可跳转到 good.html。</p>
+<h3 id="level-9">Level 9</h3>
+<p>first 和 second
+连接起来，相邻的两个数字作为一个点的坐标，画出图形，是一头牛，于是答案便是
+<em>bull</em>。</p>
+<h3 id="level-10">Level 10</h3>
+<p>找规律，第零个数是1，第一个数是11，表示1个1，第二个数是21，表示2个1，第三个数是1211，表示1个2、1个1，一次类推到第30个数，第三十个数的长度为
+<em>5808</em>，即为答案。</p>
+<h3 id="level-11">Level 11</h3>
+<p>图像的名字叫even
+odd，暗示我们要把这张图的像素点分奇偶提取出来，分别提取出坐标为奇数和偶数的像素，作图可得单词
+<em>evil</em>。</p>
+<h3 id="level-12">Level 12</h3>
+<p>先找到 evil2.gfx
+文件，原图里那个人把扑克牌分成五堆，所以这里把这个gfx分成五个文件，得到单词
+<em>disproportional</em>。</p>
+<h3 id="level-13">Level 13</h3>
+<p>按下数字键5，会进入一个xml界面，这个界面用了RPC(Remote Procedure
+Call)协议，通过python的xmlrpclib库可以处理它，向 Bert 打电话，可得单词
+<em>ITALY</em>。</p>
+<h3 id="level-14">Level 14</h3>
+<p>下方那张图片实际上是 10000<em>1 的，标题叫walk
+around，而且上方的图片是螺旋状的面包，暗示着我们要把下面的图片按照螺旋状排开，得到了一只猫的图片，所以答案是
+</em>cat*。</p>
+<h3 id="level-15">Level 15</h3>
+<p>从右下角可以看出这年是闰年，而且是1**6年，通过datetime模块来判断符合要求的年份，得到如下几个：</p>
+<ul>
+<li>1176-01-26</li>
+<li>1356-01-26</li>
+<li>1576-01-26</li>
+<li>1756-01-26</li>
+<li>1976-01-26</li>
+</ul>
+<p>而又说到是第二年轻的，所以是1756年。第二天要买花，查一查1756-01-27，发现是莫扎特的诞辰，所以答案是
+<em>Mozart</em>。</p>
+<h3 id="level-16">Level 16</h3>
+<p>标题说 let me get this
+staight，于是我们就按照每行第一个粉红色的点来对齐，得到单词
+<em>romance</em>。</p>
+<h3 id="level-17">Level 17</h3>
+<p>这一关有点麻烦，首先获取网页的cookie提示，知道要回到第四关linkedlist，用busynothing替换掉之前的nothing，而且这次要收集每次的cookie信息。然后利用之前的bz2解码方式对这些信息解码，得到
+<em>‘is it the 26th already? call his father and inform him that "the
+flowers are on their way". he'll
+understand.’</em>。然后像13题一样，给Mozart的父亲打电话，得到
+<em>555-VIOLIN</em>。将 ‘the flowers are on their way’
+作为cookie传入这个页面，得到最终的提示 <em>‘oh well, don't you dare to
+forget the balloons.’</em>。所以答案就是 <em>balloons</em>。</p>
+<h3 id="level-18">Level 18</h3>
+<p>提示说两幅图的区别，显然就是brightness。然后下载deltas.gz的文件。这个压缩文件里是两片16进制的数据，利用difflib库的ndiff函数来找出它们的不同(缺点就是计算的好慢啊。。)，结果是三幅图片，分别是
+'/hex/bin.html', 'butter',
+'fly'，所以在bin.html中输入username和password即可过关。</p>
+<h3 id="level-19">Level 19</h3>
+<p>将网页源代码中的文本信息转换成音频wav文件，encoding方式为base64，然后发现只有一个单词
+sorry，看提示图片可知，需要把每一帧音频反转，得到的音频文件内容为 ‘You
+are an idiot'，于是，答案便为 <em>idiot</em>。</p>
+<h3 id="to-be-continued...">To be continued...</h3>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/08/17/mac-tree/" rel="prev" title="Unix系统下的tree命令——展示目录树结构">
+      <i class="fa fa-chevron-left"></i> Unix系统下的tree命令——展示目录树结构
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/09/21/build-shadowsocks-VPN/" rel="next" title="翻墙教程：用国外VPS搭建自己的Shadowsocks服务器">
+      翻墙教程：用国外VPS搭建自己的Shadowsocks服务器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#level-0"><span class="nav-number">1.</span> <span class="nav-text">Level 0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-1"><span class="nav-number">2.</span> <span class="nav-text">Level 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-2"><span class="nav-number">3.</span> <span class="nav-text">Level 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-3"><span class="nav-number">4.</span> <span class="nav-text">Level 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-4"><span class="nav-number">5.</span> <span class="nav-text">Level 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-5"><span class="nav-number">6.</span> <span class="nav-text">Level 5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-6"><span class="nav-number">7.</span> <span class="nav-text">Level 6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-7"><span class="nav-number">8.</span> <span class="nav-text">Level 7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-8"><span class="nav-number">9.</span> <span class="nav-text">Level 8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-9"><span class="nav-number">10.</span> <span class="nav-text">Level 9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-10"><span class="nav-number">11.</span> <span class="nav-text">Level 10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-11"><span class="nav-number">12.</span> <span class="nav-text">Level 11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-12"><span class="nav-number">13.</span> <span class="nav-text">Level 12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-13"><span class="nav-number">14.</span> <span class="nav-text">Level 13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-14"><span class="nav-number">15.</span> <span class="nav-text">Level 14</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-15"><span class="nav-number">16.</span> <span class="nav-text">Level 15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-16"><span class="nav-number">17.</span> <span class="nav-text">Level 16</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-17"><span class="nav-number">18.</span> <span class="nav-text">Level 17</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-18"><span class="nav-number">19.</span> <span class="nav-text">Level 18</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level-19"><span class="nav-number">20.</span> <span class="nav-text">Level 19</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#to-be-continued..."><span class="nav-number">21.</span> <span class="nav-text">To be continued...</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

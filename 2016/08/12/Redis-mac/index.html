@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif Simplified Chinese:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"pengshiqi.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Redis Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。 Redis是一个速度非常快的非关系数据库（non-relational database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 在 Mac 上的安装与使用">
+<meta property="og:url" content="http://pengshiqi.github.io/2016/08/12/Redis-mac/index.html">
+<meta property="og:site_name" content="Last Whisper">
+<meta property="og:description" content="Redis Redis是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。 Redis是一个速度非常快的非关系数据库（non-relational database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://i2.piimg.com/4851/36f197a62e06769e.png">
+<meta property="og:image" content="http://i1.piimg.com/4851/07e331b5fe00d188.png">
+<meta property="article:published_time" content="2016-08-12T08:34:08.000Z">
+<meta property="article:modified_time" content="2023-01-22T12:21:24.727Z">
+<meta property="article:author" content="Patrick Peng">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://i2.piimg.com/4851/36f197a62e06769e.png">
+
+<link rel="canonical" href="http://pengshiqi.github.io/2016/08/12/Redis-mac/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Redis 在 Mac 上的安装与使用 | Last Whisper</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Last Whisper</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://pengshiqi.github.io/2016/08/12/Redis-mac/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Patrick Peng">
+      <meta itemprop="description" content="Where there is a will, there is a way.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Last Whisper">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Redis 在 Mac 上的安装与使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-08-12 16:34:08" itemprop="dateCreated datePublished" datetime="2016-08-12T16:34:08+08:00">2016-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-01-22 20:21:24" itemprop="dateModified" datetime="2023-01-22T20:21:24+08:00">2023-01-22</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%99%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">教程</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="redis">Redis</h3>
+<p>Redis是一个开源的使用ANSI
+C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。</p>
+<p>Redis是一个速度非常快的非关系数据库（non-relational
+database），它可以存储键（key）与5种不同类型的值（value）之间的映射（mapping），可以将存储在内存的键值对数据持久化到硬盘，可以使用复制特性来扩展读性能，还可以使用客户端分片来扩展写性能。
+<span id="more"></span></p>
+<p>一些数据库和缓存服务器的特性与功能对比：</p>
+<table>
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>类型</th>
+<th>数据存储选项</th>
+<th>查询类型</th>
+<th>附加功能</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Redis</td>
+<td>使用内存存储（in-memory） 的非关系数据库</td>
+<td>字符串、列表、集合、散列表、有序集合</td>
+<td>每种数据类型都有自己的专属命令， 另外还有批量操作（bulk
+operation）和不完全（partial）的事务支持</td>
+<td>发布与订阅， 主从复制（master/slave replication）， 持久化，
+脚本（存储过程，stored procedure）</td>
+</tr>
+<tr class="even">
+<td>memcached</td>
+<td>使用内存存储的键值缓存</td>
+<td>键值之间的映射</td>
+<td>创建命令、读取命令、更新命令、删除命令以及其他几个命令</td>
+<td>为提升性能而设的多线程服务器</td>
+</tr>
+<tr class="odd">
+<td>MySQL</td>
+<td>关系数据库</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个行；
+可以处理多个表的视图（view）； 支持空间（spatial）和第三方扩展</td>
+<td>SELECT 、 INSERT 、 UPDATE 、 DELETE 、函数、存储过程</td>
+<td>支持ACID性质（需要使用InnoDB）， 主从复制和主主复制 （master/master
+replication）</td>
+</tr>
+<tr class="even">
+<td>PostgreSQL</td>
+<td>关系数据库</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个行；
+可以处理多个表的视图； 支持空间和第三方扩展；支持可定制类型</td>
+<td>SELECT 、 INSERT 、 UPDATE 、 DELETE
+、内置函数、自定义的存储过程</td>
+<td>支持ACID性质，主从复制， 由第三方支持的多主复制 （multi-master
+replication）</td>
+</tr>
+<tr class="odd">
+<td>MongoDB</td>
+<td>使用硬盘存储（on-disk）的非关系文档存储</td>
+<td>每个数据库可以包含多个表， 每个表可以包含多个无schema
+（schema-less）的BSON文档</td>
+<td>创建命令、读取命令、更新命令、删除命令、条件查询命令，等等</td>
+<td>支持map-reduce操作，主从复制，分片， 空间索引（spatial index）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="redis-安装">Redis 安装</h3>
+<p>我使用的安装环境是 OS X EI Capitan 10.11.6。</p>
+<p>首先，在<a target="_blank" rel="noopener" href="http://redis.io/download">Redis官网</a>中下载稳定的
+.tar.gz 压缩包，解压后，进入该文件夹，输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make</span><br></pre></td></tr></table></figure>
+<p>然后是一个可选的命令，来查看redis内部的一些东西是否OK：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<p>然后安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+<p>此外，也可以按照官网推荐的方式来下载安装。</p>
+<h3 id="redis-启动">Redis 启动</h3>
+<p>Starting redis:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server /path/to/redis.conf</span><br></pre></td></tr></table></figure>
+<p>第二个参数为当前目录到配置文件 redis.conf 的路径，执行后可看到： <img src="http://i2.piimg.com/4851/36f197a62e06769e.png" alt="icon"></p>
+<p>这个表示redis服务端已开启。然后在另一个Terminal中启动客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
+<p>这将打开一个redis提示符：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt;</span><br></pre></td></tr></table></figure>
+<p>输入ping命令，得到pong的回应：</p>
+<figure>
+<img src="http://i1.piimg.com/4851/07e331b5fe00d188.png" alt="icon">
+<figcaption aria-hidden="true">icon</figcaption>
+</figure>
+<p>说明redis在本地启动成功！</p>
+<h3 id="redis-使用">Redis 使用</h3>
+<p>Redis 提供5种数据结构：</p>
+<table>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>结构类型</th>
+<th>结构存储的值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>STRING</td>
+<td>可以是字符串、整数或者浮点数</td>
+</tr>
+<tr class="even">
+<td>LIST</td>
+<td>一个链表，链表上的每个节点都包含了一个字符串</td>
+</tr>
+<tr class="odd">
+<td>SET</td>
+<td>包含字符串的无序收集器（unordered
+collection），并且被包含的每个字符串都是独一无二、各不相同的</td>
+</tr>
+<tr class="even">
+<td>HASH</td>
+<td>包含键值对的无序散列表</td>
+</tr>
+<tr class="odd">
+<td>ZSET （有序集合）</td>
+<td>字符串成员（member）与浮点数分值（score）之间的有序映射，元素的排列顺序由分值的大小决定</td>
+</tr>
+</tbody>
+</table>
+<h4 id="string">String</h4>
+<p>应用于 String 类型的操作主要有 SET、GET和DEL。</p>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GET</td>
+<td>获取存储在给定键中的值</td>
+</tr>
+<tr class="even">
+<td>SET</td>
+<td>设置存储在给定键中的值</td>
+</tr>
+<tr class="odd">
+<td>DEL</td>
+<td>删除存储在给定键中的值（这个命令可以用于所有类型）</td>
+</tr>
+</tbody>
+</table>
+<p>用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; set hello world</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line">&quot;world&quot;</span><br><span class="line">127.0.0.1:6379&gt; del hello</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; get hello</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+<h4 id="list">List</h4>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>RPUSH</td>
+<td>将给定值推入到列表的右端</td>
+</tr>
+<tr class="even">
+<td>LRANGE</td>
+<td>获取列表在给定范围上的所有值</td>
+</tr>
+<tr class="odd">
+<td>LINDEX</td>
+<td>获取列表在给定位置上的单个元素</td>
+</tr>
+<tr class="even">
+<td>LPOP</td>
+<td>从列表的左端弹出一个值，并返回被弹出的值</td>
+</tr>
+</tbody>
+</table>
+<p>用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; rpush list-key item</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; rpush list-key item2</span><br><span class="line">(integer) 2</span><br><span class="line">127.0.0.1:6379&gt; rpush list-key item</span><br><span class="line">(integer) 3</span><br><span class="line">127.0.0.1:6379&gt; lrange list-key 0 -1</span><br><span class="line">1) &quot;item&quot;</span><br><span class="line">2) &quot;item2&quot;</span><br><span class="line">3) &quot;item&quot;</span><br><span class="line">127.0.0.1:6379&gt; lindex list-key 1</span><br><span class="line">&quot;item2&quot;</span><br><span class="line">127.0.0.1:6379&gt; lpop list-key</span><br><span class="line">&quot;item&quot;</span><br><span class="line">127.0.0.1:6379&gt; lrange list-key 0 -1</span><br><span class="line">1) &quot;item2&quot;</span><br><span class="line">2) &quot;item&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="set">Set</h4>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SADD</td>
+<td>将给定元素添加到集合</td>
+</tr>
+<tr class="even">
+<td>SMEMBERS</td>
+<td>返回集合包含的所有元素</td>
+</tr>
+<tr class="odd">
+<td>SISMEMBER</td>
+<td>检查给定元素是否存在于集合中</td>
+</tr>
+<tr class="even">
+<td>SREM</td>
+<td>如果给定的元素存在于集合中，那么移除这个元素</td>
+</tr>
+</tbody>
+</table>
+<p>用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; sadd set-key item</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd set-key item2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd set-key item3</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; sadd set-key item</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; smembers set-key</span><br><span class="line">1) &quot;item3&quot;</span><br><span class="line">2) &quot;item2&quot;</span><br><span class="line">3) &quot;item&quot;</span><br><span class="line">127.0.0.1:6379&gt; sismember set-key item4</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; sismember set-key item</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; srem set-key item2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; srem set-key item2</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; smembers set-key</span><br><span class="line">1) &quot;item3&quot;</span><br><span class="line">2) &quot;item&quot;</span><br></pre></td></tr></table></figure>
+<p>此外，集合还有 SINTER、SUNION、SDIFF
+操作来实现交集、并集、差集运算。</p>
+<h4 id="hash">Hash</h4>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>HSET</td>
+<td>在散列里面关联起给定的键值对</td>
+</tr>
+<tr class="even">
+<td>HGET</td>
+<td>获取指定散列键的值</td>
+</tr>
+<tr class="odd">
+<td>HGETALL</td>
+<td>获取散列包含的所有键值对</td>
+</tr>
+<tr class="even">
+<td>HDEL</td>
+<td>如果给定键存在于散列里面，那么移除这个键</td>
+</tr>
+</tbody>
+</table>
+<p>用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; hset hash-key sub-key1 value1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; hset hash-key sub-key2 value2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; hset hash-key sub-key1 value1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; hgetall hash-key</span><br><span class="line">1) &quot;sub-key1&quot;</span><br><span class="line">2) &quot;value1&quot;</span><br><span class="line">3) &quot;sub-key2&quot;</span><br><span class="line">4) &quot;value2&quot;</span><br><span class="line">127.0.0.1:6379&gt; hdel hash-key sub-key2</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; hdel hash-key sub-key2</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; hget hash-key sub-key1</span><br><span class="line">&quot;value1&quot;</span><br><span class="line">127.0.0.1:6379&gt; hgetall hash-key</span><br><span class="line">1) &quot;sub-key1&quot;</span><br><span class="line">2) &quot;value1&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="zset">Zset</h4>
+<table>
+<thead>
+<tr class="header">
+<th>命令</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ZADD</td>
+<td>将一个带有给定分值的成员添加到有序集合里面</td>
+</tr>
+<tr class="even">
+<td>ZRANGE</td>
+<td>根据分值的排序顺序，获取有序集合在给定位置范围内的所有元素</td>
+</tr>
+<tr class="odd">
+<td>ZRANGEBYSCORE</td>
+<td>获取有序集合在给定分值范围内的所有元素</td>
+</tr>
+<tr class="even">
+<td>ZREM</td>
+<td>如果给定成员存在于有序集合，那么移除这个成员</td>
+</tr>
+</tbody>
+</table>
+<p>用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; zadd zset-key 728 member1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd zset-key 982 member0</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zadd zset-key 982 member0</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; zrange zset-key 0 -1 withscores</span><br><span class="line">1) &quot;member1&quot;</span><br><span class="line">2) &quot;728&quot;</span><br><span class="line">3) &quot;member0&quot;</span><br><span class="line">4) &quot;982&quot;</span><br><span class="line">127.0.0.1:6379&gt; zrangebyscore zset-key 0 800 withscores</span><br><span class="line">1) &quot;member1&quot;</span><br><span class="line">2) &quot;728&quot;</span><br><span class="line">127.0.0.1:6379&gt; zrem zset-key member1</span><br><span class="line">(integer) 1</span><br><span class="line">127.0.0.1:6379&gt; zrem zset-key member1</span><br><span class="line">(integer) 0</span><br><span class="line">127.0.0.1:6379&gt; zrange zset-key 0 -1 withscores</span><br><span class="line">1) &quot;member0&quot;</span><br><span class="line">2) &quot;982&quot;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2016/08/15/python-time/" rel="next" title="python中的time模块">
+      python中的time模块 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#redis"><span class="nav-number">1.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">Redis 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-%E5%90%AF%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">Redis 启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis-%E4%BD%BF%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">Redis 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#string"><span class="nav-number">4.1.</span> <span class="nav-text">String</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list"><span class="nav-number">4.2.</span> <span class="nav-text">List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set"><span class="nav-number">4.3.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash"><span class="nav-number">4.4.</span> <span class="nav-text">Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zset"><span class="nav-number">4.5.</span> <span class="nav-text">Zset</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Patrick Peng</p>
+  <div class="site-description" itemprop="description">Where there is a will, there is a way.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Patrick Peng</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
